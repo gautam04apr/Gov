@@ -1,444 +1,289 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Government of Odisha</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Government of Odisha</title>
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+<body>
 
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+  <!-- ═══════════════════════════════════════════
+       SECTION 1 — UTILITY BAR
+  ════════════════════════════════════════════ -->
+  <div id="utility-bar">
+    <div class="container-fluid px-4">
+      <div class="row align-items-center">
 
-    <!-- Google Font - Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-
-  <body>
-    <!-- ==========================
-         Utility Bar Start
-    ========================== -->
-
-    <section class="utility-bar">
-      <div class="container">
-        <div class="utility-wrapper">
-          <!-- Left Side -->
-          <div class="utility-left">
-            <a href="tel:+919876543210" class="phone-link">
-              <i class="fa-solid fa-phone-volume"></i>
-              +91 9876543210
-            </a>
-          </div>
-
-          <!-- Right Side -->
-          <div class="utility-right">
-            <a href="#main-content" class="utility-link">
-              Skip to Main Content
-            </a>
-
-            <span class="divider">|</span>
-
-            <a href="#" class="utility-link"> Screen Reader Access </a>
-
-            <span class="divider">|</span>
-
-            <!-- Font Controls -->
-            <div class="font-controls">
-              <button id="decrease-font">A-</button>
-
-              <button id="reset-font">A</button>
-
-              <button id="increase-font">A+</button>
-            </div>
-
-            <span class="divider">|</span>
-
-            <!-- Language Dropdown -->
-            <div class="dropdown">
-              <button
-                class="language-btn dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                English
-              </button>
-
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item language-option" href="#">
-                    English
-                  </a>
-                </li>
-
-                <li>
-                  <a class="dropdown-item language-option" href="#">
-                    ଓଡ଼ିଆ (Odia)
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================
-         Utility Bar End
-    ========================== -->
-    <!-- ==========================
-     Navbar Start
-========================== -->
-
-    <nav class="custom-navbar">
-      <div class="container">
-        <div class="navbar-wrapper">
-          <!-- Left Logo Section -->
-          <a href="index.html" class="logo-section">
-            <img
-              src="/assets/images/logo.png.png"
-              alt="Odisha Logo"
-              class="logo-img"
-            />
-
-            <div class="logo-text">
-              <h5>Government of Odisha</h5>
-
-              <span> Odisha Paribar </span>
-            </div>
+        <!-- LEFT: Phone -->
+        <div class="col-auto">
+          <a href="tel:+919876543210" class="utility-phone">
+            <i class="fa-solid fa-phone"></i>
+            <span>+91 9876543210</span>
           </a>
+        </div>
 
-          <!-- Center Menu -->
-          <ul class="nav-menu">
-            <li>
-              <a href="index.html" class="nav-link active-nav"> Home </a>
-            </li>
+        <!-- RIGHT: Utility Links -->
+        <div class="col d-flex align-items-center justify-content-end gap-0">
 
-            <li>
-              <a href="about.html" class="nav-link"> About Us </a>
-            </li>
+          <a href="#main-content" class="utility-link">Skip to Main Content</a>
+          <span class="utility-divider">|</span>
 
-            <li>
-              <a href="registration.html" class="nav-link"> Registrations </a>
-            </li>
+          <a href="#" class="utility-link">Screen Reader Access</a>
+          <span class="utility-divider">|</span>
 
-            <li>
-              <a href="directory.html" class="nav-link"> Directory </a>
-            </li>
-
-            <li>
-              <a href="faq.html" class="nav-link"> FAQs </a>
-            </li>
-          </ul>
-
-          <!-- Right Buttons -->
-          <div class="nav-buttons">
-            <div class="search-wrapper">
-              <button class="search-toggle">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-
-              <input
-                type="text"
-                class="search-input"
-                placeholder="Search here..."
-              />
-            </div>
-
-            <a href="#" class="login-btn"> Login </a>
-
-            <a href="#" class="register-btn"> Register </a>
+          <!-- Font Size Buttons -->
+          <div class="font-size-controls d-flex align-items-center gap-1">
+            <button class="font-btn" id="btn-decrease" title="Decrease font size">A<sup>-</sup></button>
+            <button class="font-btn" id="btn-reset" title="Reset font size">A</button>
+            <button class="font-btn" id="btn-increase" title="Increase font size">A<sup>+</sup></button>
           </div>
+          <span class="utility-divider">|</span>
+
+          <!-- Language Dropdown -->
+          <div class="dropdown lang-dropdown">
+            <button class="utility-link lang-btn dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-globe me-1"></i>
+              <span id="selected-lang">English</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end lang-menu" aria-labelledby="langDropdown">
+              <li><a class="dropdown-item lang-option" href="#" data-lang="English">English</a></li>
+              <li><a class="dropdown-item lang-option" href="#" data-lang="Odia">ଓଡ଼ିଆ (Odia)</a></li>
+            </ul>
+          </div>
+
         </div>
       </div>
-    </nav>
-
-    <!-- ==========================
-     Navbar End
-========================== -->
-
- <!-- ==========================
-     Hero Carousel Start
-========================== -->
-
-<section class="hero-slider">
-
-  <div class="hero-container">
-
-    <div class="swiper heroSwiper">
-
-      <div class="swiper-wrapper">
-
-        <!-- Slide 1 -->
-        <div class="swiper-slide">
-
-          <div class="hero-content">
-
-            <span class="hero-tagline">
-              Connect. Engage. Contribute.
-            </span>
-
-            <h1>
-              A Global Odia <br>
-              Family,
-              <span>United.</span>
-            </h1>
-
-            <p>
-              The Odisha Diaspora Portal is your
-              one-stop platform to connect with
-              the Government and contribute to
-              Odisha’s growth.
-            </p>
-
-            <a href="#"
-              class="hero-btn">
-
-              Registration
-
-            </a>
-
-          </div>
-
-          <img
-            src="assets/images/hero-1.png"
-            alt="Hero Image"
-            class="hero-image"
-          >
-
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="swiper-slide">
-
-          <div class="hero-content">
-
-            <span class="hero-tagline">
-              Empower. Inspire. Grow.
-            </span>
-
-            <h1>
-              Together We <br>
-              Build
-              <span>Odisha.</span>
-            </h1>
-
-            <p>
-              Connect globally and discover
-              opportunities to strengthen
-              Odisha's future together.
-            </p>
-
-            <a href="#"
-              class="hero-btn">
-
-              Registration
-
-            </a>
-
-          </div>
-
-          <img
-            src="assets/images/hero-2.png"
-            alt="Hero Image"
-            class="hero-image"
-          >
-
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="swiper-slide">
-
-          <div class="hero-content">
-
-            <span class="hero-tagline">
-              Explore. Connect. Return.
-            </span>
-
-            <h1>
-              Endless <br>
-              Global
-              <span>Opportunities.</span>
-            </h1>
-
-            <p>
-              Be part of Odisha's growing
-              innovation ecosystem and
-              development journey.
-            </p>
-
-            <a href="#"
-              class="hero-btn">
-
-              Registration
-
-            </a>
-
-          </div>
-
-          <img
-            src="assets/images/hero-3.png"
-            alt="Hero Image"
-            class="hero-image"
-          >
-
-        </div>
-
-        <!-- Slide 4 -->
-        <div class="swiper-slide">
-
-          <div class="hero-content">
-
-            <span class="hero-tagline">
-              Culture. Heritage. Future.
-            </span>
-
-            <h1>
-              Stay Close <br>
-              To Your
-              <span>Roots.</span>
-            </h1>
-
-            <p>
-              Celebrate Odisha’s culture,
-              tradition and global identity
-              with pride.
-            </p>
-
-            <a href="#"
-              class="hero-btn">
-
-              Registration
-
-            </a>
-
-          </div>
-
-          <img
-            src="assets/images/hero-4.png"
-            alt="Hero Image"
-            class="hero-image"
-          >
-
-        </div>
-
-        <!-- Slide 5 -->
-        <div class="swiper-slide">
-
-          <div class="hero-content">
-
-            <span class="hero-tagline">
-              One Community. One Mission.
-            </span>
-
-            <h1>
-              Bringing Odias <br>
-              Under One
-              <span>Umbrella.</span>
-            </h1>
-
-            <p>
-              Strengthen global Odia
-              connections and contribute
-              back to society.
-            </p>
-
-            <a href="#"
-              class="hero-btn">
-
-              Registration
-
-            </a>
-
-          </div>
-
-          <img
-            src="assets/images/hero-5.png"
-            alt="Hero Image"
-            class="hero-image"
-          >
-
-        </div>
-
-        <!-- Slide 6 -->
-        <div class="swiper-slide">
-
-          <div class="hero-content">
-
-            <span class="hero-tagline">
-              Together Towards Tomorrow.
-            </span>
-
-            <h1>
-              Stronger <br>
-              Together
-              <span>Always.</span>
-            </h1>
-
-            <p>
-              Join initiatives and become
-              a proud part of Odisha's
-              transformation journey.
-            </p>
-
-            <a href="#"
-              class="hero-btn">
-
-              Registration
-
-            </a>
-
-          </div>
-
-          <img
-            src="assets/images/hero-6.png"
-            alt="Hero Image"
-            class="hero-image"
-          >
-
-        </div>
-
-      </div>
-
-      <!-- Left Right Arrows -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-
-      <!-- Dots -->
-      <div class="swiper-pagination"></div>
-
     </div>
-
   </div>
 
-</section>
 
-<!-- ==========================
-     Hero Carousel End
-========================== -->
+  <!-- ═══════════════════════════════════════════
+       SECTION 2 — STICKY NAVBAR
+  ════════════════════════════════════════════ -->
+  <nav id="main-navbar" class="navbar sticky-top">
+    <div class="container-fluid px-4">
+      <div class="row w-100 align-items-center">
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- LEFT: Logo + Branding -->
+        <div class="col-auto d-flex align-items-center gap-3">
+          <a href="#" class="navbar-logo-wrap d-flex align-items-center gap-3 text-decoration-none">
+            <img src="assets/images/logo.png" alt="Odisha Logo" class="gov-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/40px-Flag_of_India.svg.png'" />
+            <div class="gov-brand">
+              <span class="gov-title">Government of Odisha</span>
+              <span class="gov-subtitle">Odisha Paribar</span>
+            </div>
+          </a>
+        </div>
 
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <!-- CENTER: Navigation Menu -->
+        <div class="col d-flex justify-content-center">
+          <ul class="nav-menu d-flex align-items-center gap-1 list-unstyled mb-0">
+            <li><a href="#" class="nav-item-link active" data-nav="Home">Home</a></li>
+            <li><a href="#" class="nav-item-link" data-nav="About Us">About Us</a></li>
+            <li><a href="registration.html" class="nav-item-link" data-nav="Registrations">Registrations</a></li>
+            <li><a href="#" class="nav-item-link" data-nav="Directory">Directory</a></li>
+            <li><a href="faq.html" class="nav-item-link" data-nav="FAQs">FAQs</a></li>
+          </ul>
+        </div>
 
-    <!-- Custom JS -->
-    <script src="js/script.js"></script>
-  </body>
+        <!-- RIGHT: Search + Login + Register -->
+        <div class="col-auto d-flex align-items-center gap-2">
+
+          <!-- Search -->
+          <div class="search-wrap d-flex align-items-center">
+            <div class="search-input-wrap" id="search-input-wrap">
+              <input type="text" id="search-input" class="search-input" placeholder="Search..." />
+            </div>
+            <button class="search-btn" id="search-toggle" title="Search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+
+          <a href="#" class="btn btn-login">Login</a>
+          <a href="#" class="btn btn-register">Register</a>
+
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 3 — HERO CAROUSEL
+  ════════════════════════════════════════════ -->
+  <section id="hero-section" aria-label="Hero Carousel">
+
+    <div id="heroCarousel" class="hero-carousel">
+
+      <!-- ── SLIDES ─────────────────────────── -->
+
+      <!-- Slide 1 -->
+      <div class="hero-slide active" data-index="0"
+           style="--slide-img: url('../assets/images/hero-1.png')">
+        <div class="hero-overlay"></div>
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-6 hero-content">
+              <p class="hero-label">
+                <span>Connect. Engage. Contribute.</span>
+              </p>
+              <h1 class="hero-heading">
+                A Global Odia<br>Family, <span class="hero-highlight">United.</span>
+              </h1>
+              <p class="hero-desc">
+                The Odisha Diaspora Portal is your one-stop platform to connect with the Government, explore opportunities and contribute to Odisha's growth.
+              </p>
+              <a href="#" class="btn hero-cta">Registration</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="hero-slide" data-index="1"
+           style="--slide-img: url('../assets/images/hero-2.png')">
+        <div class="hero-overlay"></div>
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-6 hero-content">
+              <p class="hero-label">
+                <span>Empower. Inspire. Grow.</span>
+              </p>
+              <h1 class="hero-heading">
+                Together We Build <span class="hero-highlight">Odisha.</span>
+              </h1>
+              <p class="hero-desc">
+                Join thousands of Odia diaspora members worldwide who are actively contributing to the economic and cultural growth of our beloved state.
+              </p>
+              <a href="#" class="btn hero-cta">Registration</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="hero-slide" data-index="2"
+           style="--slide-img: url('../assets/images/hero-3.png')">
+        <div class="hero-overlay"></div>
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-6 hero-content">
+              <p class="hero-label">
+                <span>Culture. Heritage. Future.</span>
+              </p>
+              <h1 class="hero-heading">
+                Stay Close To Your <span class="hero-highlight">Roots.</span>
+              </h1>
+              <p class="hero-desc">
+                Odisha's rich heritage of art, music, and tradition lives in every Odia heart. Stay connected, celebrate your culture, and carry it forward.
+              </p>
+              <a href="#" class="btn hero-cta">Registration</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="hero-slide" data-index="3"
+           style="--slide-img: url('../assets/images/hero-4.png')">
+        <div class="hero-overlay"></div>
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-6 hero-content">
+              <p class="hero-label">
+                <span>Explore. Connect. Return.</span>
+              </p>
+              <h1 class="hero-heading">
+                Endless Global <span class="hero-highlight">Opportunities.</span>
+              </h1>
+              <p class="hero-desc">
+                Discover investment, collaboration, and growth opportunities that connect the global Odia community with the state's development vision.
+              </p>
+              <a href="#" class="btn hero-cta">Registration</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="hero-slide" data-index="4"
+           style="--slide-img: url('../assets/images/hero-5.png')">
+        <div class="hero-overlay"></div>
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-6 hero-content">
+              <p class="hero-label">
+                <span>Support. Collaborate. Rise.</span>
+              </p>
+              <h1 class="hero-heading">
+                Building Odisha <span class="hero-highlight">Together.</span>
+              </h1>
+              <p class="hero-desc">
+                Every contribution matters — from sharing skills to investing in projects. The Odisha Diaspora Portal makes collaboration seamless.
+              </p>
+              <a href="#" class="btn hero-cta">Registration</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6 -->
+      <div class="hero-slide" data-index="5"
+           style="--slide-img: url('../assets/images/hero-6.png')">
+        <div class="hero-overlay"></div>
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-6 hero-content">
+              <p class="hero-label">
+                <span>Dream. Connect. Achieve.</span>
+              </p>
+              <h1 class="hero-heading">
+                Your Odisha <span class="hero-highlight">Journey</span> Starts Here.
+              </h1>
+              <p class="hero-desc">
+                Whether you're returning home or supporting from afar — this is where your Odisha journey begins. Register and be part of something bigger.
+              </p>
+              <a href="#" class="btn hero-cta">Registration</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ARROWS ─────────────────────────── -->
+      <button class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous slide">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next slide">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <!-- ── DOTS ──────────────────────────── -->
+      <div class="hero-dots" id="heroDots">
+        <button class="hero-dot active" data-dot="0" aria-label="Slide 1"></button>
+        <button class="hero-dot" data-dot="1" aria-label="Slide 2"></button>
+        <button class="hero-dot" data-dot="2" aria-label="Slide 3"></button>
+        <button class="hero-dot" data-dot="3" aria-label="Slide 4"></button>
+        <button class="hero-dot" data-dot="4" aria-label="Slide 5"></button>
+        <button class="hero-dot" data-dot="5" aria-label="Slide 6"></button>
+      </div>
+
+    </div><!-- /heroCarousel -->
+  </section>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/script.js"></script>
+</body>
 </html>

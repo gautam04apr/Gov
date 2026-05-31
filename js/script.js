@@ -1,148 +1,194 @@
-// ==========================
-// Font Size Controls
-// ==========================
+/* ═══════════════════════════════════════════════
+   GOVERNMENT OF ODISHA — SCRIPT.JS
+═══════════════════════════════════════════════ */
 
-let currentScale = 1;
+document.addEventListener('DOMContentLoaded', function () {
 
-const textElements = document.querySelectorAll(
-  `
-  .utility-link,
-  .phone-link,
-  .nav-link,
-  .logo-text h5,
-  .logo-text span,
-  .language-btn
-  `,
-);
+  /* ─────────────────────────────────────────
+     1. FONT SIZE ACCESSIBILITY
+  ───────────────────────────────────────── */
+  const BASE_SIZE = 16;   // px
+  const MIN_SIZE  = 13;
+  const MAX_SIZE  = 20;
+  const STEP      = 1;
 
-const buttonElements = document.querySelectorAll(
-  `
-  .login-btn,
-  .register-btn
-  `,
-);
+  let currentSize = BASE_SIZE;
 
-// Update Font Size
+  const htmlEl        = document.documentElement;
+  const btnIncrease   = document.getElementById('btn-increase');
+  const btnDecrease   = document.getElementById('btn-decrease');
+  const btnReset      = document.getElementById('btn-reset');
 
-function updateFontSize() {
-  // Text size
-  textElements.forEach((el) => {
-    el.style.fontSize = `${currentScale}em`;
-  });
-
-  // Button size
-  buttonElements.forEach((btn) => {
-    btn.style.transform = `scale(${currentScale})`;
-  });
-}
-
-// Increase Font
-
-document.getElementById("increase-font").addEventListener("click", () => {
-  if (currentScale < 1.2) {
-    currentScale += 0.05;
-
-    updateFontSize();
+  function applyFontSize(size) {
+    currentSize = Math.min(MAX_SIZE, Math.max(MIN_SIZE, size));
+    htmlEl.style.fontSize = currentSize + 'px';
   }
-});
 
-// Decrease Font
+  btnIncrease?.addEventListener('click', () => applyFontSize(currentSize + STEP));
+  btnDecrease?.addEventListener('click', () => applyFontSize(currentSize - STEP));
+  btnReset?.addEventListener('click',    () => applyFontSize(BASE_SIZE));
 
-document.getElementById("decrease-font").addEventListener("click", () => {
-  if (currentScale > 0.85) {
-    currentScale -= 0.05;
 
-    updateFontSize();
+  /* ─────────────────────────────────────────
+     2. LANGUAGE SWITCHER
+  ───────────────────────────────────────── */
+  const langOptions    = document.querySelectorAll('.lang-option');
+  const selectedLangEl = document.getElementById('selected-lang');
+
+  langOptions.forEach(function (item) {
+    item.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Update button label
+      const chosen = this.getAttribute('data-lang');
+      if (selectedLangEl) selectedLangEl.textContent = chosen;
+
+      // Mark active
+      langOptions.forEach(opt => opt.classList.remove('active'));
+      this.classList.add('active');
+
+      // Close dropdown
+      const ddEl  = document.getElementById('langDropdown');
+      const ddInst = bootstrap.Dropdown.getInstance(ddEl);
+      if (ddInst) ddInst.hide();
+    });
+  });
+
+
+  /* ─────────────────────────────────────────
+     3. SEARCH — EXPAND / COLLAPSE + AUTO-CLOSE
+  ───────────────────────────────────────── */
+  const searchToggle    = document.getElementById('search-toggle');
+  const searchInputWrap = document.getElementById('search-input-wrap');
+  const searchInput     = document.getElementById('search-input');
+
+  let searchOpen      = false;
+  let autoCloseTimer  = null;
+
+  function openSearch() {
+    searchOpen = true;
+    searchInputWrap.classList.add('open');
+    searchToggle.classList.add('active');
+    // Focus after CSS transition starts
+    setTimeout(() => searchInput?.focus(), 80);
+    startAutoClose();
   }
-});
 
-// Reset Font
+  function closeSearch() {
+    searchOpen = false;
+    searchInputWrap.classList.remove('open');
+    searchToggle.classList.remove('active');
+    if (searchInput) searchInput.value = '';
+    clearAutoClose();
+  }
 
-document.getElementById("reset-font").addEventListener("click", () => {
-  currentScale = 1;
-
-  textElements.forEach((el) => {
-    el.style.fontSize = "";
-  });
-
-  buttonElements.forEach((btn) => {
-    btn.style.transform = "";
-  });
-});
-
-// ==========================
-// Language Dropdown
-// ==========================
-
-const languageOptions = document.querySelectorAll(".language-option");
-
-const languageBtn = document.querySelector(".language-btn");
-
-languageOptions.forEach((option) => {
-  option.addEventListener("click", function () {
-    languageBtn.innerHTML = this.textContent.trim();
-  });
-});
-
-// ==========================
-// Search Expand Animation
-// ==========================
-
-const searchBtn = document.querySelector(".search-toggle");
-
-const searchInput = document.querySelector(".search-input");
-
-let searchTimeout;
-
-// Open / Close Search
-
-searchBtn.addEventListener("click", () => {
-  searchInput.classList.toggle("active");
-
-  if (searchInput.classList.contains("active")) {
-    searchInput.focus();
-
-    clearTimeout(searchTimeout);
-
-    searchTimeout = setTimeout(() => {
-      if (searchInput.value.trim() === "") {
-        searchInput.classList.remove("active");
+  function startAutoClose() {
+    clearAutoClose();
+    // Auto-close after 10 s if input is empty
+    autoCloseTimer = setTimeout(function () {
+      if (searchInput && searchInput.value.trim() === '') {
+        closeSearch();
       }
     }, 10000);
   }
-});
 
-// Auto close if empty
-
-searchInput.addEventListener("input", () => {
-  clearTimeout(searchTimeout);
-
-  if (searchInput.value.trim() === "") {
-    searchTimeout = setTimeout(() => {
-      searchInput.classList.remove("active");
-    }, 10000);
+  function clearAutoClose() {
+    if (autoCloseTimer) {
+      clearTimeout(autoCloseTimer);
+      autoCloseTimer = null;
+    }
   }
+
+  searchToggle?.addEventListener('click', function () {
+    if (searchOpen) {
+      closeSearch();
+    } else {
+      openSearch();
+    }
+  });
+
+  // Reset auto-close timer while user types
+  searchInput?.addEventListener('input', function () {
+    if (this.value.trim() !== '') {
+      clearAutoClose();          // typing → don't auto-close
+    } else {
+      startAutoClose();          // cleared → restart timer
+    }
+  });
+
+  // Close on Escape key
+  searchInput?.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSearch();
+  });
+
+
+  /* ─────────────────────────────────────────
+     4. ACTIVE NAV ITEM
+  ───────────────────────────────────────── */
+  const navLinks = document.querySelectorAll('.nav-item-link');
+
+  navLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      // Only prevent default for placeholder links (href="#")
+      if (this.getAttribute('href') === '#') {
+        e.preventDefault();
+      }
+      navLinks.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
 });
 
-// ==========================
-// Hero Swiper
-// ==========================
 
-const heroSwiper = new Swiper(".heroSwiper", {
-  loop: true,
+/* ═══════════════════════════════════════════════
+   SECTION 3 — HERO CAROUSEL
+═══════════════════════════════════════════════ */
+(function () {
+  const TOTAL       = 6;
+  const INTERVAL_MS = 5000;
 
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: false,
-  },
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots   = document.querySelectorAll('.hero-dot');
+  const prev   = document.getElementById('heroPrev');
+  const next   = document.getElementById('heroNext');
 
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
+  if (!slides.length) return;
 
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-});
+  let current = 0;
+  let timer   = null;
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (n + TOTAL) % TOTAL;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(function () { goTo(current + 1); }, INTERVAL_MS);
+  }
+
+  prev?.addEventListener('click', function () { goTo(current - 1); startTimer(); });
+  next?.addEventListener('click', function () { goTo(current + 1); startTimer(); });
+
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      goTo(parseInt(this.getAttribute('data-dot'), 10));
+      startTimer();
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  { goTo(current - 1); startTimer(); }
+    if (e.key === 'ArrowRight') { goTo(current + 1); startTimer(); }
+  });
+
+  const carousel = document.getElementById('heroCarousel');
+  carousel?.addEventListener('mouseenter', function () { clearInterval(timer); });
+  carousel?.addEventListener('mouseleave', startTimer);
+
+  startTimer();
+}());
