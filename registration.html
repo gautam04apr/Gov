@@ -1,0 +1,1342 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration - Government of Odisha</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <!-- Google Font - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Registration Page Styles */
+      .registration-section {
+        padding: 20px 0;
+        min-height: 800px;
+      }
+
+      .page-title {
+        margin-bottom: 10px;
+      }
+
+      .page-title h1 {
+        font-size: 48px;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 0px;
+      }
+
+      .page-title p {
+        font-size: 18px;
+        color: #8a7569;
+      }
+
+      /* Tabs Container */
+      .registration-tabs-wrapper {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+      }
+
+      .registration-tabs {
+        display: flex;
+        border-bottom: 2px solid #f0f0f0;
+        background: #fafafa;
+      }
+
+      .tab-btn {
+        flex: 1;
+        padding: 20px 24px;
+        border: none;
+        background: transparent;
+        color: var(--text-color);
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s ease;
+        position: relative;
+        text-align: center;
+      }
+
+      .tab-btn:hover {
+        background: #f5f5f5;
+        color: var(--hover-color);
+      }
+
+      .tab-btn.active {
+        background: white;
+        color: var(--hover-color);
+        border-bottom: 3px solid var(--hover-color);
+        margin-bottom: -2px;
+      }
+
+      /* Toggle Container */
+      .toggle-section {
+        padding: 30px 24px;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fafafa;
+      }
+
+      .toggle-label {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-color);
+        margin: 0;
+      }
+
+      /* Toggle Switch */
+      .toggle-switch-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .toggle-option {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-color);
+      }
+
+      .toggle-option.active {
+        color: var(--hover-color);
+        font-weight: 600;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: var(--hover-color);
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      /* Tab Content */
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Form Content Container */
+      .form-content {
+        padding: 40px 24px;
+        display: none;
+      }
+
+      .form-content.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .form-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 10px;
+      }
+
+      .form-page-indicator {
+        font-size: 14px;
+        color: #999;
+        margin-bottom: 30px;
+      }
+
+      /* Form Pages */
+      .form-page {
+        display: none;
+      }
+
+      .form-page.active {
+        display: block;
+      }
+
+      /* Form Group */
+      .form-group {
+        margin-bottom: 24px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 10px;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-family: "Inter", sans-serif;
+        transition: 0.3s ease;
+      }
+
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--hover-color);
+        box-shadow: 0 0 0 3px rgba(222, 89, 46, 0.1);
+      }
+
+      .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      /* Form Row */
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      /* Form Actions */
+      .form-actions {
+        display: flex;
+        gap: 16px;
+        margin-top: 40px;
+      }
+
+      .submit-btn,
+      .reset-btn,
+      .back-btn,
+      .next-btn,
+      .draft-btn {
+        padding: 14px 32px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      .submit-btn {
+        background: var(--hover-color);
+        color: white;
+      }
+
+      .submit-btn:hover {
+        background: var(--btn-color);
+      }
+
+      .submit-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
+      .next-btn {
+        background: var(--hover-color);
+        color: white;
+        margin-left: auto;
+      }
+
+      .next-btn:hover {
+        background: var(--btn-color);
+      }
+
+      .back-btn {
+        background: #f0f0f0;
+        color: var(--text-color);
+        border: 1px solid #ddd;
+      }
+
+      .back-btn:hover {
+        background: #e0e0e0;
+      }
+
+      .draft-btn {
+        background: transparent;
+        color: var(--hover-color);
+        border: 1px solid var(--hover-color);
+      }
+
+      .draft-btn:hover {
+        background: #f5f5f5;
+      }
+
+      .reset-btn {
+        background: #f0f0f0;
+        color: var(--text-color);
+        border: 1px solid #ddd;
+      }
+
+      .reset-btn:hover {
+        background: #e0e0e0;
+      }
+
+      /* Disabled State */
+      .tab-btn:disabled,
+      .toggle-switch input:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .toggle-switch input:disabled + .slider {
+        background-color: #ccc;
+      }
+
+      /* Info Box */
+      .info-box {
+        background: #f8f8f8;
+        border-left: 4px solid var(--hover-color);
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+
+      .info-box p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .registration-section {
+          padding: 40px 0;
+        }
+
+        .page-title h1 {
+          font-size: 32px;
+          margin-bottom: 15px;
+        }
+
+        .registration-tabs {
+          flex-wrap: wrap;
+        }
+
+        .tab-btn {
+          flex: 0 0 50%;
+          padding: 16px 12px;
+          font-size: 14px;
+        }
+
+        .toggle-section {
+          flex-direction: column;
+          gap: 16px;
+          align-items: flex-start;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .form-actions {
+          flex-direction: column;
+        }
+
+        .submit-btn,
+        .reset-btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ==========================
+         Utility Bar Start
+    ========================== -->
+
+    <section class="utility-bar">
+      <div class="container">
+        <div class="utility-wrapper">
+          <!-- Left Side -->
+          <div class="utility-left">
+            <a href="tel:+919876543210" class="phone-link">
+              <i class="fa-solid fa-phone-volume"></i>
+              +91 9876543210
+            </a>
+          </div>
+
+          <!-- Right Side -->
+          <div class="utility-right">
+            <a href="#main-content" class="utility-link">
+              Skip to Main Content
+            </a>
+
+            <span class="divider">|</span>
+
+            <a href="#" class="utility-link"> Screen Reader Access </a>
+
+            <span class="divider">|</span>
+
+            <!-- Font Controls -->
+            <div class="font-controls">
+              <button id="decrease-font">A-</button>
+
+              <button id="reset-font">A</button>
+
+              <button id="increase-font">A+</button>
+            </div>
+
+            <span class="divider">|</span>
+
+            <!-- Language Dropdown -->
+            <div class="dropdown">
+              <button
+                class="language-btn dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                English
+              </button>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item language-option" href="#">
+                    English
+                  </a>
+                </li>
+
+                <li>
+                  <a class="dropdown-item language-option" href="#">
+                    ଓଡ଼ିଆ (Odia)
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================
+         Utility Bar End
+    ========================== -->
+
+    <!-- ==========================
+     Navbar Start
+========================== -->
+
+    <nav class="custom-navbar">
+      <div class="container">
+        <div class="navbar-wrapper">
+          <!-- Left Logo Section -->
+          <a href="index.html" class="logo-section">
+            <img
+              src="/assets/images/logo.png.png"
+              alt="Odisha Logo"
+              class="logo-img"
+            />
+
+            <div class="logo-text">
+              <h5>Government of Odisha</h5>
+
+              <span> Odisha Paribar </span>
+            </div>
+          </a>
+
+          <!-- Center Menu -->
+          <ul class="nav-menu">
+            <li>
+              <a href="index.html" class="nav-link"> Home </a>
+            </li>
+
+            <li>
+              <a href="about.html" class="nav-link"> About Us </a>
+            </li>
+
+            <li>
+              <a href="registration.html" class="nav-link active-nav"> Registrations </a>
+            </li>
+
+            <li>
+              <a href="directory.html" class="nav-link"> Directory </a>
+            </li>
+
+            <li>
+              <a href="faq.html" class="nav-link"> FAQs </a>
+            </li>
+          </ul>
+
+          <!-- Right Buttons -->
+          <div class="nav-buttons">
+            <div class="search-wrapper">
+              <button class="search-toggle">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Search here..."
+              />
+            </div>
+
+            <a href="#" class="login-btn"> Login </a>
+
+            <a href="#" class="register-btn"> Register </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ==========================
+     Navbar End
+========================== -->
+
+    <!-- ==========================
+     Registration Section Start
+========================== -->
+
+    <section class="registration-section" id="main-content">
+      <div class="container">
+        <!-- Page Title -->
+        <div class="page-title">
+          <h1>Registration</h1>
+          <p>Choose a registration category and provide your information</p>
+        </div>
+
+        <!-- Registration Tabs Container -->
+        <div class="registration-tabs-wrapper">
+          <!-- Tab Navigation -->
+          <div class="registration-tabs">
+            <button class="tab-btn active" data-tab="tab-1">
+              <i class="fas fa-id-card" style="margin-right: 8px;"></i> Pravasi Odia
+            </button>
+            <button class="tab-btn" data-tab="tab-2">
+              <i class="fas fa-users" style="margin-right: 8px;"></i> Odia Association
+            </button>
+            <button class="tab-btn" data-tab="tab-3">
+              <i class="fas fa-gopuram" style="margin-right: 8px;"></i> Jagannath Temple
+            </button>
+          </div>
+
+          <!-- Tab 1: Pravasi Odia -->
+          <div id="tab-1" class="tab-content active">
+            <!-- Toggle Section -->
+            <div class="toggle-section">
+              <label class="toggle-label">Select Registration Type:</label>
+              <div class="toggle-switch-wrapper">
+                <span class="toggle-option active" id="toggle-1-label-1">Overseas</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggle-1" class="tab-toggle">
+                  <span class="slider"></span>
+                </label>
+                <span class="toggle-option" id="toggle-1-label-2">India</span>
+              </div>
+            </div>
+
+            <!-- Form Content 1: Pravasi Odia (Overseas) -->
+            <div class="form-content active" id="toggle-1-overseas">
+              <h3 class="form-title">Pravasi Odia (Overseas)</h3>
+              <div class="form-page-indicator">Page <span class="current-page">1</span> of 2</div>
+              
+              <div class="info-box">
+                <p><strong>Note:</strong> Please fill in all the required fields. Your registration will be verified by our team within 5-7 business days.</p>
+              </div>
+
+              <form class="registration-form" data-form-id="form-1-overseas">
+                <!-- Page 1 -->
+                <div class="form-page active page-1">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">First Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Last Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter your last name" required>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Email Address <span style="color: var(--hover-color);">*</span></label>
+                      <input type="email" class="form-input form-field" placeholder="Enter your email address" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Phone Number <span style="color: var(--hover-color);">*</span></label>
+                      <input type="tel" class="form-input form-field" placeholder="Enter your phone number" required>
+                    </div>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="button" class="next-btn next-page-btn">Next</button>
+                  </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="form-page page-2">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Country of Residence <span style="color: var(--hover-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select Country</option>
+                        <option value="USA">United States</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Occupation <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter your occupation" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">About Yourself</label>
+                    <textarea class="form-textarea form-field" placeholder="Tell us about yourself and your connection to Odisha"></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="back-btn back-page-btn">Back</button>
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="submit" class="submit-btn">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Form Content 2: Pravasi Odia (India) -->
+            <div class="form-content" id="toggle-1-india">
+              <h3 class="form-title">Pravasi Odia (India)</h3>
+              <div class="form-page-indicator">Page <span class="current-page">1</span> of 2</div>
+              
+              <div class="info-box">
+                <p><strong>Note:</strong> Please fill in all the required fields. Your registration will be verified by our team within 5-7 business days.</p>
+              </div>
+
+              <form class="registration-form" data-form-id="form-1-india">
+                <!-- Page 1 -->
+                <div class="form-page active page-1">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">First Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Last Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter your last name" required>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Email Address <span style="color: var(--hover-color);">*</span></label>
+                      <input type="email" class="form-input form-field" placeholder="Enter your email address" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Phone Number <span style="color: var(--hover-color);">*</span></label>
+                      <input type="tel" class="form-input form-field" placeholder="Enter your phone number" required>
+                    </div>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="button" class="next-btn next-page-btn">Next</button>
+                  </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="form-page page-2">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">State <span style="color: var(--hover-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select State</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Occupation <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter your occupation" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">About Yourself</label>
+                    <textarea class="form-textarea form-field" placeholder="Tell us about yourself and your connection to Odisha"></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="back-btn back-page-btn">Back</button>
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="submit" class="submit-btn">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Tab 2: Odia Association -->
+          <div id="tab-2" class="tab-content">
+            <!-- Toggle Section -->
+            <div class="toggle-section">
+              <label class="toggle-label">Select Registration Type:</label>
+              <div class="toggle-switch-wrapper">
+                <span class="toggle-option active" id="toggle-2-label-1">Overseas</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggle-2" class="tab-toggle">
+                  <span class="slider"></span>
+                </label>
+                <span class="toggle-option" id="toggle-2-label-2">India</span>
+              </div>
+            </div>
+
+            <!-- Form Content 1: Odia Association (Overseas) -->
+            <div class="form-content active" id="toggle-2-overseas">
+              <h3 class="form-title">Odia Association Registration (Overseas)</h3>
+              <div class="form-page-indicator">Page <span class="current-page">1</span> of 2</div>
+              
+              <div class="info-box">
+                <p><strong>Note:</strong> Please provide accurate information about your association. Documentation may be required for verification.</p>
+              </div>
+
+              <form class="registration-form" data-form-id="form-2-overseas">
+                <!-- Page 1 -->
+                <div class="form-page active page-1">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Association Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter association name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Registration Number <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter registration number" required>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Country <span style="color: var(--hover-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select Country</option>
+                        <option value="USA">United States</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">City <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter city name" required>
+                    </div>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="button" class="next-btn next-page-btn">Next</button>
+                  </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="form-page page-2">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">President Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter president name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Contact Email <span style="color: var(--hover-color);">*</span></label>
+                      <input type="email" class="form-input form-field" placeholder="Enter contact email" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Association Description</label>
+                    <textarea class="form-textarea form-field" placeholder="Describe your association's activities and objectives"></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="back-btn back-page-btn">Back</button>
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="submit" class="submit-btn">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Form Content 2: Odia Association (India) -->
+            <div class="form-content" id="toggle-2-india">
+              <h3 class="form-title">Odia Association Registration (India)</h3>
+              <div class="form-page-indicator">Page <span class="current-page">1</span> of 2</div>
+              
+              <div class="info-box">
+                <p><strong>Note:</strong> Please provide accurate information about your association. Documentation may be required for verification.</p>
+              </div>
+
+              <form class="registration-form" data-form-id="form-2-india">
+                <!-- Page 1 -->
+                <div class="form-page active page-1">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Association Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter association name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Registration Number <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter registration number" required>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">State <span style="color: var(--hover-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select State</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">City <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter city name" required>
+                    </div>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="button" class="next-btn next-page-btn">Next</button>
+                  </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="form-page page-2">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">President Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter president name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Contact Email <span style="color: var(--hover-color);">*</span></label>
+                      <input type="email" class="form-input form-field" placeholder="Enter contact email" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Association Description</label>
+                    <textarea class="form-textarea form-field" placeholder="Describe your association's activities and objectives"></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="back-btn back-page-btn">Back</button>
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="submit" class="submit-btn">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Tab 3: Jagannath Temple -->
+          <div id="tab-3" class="tab-content">
+            <!-- Toggle Section -->
+            <div class="toggle-section">
+              <label class="toggle-label">Select Registration Type:</label>
+              <div class="toggle-switch-wrapper">
+                <span class="toggle-option active" id="toggle-3-label-1">Overseas</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggle-3" class="tab-toggle">
+                  <span class="slider"></span>
+                </label>
+                <span class="toggle-option" id="toggle-3-label-2">India</span>
+              </div>
+            </div>
+
+            <!-- Form Content 1: Jagannath Temple (Overseas) -->
+            <div class="form-content active" id="toggle-3-overseas">
+              <h3 class="form-title">Jagannath Temple Registration (Overseas)</h3>
+              <div class="form-page-indicator">Page <span class="current-page">1</span> of 2</div>
+              
+              <div class="info-box">
+                <p><strong>Note:</strong> Register your temple or worship center dedicated to Lord Jagannath. Verification documents will be required.</p>
+              </div>
+
+              <form class="registration-form" data-form-id="form-3-overseas">
+                <!-- Page 1 -->
+                <div class="form-page active page-1">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Temple/Center Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter temple or worship center name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Establishment Year <span style="color: var(--hover-color);">*</span></label>
+                      <input type="number" class="form-input form-field" placeholder="Enter year" required>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Country <span style="color: var(--hover-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select Country</option>
+                        <option value="USA">United States</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">City <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter city name" required>
+                    </div>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="button" class="next-btn next-page-btn">Next</button>
+                  </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="form-page page-2">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Head Priest Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter head priest name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Contact Number <span style="color: var(--hover-color);">*</span></label>
+                      <input type="tel" class="form-input form-field" placeholder="Enter contact number" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Temple Details</label>
+                    <textarea class="form-textarea form-field" placeholder="Provide details about your temple or worship center"></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="back-btn back-page-btn">Back</button>
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="submit" class="submit-btn">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Form Content 2: Jagannath Temple (India) -->
+            <div class="form-content" id="toggle-3-india">
+              <h3 class="form-title">Jagannath Temple Registration (India)</h3>
+              <div class="form-page-indicator">Page <span class="current-page">1</span> of 2</div>
+              
+              <div class="info-box">
+                <p><strong>Note:</strong> Register your temple or worship center dedicated to Lord Jagannath. Verification documents will be required.</p>
+              </div>
+
+              <form class="registration-form" data-form-id="form-3-india">
+                <!-- Page 1 -->
+                <div class="form-page active page-1">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Temple/Center Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter temple or worship center name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Establishment Year <span style="color: var(--hover-color);">*</span></label>
+                      <input type="number" class="form-input form-field" placeholder="Enter year" required>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">State <span style="color: var(--hover-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select State</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">City <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter city name" required>
+                    </div>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="button" class="next-btn next-page-btn">Next</button>
+                  </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="form-page page-2">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Head Priest Name <span style="color: var(--hover-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="Enter head priest name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Contact Number <span style="color: var(--hover-color);">*</span></label>
+                      <input type="tel" class="form-input form-field" placeholder="Enter contact number" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Temple Details</label>
+                    <textarea class="form-textarea form-field" placeholder="Provide details about your temple or worship center"></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="button" class="back-btn back-page-btn">Back</button>
+                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+                    <button type="submit" class="submit-btn">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================
+     Registration Section End
+========================== -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+      // Track form modifications
+      let isFormModified = false;
+      let currentActiveForm = null;
+
+      // Initialize form tracking
+      function initializeFormTracking() {
+        const formFields = document.querySelectorAll('.form-field');
+        
+        formFields.forEach(field => {
+          field.addEventListener('input', handleFormModified);
+          field.addEventListener('change', handleFormModified);
+        });
+      }
+
+      function handleFormModified() {
+        if (!isFormModified) {
+          isFormModified = true;
+          disableTabsAndToggles();
+        }
+      }
+
+      function disableTabsAndToggles() {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const toggleInputs = document.querySelectorAll('.tab-toggle');
+        
+        // Disable all inactive tabs
+        tabButtons.forEach(btn => {
+          if (!btn.classList.contains('active')) {
+            btn.disabled = true;
+          }
+        });
+
+        // Disable ALL toggles (including the current tab's toggle)
+        toggleInputs.forEach(toggle => {
+          toggle.disabled = true;
+        });
+      }
+
+      function enableTabsAndToggles() {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const toggleInputs = document.querySelectorAll('.tab-toggle');
+        
+        tabButtons.forEach(btn => btn.disabled = false);
+        toggleInputs.forEach(toggle => toggle.disabled = false);
+      }
+
+      let currentActiveToggle = null;
+
+      // Reset all forms
+      function resetAllForms() {
+        document.querySelectorAll('.registration-form').forEach(form => {
+          form.reset();
+          // Reset to page 1
+          const pages = form.querySelectorAll('.form-page');
+          pages.forEach((page, index) => {
+            if (index === 0) {
+              page.classList.add('active');
+            } else {
+              page.classList.remove('active');
+            }
+          });
+          updatePageIndicator(form);
+        });
+      }
+
+      // Tab Switching
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          if (button.disabled && isFormModified) {
+            alert('Please submit or clear the current form before switching to another registration type.');
+            return;
+          }
+
+          const tabId = button.getAttribute('data-tab');
+          
+          // Remove active class from all tabs and buttons
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+          
+          // Add active class to clicked button and corresponding tab
+          button.classList.add('active');
+          document.getElementById(tabId).classList.add('active');
+
+          // Reset toggles and form state
+          const tabToggle = document.getElementById(tabId).querySelector('.tab-toggle');
+          if (tabToggle) {
+            tabToggle.checked = false;
+            currentActiveToggle = tabToggle.id;
+            updateToggleState(tabToggle);
+          }
+
+          // Reset form state
+          isFormModified = false;
+          resetAllForms();
+          enableTabsAndToggles();
+        });
+      });
+
+      // Toggle Switching
+      const toggles = document.querySelectorAll('.tab-toggle');
+
+      toggles.forEach(toggle => {
+        toggle.addEventListener('change', function() {
+          if (this.disabled && isFormModified) {
+            this.checked = !this.checked;
+            alert('Please submit or clear the current form before switching registration types.');
+            return;
+          }
+          updateToggleState(this);
+        });
+      });
+
+      function updateToggleState(toggle) {
+        const toggleId = toggle.id;
+        const tabNumber = toggleId.replace('toggle-', '');
+        const tabContent = document.getElementById(`tab-${tabNumber}`);
+        
+        const formContentOverseas = tabContent.querySelector(`#toggle-${tabNumber}-overseas`);
+        const formContentIndia = tabContent.querySelector(`#toggle-${tabNumber}-india`);
+        
+        const label1 = document.getElementById(`toggle-${tabNumber}-label-1`);
+        const label2 = document.getElementById(`toggle-${tabNumber}-label-2`);
+        
+        if (toggle.checked) {
+          // India
+          formContentOverseas.classList.remove('active');
+          formContentIndia.classList.add('active');
+          label1.classList.remove('active');
+          label2.classList.add('active');
+        } else {
+          // Overseas
+          formContentIndia.classList.remove('active');
+          formContentOverseas.classList.add('active');
+          label2.classList.remove('active');
+          label1.classList.add('active');
+        }
+      }
+
+      // Form Page Navigation
+      document.querySelectorAll('.next-page-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const form = this.closest('.registration-form');
+          const currentPage = form.querySelector('.form-page.active');
+          const nextPage = currentPage.nextElementSibling;
+          
+          if (nextPage && nextPage.classList.contains('form-page')) {
+            currentPage.classList.remove('active');
+            nextPage.classList.add('active');
+            updatePageIndicator(form);
+          }
+        });
+      });
+
+      document.querySelectorAll('.back-page-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const form = this.closest('.registration-form');
+          const currentPage = form.querySelector('.form-page.active');
+          const prevPage = currentPage.previousElementSibling;
+          
+          if (prevPage && prevPage.classList.contains('form-page')) {
+            currentPage.classList.remove('active');
+            prevPage.classList.add('active');
+            updatePageIndicator(form);
+          }
+        });
+      });
+
+      function updatePageIndicator(form) {
+        const pages = form.querySelectorAll('.form-page');
+        const indicators = form.querySelectorAll('.form-page-indicator .current-page');
+        let activePage = 1;
+        
+        pages.forEach((page, index) => {
+          if (page.classList.contains('active')) {
+            activePage = index + 1;
+          }
+        });
+        
+        indicators.forEach(indicator => {
+          indicator.textContent = activePage;
+        });
+      }
+
+      // Save as Draft
+      document.querySelectorAll('.save-draft-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const form = this.closest('.registration-form');
+          const formId = form.getAttribute('data-form-id');
+          const formData = new FormData(form);
+          const formDataObj = Object.fromEntries(formData);
+          
+          localStorage.setItem(`draft_${formId}`, JSON.stringify(formDataObj));
+          alert('Form saved as draft successfully!');
+        });
+      });
+
+      // Form Submission
+      document.querySelectorAll('.registration-form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const formId = this.getAttribute('data-form-id');
+          
+          // Here you can send the form data to server
+          console.log('Form submitted:', formId);
+          alert('Registration submitted successfully! Your reference number is: REF-' + Date.now());
+          
+          // Clear draft
+          localStorage.removeItem(`draft_${formId}`);
+          
+          // Reset form and state
+          this.reset();
+          isFormModified = false;
+          enableTabsAndToggles();
+          
+          // Reset to first page
+          const pages = this.querySelectorAll('.form-page');
+          pages.forEach((page, index) => {
+            if (index === 0) {
+              page.classList.add('active');
+            } else {
+              page.classList.remove('active');
+            }
+          });
+          updatePageIndicator(this);
+        });
+      });
+
+      // Search functionality
+      const searchToggle = document.querySelector('.search-toggle');
+      const searchInput = document.querySelector('.search-input');
+
+      if (searchToggle) {
+        searchToggle.addEventListener('click', () => {
+          searchInput.classList.toggle('active');
+          searchInput.focus();
+        });
+      }
+
+      // Initialize
+      initializeFormTracking();
+      currentActiveToggle = 'toggle-1';
+    </script>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
