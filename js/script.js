@@ -499,3 +499,69 @@ document.addEventListener("DOMContentLoaded", function () {
     requestAnimationFrame(animate);
   }
 })();
+
+/* ─────────────────────────────────────────
+   7. FOOTER — SCROLL ANIMATIONS & NEWSLETTER
+───────────────────────────────────────── */
+
+// FOOTER SCROLL-IN ANIMATION
+const footerElement = document.getElementById("main-footer");
+if (footerElement) {
+  const footerObserver = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = "footer-fade-up 0.8s ease-out 0.2s both";
+          footerObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  footerObserver.observe(footerElement);
+}
+
+// NEWSLETTER FORM HANDLING
+const newsletterForm = document.getElementById("footer-newsletter-form");
+if (newsletterForm) {
+  newsletterForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const input = this.querySelector(".footer-input");
+    const btn = this.querySelector(".footer-btn");
+    const email = input.value.trim();
+
+    // Basic email validation
+    if (!email || !email.includes("@")) {
+      input.style.borderColor = "#ff6b6b";
+      setTimeout(() => {
+        input.style.borderColor = "";
+      }, 1500);
+      return;
+    }
+
+    // Button feedback
+    btn.style.background = "linear-gradient(135deg, #90ee90, #76d776)";
+    btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+    setTimeout(() => {
+      btn.style.background = "linear-gradient(135deg, var(--btn), #c74a24)";
+      btn.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
+      input.value = "";
+    }, 2000);
+  });
+
+  // Input focus animation
+  const input = newsletterForm.querySelector(".footer-input");
+  if (input) {
+    input.addEventListener("focus", function () {
+      this.parentElement.style.boxShadow =
+        "0 0 20px rgba(222, 89, 46, 0.3), inset 0 0 15px rgba(222, 89, 46, 0.1)";
+    });
+
+    input.addEventListener("blur", function () {
+      this.parentElement.style.boxShadow = "";
+    });
+  }
+}
