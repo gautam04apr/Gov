@@ -1,0 +1,384 @@
+/* ═══════════════════════════════════════════════
+   REGISTRATION PAGE STYLES
+═══════════════════════════════════════════════ */
+
+.registration-section {
+  padding: 20px 0;
+  min-height: 800px;
+}
+
+.page-title {
+  margin-bottom: 10px;
+}
+
+.page-title h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 0px;
+}
+
+.page-title p {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+/* Tabs Container */
+.registration-tabs-wrapper {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.registration-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border-light);
+  background: var(--bg-light);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 20px 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  position: relative;
+  text-align: center;
+}
+
+.tab-btn:hover {
+  background: var(--hover-light);
+  color: var(--btn-color);
+}
+
+.tab-btn.active {
+  background: white;
+  color: var(--btn-color);
+  border-bottom: 3px solid var(--btn-color);
+  margin-bottom: -2px;
+}
+
+/* Toggle Container */
+.toggle-section {
+  padding: 30px 24px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-light);
+}
+
+.toggle-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Toggle Switch */
+.toggle-switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.toggle-option {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.toggle-option.active {
+  color: var(--btn-color);
+  font-weight: 600;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--btn-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Form Content Container */
+.form-content {
+  padding: 40px 24px;
+  display: none;
+}
+
+.form-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.form-page-indicator {
+  font-size: 14px;
+  color: var(--text-secondary-2);
+  margin-bottom: 30px;
+}
+
+/* Form Pages */
+.form-page {
+  display: none;
+}
+
+.form-page.active {
+  display: block;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  transition: 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--btn-color);
+  box-shadow: 0 0 0 3px rgba(222, 89, 46, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Form Row */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.submit-btn,
+.reset-btn,
+.back-btn,
+.next-btn,
+.draft-btn {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.submit-btn {
+  background: var(--btn-color);
+  color: white;
+}
+
+.submit-btn:hover {
+  background: var(--hover-color);
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.next-btn {
+  background: var(--btn-color);
+  color: white;
+  margin-left: auto;
+}
+
+.next-btn:hover {
+  background: var(--hover-color);
+}
+
+.back-btn {
+  background: var(--bg-light);
+  color: var(--text-color);
+  border: 1px solid var(--border-light);
+}
+
+.back-btn:hover {
+  background: #e0e0e0;
+}
+
+.draft-btn {
+  background: transparent;
+  color: var(--btn-color);
+  border: 1px solid var(--btn-color);
+}
+
+.draft-btn:hover {
+  background: #f5f5f5;
+}
+
+.reset-btn {
+  background: var(--bg-light);
+  color: var(--text-color);
+  border: 1px solid var(--border-light);
+}
+
+.reset-btn:hover {
+  background: #e0e0e0;
+}
+
+/* Disabled State */
+.tab-btn:disabled,
+.toggle-switch input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggle-switch input:disabled + .slider {
+  background-color: #ccc;
+}
+
+/* Info Box */
+.info-box {
+  background: var(--bg-light);
+  border-left: 4px solid var(--btn-color);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.info-box p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .registration-section {
+    padding: 40px 0;
+  }
+
+  .page-title h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+
+  .registration-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    flex: 0 0 50%;
+    padding: 16px 12px;
+    font-size: 14px;
+  }
+
+  .toggle-section {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .submit-btn,
+  .reset-btn {
+    width: 100%;
+  }
+}

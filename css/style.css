@@ -29,6 +29,15 @@
   --card-color: #e9c8bf;
   --btn-color: #de592e;
   --hover-color: #965038;
+  
+  /* Additional colors for extended design system */
+  --text-secondary: #7a5848;
+  --border-light: #f0f0f0;
+  --border-lighter: #eee;
+  --bg-light: #fafafa;
+  --hover-light: #f5f5f5;
+  --text-secondary-2: #999;
+  --text-secondary-3: #666;
 }
 
 * {
@@ -57,7 +66,7 @@ body {
   border-bottom: 1px solid var(--border);
   padding: 7px 0;
   position: relative;
-  z-index: 1050;
+  z-index: 900;
 }
 
 /* Left: Phone */
@@ -416,9 +425,18 @@ body {
    UTILITY: Sticky position logic
    Utility bar scrolls away; navbar stays
 ═══════════════════════════════════════════ */
+
+#site-header {
+  display: contents;
+}
+
 #main-navbar.navbar {
   position: sticky;
   top: 0;
+  /* 2. Fix the z-index. It must be higher than the notification bar (100) 
+        and the hero section slides (2). */
+  z-index: 100; 
+  background: var(--white);
 }
 
 /* ═══════════════════════════════════════════
@@ -715,7 +733,7 @@ body {
   align-items: center;
   overflow: hidden;
   position: relative;
-  z-index: 100;
+  z-index: 10;
 }
 
 /* Left label badge */
