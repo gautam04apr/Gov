@@ -565,3 +565,88 @@ if (newsletterForm) {
     });
   }
 }
+
+/* ─────────────────────────────────────────
+   SECTION 6 — PARTNERS CAROUSEL
+───────────────────────────────────────── */
+(function () {
+  const carouselTrack = document.getElementById("partnersCarouselTrack");
+  const carouselWrapper = document.querySelector(".partners-carousel-wrapper");
+
+  if (!carouselTrack || !carouselWrapper) return;
+
+  // Initialize carousel — ensure seamless loop
+  // The CSS animation handles the continuous scrolling
+  // This JavaScript ensures smooth experience and accessibility
+
+  // Pause animation on hover (handled by CSS, but ensure browser support)
+  carouselWrapper.addEventListener("mouseenter", function () {
+    carouselTrack.style.animationPlayState = "paused";
+  });
+
+  carouselWrapper.addEventListener("mouseleave", function () {
+    carouselTrack.style.animationPlayState = "running";
+  });
+
+  // Touch support for mobile devices
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  carouselWrapper.addEventListener(
+    "touchstart",
+    function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+      carouselTrack.style.animationPlayState = "paused";
+    },
+    false
+  );
+
+  carouselWrapper.addEventListener(
+    "touchend",
+    function (e) {
+      touchEndX = e.changedTouches[0].screenX;
+      carouselTrack.style.animationPlayState = "running";
+    },
+    false
+  );
+
+  // Scroll behavior on touch
+  carouselWrapper.addEventListener("touchmove", function (e) {
+    // Allow default scroll behavior
+    if (Math.abs(touchStartX - touchEndX) > 50) {
+      // Significant swipe detected
+      e.preventDefault();
+    }
+  });
+
+  // Intersection Observer for animation trigger
+  const section = document.getElementById("partners-carousel-section");
+  if (section) {
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            carouselTrack.style.animationPlayState = "running";
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(section);
+  }
+
+  // Keyboard support
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      // Only work if carousel is in view
+      const rect = carouselWrapper.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        carouselTrack.style.animationPlayState = "paused";
+        setTimeout(() => {
+          carouselTrack.style.animationPlayState = "running";
+        }, 2000);
+      }
+    }
+  });
+})();
