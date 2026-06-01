@@ -216,3 +216,286 @@ document.addEventListener("DOMContentLoaded", function () {
   // Clone all items and append — makes loop seamless
   track.innerHTML += track.innerHTML;
 })();
+
+/* SECTION 5 — VIDEO PLAYER */
+(function () {
+  const featuredThumb = document.getElementById("featuredThumb");
+  const featuredIframe = document.getElementById("featuredIframe");
+  const featuredPlayBtn = document.getElementById("featuredPlayBtn");
+  const featuredThumbImg = document.getElementById("featuredThumbImg");
+  const featuredTitle = document.getElementById("featuredTitle");
+  const thumbCards = document.querySelectorAll(".vthumb-card");
+  let currentVid = "r80IU7cVn-s";
+
+  function playFeatured(vid) {
+    featuredIframe.src =
+      "https://www.youtube.com/embed/" +
+      vid +
+      "?autoplay=1&rel=0&modestbranding=1";
+    featuredIframe.classList.remove("d-none");
+    featuredThumb.style.opacity = "0";
+    featuredThumb.style.pointerEvents = "none";
+  }
+
+  function resetFeatured() {
+    featuredIframe.src = "";
+    featuredIframe.classList.add("d-none");
+    featuredThumb.style.opacity = "1";
+    featuredThumb.style.pointerEvents = "auto";
+  }
+
+  featuredPlayBtn?.addEventListener("click", () => playFeatured(currentVid));
+
+  thumbCards.forEach(function (card) {
+    card.addEventListener("click", function () {
+      const vid = this.getAttribute("data-vid");
+      const title = this.getAttribute("data-title");
+      thumbCards.forEach((c) => c.classList.remove("active"));
+      this.classList.add("active");
+      resetFeatured();
+      currentVid = vid;
+      featuredThumbImg.src =
+        "https://img.youtube.com/vi/" + vid + "/maxresdefault.jpg";
+      featuredThumbImg.onerror = function () {
+        this.src = "https://img.youtube.com/vi/" + vid + "/hqdefault.jpg";
+      };
+      if (featuredTitle) featuredTitle.textContent = title;
+      setTimeout(() => playFeatured(vid), 120);
+    });
+  });
+})();
+
+/* Count-up animation — repeats every 10s */
+(function () {
+  const stats = document.querySelectorAll(".stat-num[data-target]");
+  if (!stats.length) return;
+
+  function countUp(el) {
+    const target = +el.getAttribute("data-target");
+    const duration = 1800;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(function () {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent =
+        target >= 1000
+          ? Math.floor(current / 1000) + "K+"
+          : Math.floor(current) + "+";
+    }, 16);
+  }
+
+  function runAll() {
+    stats.forEach(countUp);
+  }
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          runAll();
+          setInterval(runAll, 10000);
+          observer.disconnect();
+        }
+      });
+    },
+    { threshold: 0.4 },
+  );
+
+  const section = document.getElementById("about-section");
+  if (section) observer.observe(section);
+})();
+
+/* Video thumb slider — infinite loop arrows */
+(function () {
+  const slider = document.getElementById("videoThumbSlider");
+  const prev = document.getElementById("vSliderPrev");
+  const next = document.getElementById("vSliderNext");
+  if (!slider) return;
+  const SCROLL = 200;
+
+  next?.addEventListener("click", function () {
+    const atEnd =
+      slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5;
+    if (atEnd) slider.scrollTo({ left: 0, behavior: "smooth" });
+    else slider.scrollBy({ left: SCROLL, behavior: "smooth" });
+  });
+
+  prev?.addEventListener("click", function () {
+    const atStart = slider.scrollLeft <= 5;
+    if (atStart)
+      slider.scrollTo({ left: slider.scrollWidth, behavior: "smooth" });
+    else slider.scrollBy({ left: -SCROLL, behavior: "smooth" });
+  });
+})();
+/* Honeycomb canvas transition — 3D coin flip with ember wave */
+(function () {
+  const card = document.getElementById("honeycombCard");
+  const canvas = document.getElementById("honeycombCanvas");
+  if (!card || !canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  const images = [
+    "assets/images/hero-1.png",
+    "assets/images/hero-2.png",
+    "assets/images/hero-3.png",
+    "assets/images/hero-4.png",
+  ];
+
+  const HEX_SIZE = 52;
+  const TRANSITION = 1400;
+  const HOLD = 3200;
+
+  let imgObjs = [];
+  let current = 0;
+  let hexCells = [];
+  let W, H;
+
+  /* Load images */
+  let loaded = 0;
+  images.forEach(function (src, i) {
+    const img = new Image();
+    img.src = src;
+    img.onload = function () {
+      imgObjs[i] = img;
+      loaded++;
+      if (loaded === images.length) init();
+    };
+    img.onerror = function () {
+      loaded++;
+      if (loaded === images.length) init();
+    };
+  });
+
+  function init() {
+    resize();
+    window.addEventListener("resize", resize);
+    drawFrame(imgObjs[current], 1);
+    setTimeout(nextSlide, HOLD);
+  }
+
+  function resize() {
+    W = canvas.width = card.offsetWidth;
+    H = canvas.height = card.offsetHeight || 280;
+    buildHexGrid();
+  }
+
+  function buildHexGrid() {
+    hexCells = [];
+    const colW = HEX_SIZE * Math.sqrt(3);
+    const rowH = HEX_SIZE * 1.5;
+    const cols = Math.ceil(W / colW) + 2;
+    const rows = Math.ceil(H / rowH) + 2;
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const offset = (col % 2) * HEX_SIZE * 0.75;
+        hexCells.push({
+          cx: col * colW * 0.865,
+          cy: row * rowH + offset,
+          col,
+          row,
+        });
+      }
+    }
+  }
+
+  function drawFrame(img, alpha) {
+    if (!img) return;
+    ctx.globalAlpha = alpha;
+    ctx.drawImage(img, 0, 0, W, H);
+    ctx.globalAlpha = 1;
+  }
+
+  function hexPath(cx, cy, r) {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI / 180) * (60 * i - 30);
+      i === 0
+        ? ctx.moveTo(cx + r * Math.cos(angle), cy + r * Math.sin(angle))
+        : ctx.lineTo(cx + r * Math.cos(angle), cy + r * Math.sin(angle));
+    }
+    ctx.closePath();
+  }
+
+  function nextSlide() {
+    const fromImg = imgObjs[current];
+    const next = (current + 1) % imgObjs.length;
+    const toImg = imgObjs[next];
+    if (!fromImg || !toImg) {
+      current = next;
+      setTimeout(nextSlide, HOLD);
+      return;
+    }
+
+    const startTime = performance.now();
+    const maxDiag = Math.max(...hexCells.map((h) => h.col + h.row));
+
+    function animate(now) {
+      const elapsed = now - startTime;
+      ctx.clearRect(0, 0, W, H);
+
+      /* Base: old image */
+      drawFrame(fromImg, 1);
+
+      hexCells.forEach(function (hex) {
+        /* Diagonal wave: top-left → bottom-right */
+        const diagNorm = (hex.col + hex.row) / maxDiag;
+        const waveStart = diagNorm * (TRANSITION * 0.5);
+        const localT = Math.min(
+          1,
+          Math.max(0, (elapsed - waveStart) / (TRANSITION * 0.45)),
+        );
+
+        if (localT <= 0) return;
+
+        /* 3D coin flip: scaleX goes 1 → 0 (first half) → 1 (second half) */
+        const flip = Math.abs(Math.cos(localT * Math.PI)); /* 1→0→1 */
+        const isBack = localT > 0.5; /* which face showing */
+
+        ctx.save();
+        ctx.translate(hex.cx, hex.cy);
+        ctx.scale(flip, 1); /* fake 3D perspective */
+        ctx.translate(-hex.cx, -hex.cy);
+
+        hexPath(hex.cx, hex.cy, HEX_SIZE);
+        ctx.clip();
+
+        if (isBack) {
+          /* Second half: reveal new image */
+          ctx.drawImage(toImg, 0, 0, W, H);
+        } else {
+          /* First half: show old image (already drawn, just re-clip) */
+          ctx.drawImage(fromImg, 0, 0, W, H);
+        }
+
+        /* Ember flash at flip midpoint — orange glow when scaleX ≈ 0 */
+        const emberAlpha = Math.max(0, 1 - flip * 6); /* spikes at flip=0 */
+        if (emberAlpha > 0) {
+          ctx.fillStyle = `rgba(222, 89, 46, ${emberAlpha * 0.92})`;
+          ctx.fill();
+
+          /* Inner bright core */
+          ctx.fillStyle = `rgba(255, 200, 120, ${emberAlpha * 0.6})`;
+          hexPath(hex.cx, hex.cy, HEX_SIZE * 0.55);
+          ctx.fill();
+        }
+
+        ctx.restore();
+      });
+
+      if (elapsed < TRANSITION + maxDiag * 18) {
+        requestAnimationFrame(animate);
+      } else {
+        ctx.clearRect(0, 0, W, H);
+        drawFrame(toImg, 1);
+        current = next;
+        setTimeout(nextSlide, HOLD);
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+})();

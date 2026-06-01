@@ -433,6 +433,240 @@
         </div>
       </div>
     </div>
+    <!-- ═══════════════════════════════════════════
+       SECTION 5 — ABOUT US + VIDEO
+  ════════════════════════════════════════════ -->
+    <section id="about-section">
+      <div class="container-fluid px-5">
+        <div class="row g-5 align-items-stretch">
+          <!-- ── LEFT: About Us ──────────────────── -->
+          <div class="col-5 d-flex flex-column">
+            <div class="about-text-card">
+              <span class="about-eyebrow">Who We Are</span>
+              <h2 class="about-heading">
+                About <span class="about-highlight">Us</span>
+              </h2>
+              <p class="about-desc">
+                Odisha Paribar is committed to building a strong global
+                community of Odias, working together for the progress and
+                prosperity of Odisha. We bridge the gap between the Odia
+                diaspora and the homeland.
+              </p>
+              <p class="about-desc">
+                From investment opportunities to cultural exchange programs,
+                Odisha Paribar is your gateway to staying connected with the
+                roots that define us — wherever in the world you are.
+              </p>
+
+              <!-- Image now inside card -->
+              <div class="about-img-card" id="honeycombCard">
+                <canvas id="honeycombCanvas"></canvas>
+                <div class="about-img-badge">
+                  <i class="fa-solid fa-landmark"></i>
+                  <span>Rich Heritage of Odisha</span>
+                </div>
+              </div>
+
+              <div class="about-stats-row">
+                <div class="about-stat">
+                  <span class="stat-num" data-target="12000">0</span
+                  ><span class="stat-label">Members</span>
+                </div>
+                <div class="about-stat-divider"></div>
+                <div class="about-stat">
+                  <span class="stat-num" data-target="48">0</span
+                  ><span class="stat-label">Countries</span>
+                </div>
+                <div class="about-stat-divider"></div>
+                <div class="about-stat">
+                  <span class="stat-num" data-target="200">0</span
+                  ><span class="stat-label">Events</span>
+                </div>
+              </div>
+              <a href="#" class="btn about-cta"
+                >Explore More <i class="fa-solid fa-arrow-right ms-2"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- ── RIGHT: Video Player ─────────────── -->
+          <div class="col-7 d-flex flex-column gap-3">
+            <!-- Featured Player -->
+            <div class="video-player-card">
+              <div class="video-featured-wrap" id="featuredPlayerWrap">
+                <!-- Thumbnail state -->
+                <div class="video-thumb-overlay" id="featuredThumb">
+                  <img
+                    src="https://img.youtube.com/vi/r80IU7cVn-s/maxresdefault.jpg"
+                    alt="Featured Video"
+                    class="video-thumb-img"
+                    id="featuredThumbImg"
+                    onerror="
+                      this.src =
+                        'https://img.youtube.com/vi/r80IU7cVn-s/hqdefault.jpg'
+                    "
+                  />
+                  <div class="video-thumb-gradient"></div>
+                  <button
+                    class="video-play-btn"
+                    id="featuredPlayBtn"
+                    aria-label="Play video"
+                  >
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                  <div class="video-thumb-meta" id="featuredMeta">
+                    <span class="video-yt-badge"
+                      ><i class="fa-brands fa-youtube"></i> YouTube</span
+                    >
+                    <p class="video-thumb-title" id="featuredTitle">
+                      CM Mohan Charan Majhi Meets Prime Minister Modi
+                    </p>
+                  </div>
+                </div>
+                <!-- iframe injected here on play -->
+                <iframe
+                  id="featuredIframe"
+                  class="video-iframe d-none"
+                  allow="autoplay; encrypted-media"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+
+            <!-- Thumbnail Row -->
+            <div class="video-thumb-slider-wrap">
+              <button class="vslider-arrow vslider-prev" id="vSliderPrev">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <div class="video-thumb-slider" id="videoThumbSlider">
+                <div
+                  class="vthumb-card active"
+                  data-vid="r80IU7cVn-s"
+                  data-title="CM Mohan Charan Majhi Meets Prime Minister Modi"
+                >
+                  <div class="vthumb-img-wrap">
+                    <img
+                      src="https://img.youtube.com/vi/r80IU7cVn-s/mqdefault.jpg"
+                      alt=""
+                    />
+                    <div class="vthumb-play">
+                      <i class="fa-solid fa-play"></i>
+                    </div>
+                    <span class="vthumb-active-bar"></span>
+                  </div>
+                  <p class="vthumb-title">CM Majhi Meets PM Modi</p>
+                  <span class="vthumb-yt"
+                    ><i class="fa-brands fa-youtube"></i> YouTube</span
+                  >
+                </div>
+                <div
+                  class="vthumb-card"
+                  data-vid="WzAh69qIW6U"
+                  data-title="Odisha Pravasi Connect"
+                >
+                  <div class="vthumb-img-wrap">
+                    <img
+                      src="https://img.youtube.com/vi/WzAh69qIW6U/mqdefault.jpg"
+                      alt=""
+                    />
+                    <div class="vthumb-play">
+                      <i class="fa-solid fa-play"></i>
+                    </div>
+                  </div>
+                  <p class="vthumb-title">Odisha Pravasi Connect</p>
+                  <span class="vthumb-yt"
+                    ><i class="fa-brands fa-youtube"></i> YouTube</span
+                  >
+                </div>
+                <div
+                  class="vthumb-card"
+                  data-vid="GaZoQWHhW-s"
+                  data-title="Odisha Heritage Festival 2025"
+                >
+                  <div class="vthumb-img-wrap">
+                    <img
+                      src="https://img.youtube.com/vi/GaZoQWHhW-s/mqdefault.jpg"
+                      alt=""
+                    />
+                    <div class="vthumb-play">
+                      <i class="fa-solid fa-play"></i>
+                    </div>
+                  </div>
+                  <p class="vthumb-title">Odisha Heritage Festival</p>
+                  <span class="vthumb-yt"
+                    ><i class="fa-brands fa-youtube"></i> YouTube</span
+                  >
+                </div>
+                <div
+                  class="vthumb-card"
+                  data-vid="r80IU7cVn-s"
+                  data-title="Pravasi Odia Global Summit"
+                >
+                  <div class="vthumb-img-wrap">
+                    <img
+                      src="https://img.youtube.com/vi/r80IU7cVn-s/mqdefault.jpg"
+                      alt=""
+                    />
+                    <div class="vthumb-play">
+                      <i class="fa-solid fa-play"></i>
+                    </div>
+                  </div>
+                  <p class="vthumb-title">Pravasi Odia Global Summit</p>
+                  <span class="vthumb-yt"
+                    ><i class="fa-brands fa-youtube"></i> YouTube</span
+                  >
+                </div>
+                <div
+                  class="vthumb-card"
+                  data-vid="WzAh69qIW6U"
+                  data-title="Odisha Investment Meet"
+                >
+                  <div class="vthumb-img-wrap">
+                    <img
+                      src="https://img.youtube.com/vi/WzAh69qIW6U/mqdefault.jpg"
+                      alt=""
+                    />
+                    <div class="vthumb-play">
+                      <i class="fa-solid fa-play"></i>
+                    </div>
+                  </div>
+                  <p class="vthumb-title">Odisha Investment Meet</p>
+                  <span class="vthumb-yt"
+                    ><i class="fa-brands fa-youtube"></i> YouTube</span
+                  >
+                </div>
+                <div
+                  class="vthumb-card"
+                  data-vid="GaZoQWHhW-s"
+                  data-title="Cultural Connect 2025"
+                >
+                  <div class="vthumb-img-wrap">
+                    <img
+                      src="https://img.youtube.com/vi/GaZoQWHhW-s/mqdefault.jpg"
+                      alt=""
+                    />
+                    <div class="vthumb-play">
+                      <i class="fa-solid fa-play"></i>
+                    </div>
+                  </div>
+                  <p class="vthumb-title">Cultural Connect 2025</p>
+                  <span class="vthumb-yt"
+                    ><i class="fa-brands fa-youtube"></i> YouTube</span
+                  >
+                </div>
+              </div>
+              <button class="vslider-arrow vslider-next" id="vSliderNext">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+            <!-- /video thumb row -->
+          </div>
+          <!-- /col-7 -->
+        </div>
+        <!-- /row -->
+      </div>
+      <!-- /container -->
+    </section>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
