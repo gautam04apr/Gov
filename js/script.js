@@ -35,7 +35,8 @@ function setActiveNavLink() {
   const navLinks = document.querySelectorAll(".nav-item-link");
   const currentPath = window.location.pathname;
   // Get just the filename e.g. "registration.html"
-  const currentFile = currentPath.substring(currentPath.lastIndexOf("/") + 1) || "index.html";
+  const currentFile =
+    currentPath.substring(currentPath.lastIndexOf("/") + 1) || "index.html";
 
   navLinks.forEach(function (link) {
     const href = link.getAttribute("href");
@@ -60,28 +61,31 @@ function setActiveNavLink() {
    that have the header hard-coded.
 ═══════════════════════════════════════════════ */
 function initHeader() {
-
   /* ─────────────────────────────────────────
      1. FONT SIZE ACCESSIBILITY
   ───────────────────────────────────────── */
   const BASE_SIZE = 16;
-  const MIN_SIZE  = 13;
-  const MAX_SIZE  = 20;
-  const STEP      = 1;
+  const MIN_SIZE = 13;
+  const MAX_SIZE = 20;
+  const STEP = 1;
   let currentSize = BASE_SIZE;
-  const htmlEl    = document.documentElement;
+  const htmlEl = document.documentElement;
 
   function applyFontSize(size) {
     currentSize = Math.min(MAX_SIZE, Math.max(MIN_SIZE, size));
     htmlEl.style.fontSize = currentSize + "px";
   }
 
-  document.getElementById("btn-increase")?.addEventListener("click", function () {
-    applyFontSize(currentSize + STEP);
-  });
-  document.getElementById("btn-decrease")?.addEventListener("click", function () {
-    applyFontSize(currentSize - STEP);
-  });
+  document
+    .getElementById("btn-increase")
+    ?.addEventListener("click", function () {
+      applyFontSize(currentSize + STEP);
+    });
+  document
+    .getElementById("btn-decrease")
+    ?.addEventListener("click", function () {
+      applyFontSize(currentSize - STEP);
+    });
   document.getElementById("btn-reset")?.addEventListener("click", function () {
     applyFontSize(BASE_SIZE);
   });
@@ -89,7 +93,7 @@ function initHeader() {
   /* ─────────────────────────────────────────
      2. LANGUAGE SWITCHER
   ───────────────────────────────────────── */
-  const langOptions    = document.querySelectorAll(".lang-option");
+  const langOptions = document.querySelectorAll(".lang-option");
   const selectedLangEl = document.getElementById("selected-lang");
 
   langOptions.forEach(function (item) {
@@ -99,11 +103,13 @@ function initHeader() {
       const chosen = this.getAttribute("data-lang");
       if (selectedLangEl) selectedLangEl.textContent = chosen;
 
-      langOptions.forEach(function (opt) { opt.classList.remove("active"); });
+      langOptions.forEach(function (opt) {
+        opt.classList.remove("active");
+      });
       this.classList.add("active");
 
       // Close Bootstrap dropdown
-      const ddEl   = document.getElementById("langDropdown");
+      const ddEl = document.getElementById("langDropdown");
       const ddInst = ddEl ? bootstrap.Dropdown.getInstance(ddEl) : null;
       if (ddInst) ddInst.hide();
     });
@@ -112,14 +118,14 @@ function initHeader() {
   /* ─────────────────────────────────────────
      3. SEARCH — EXPAND / COLLAPSE + AUTO-CLOSE
   ───────────────────────────────────────── */
-  const searchToggle    = document.getElementById("search-toggle");
+  const searchToggle = document.getElementById("search-toggle");
   const searchInputWrap = document.getElementById("search-input-wrap");
-  const searchInput     = document.getElementById("search-input");
+  const searchInput = document.getElementById("search-input");
 
   // Guard — if elements don't exist, skip silently
   if (!searchToggle || !searchInputWrap) return;
 
-  let searchOpen     = false;
+  let searchOpen = false;
   let autoCloseTimer = null;
 
   function openSearch() {
@@ -127,7 +133,9 @@ function initHeader() {
     searchInputWrap.classList.add("open");
     searchToggle.classList.add("active");
     // Focus input after CSS transition starts
-    setTimeout(function () { searchInput?.focus(); }, 80);
+    setTimeout(function () {
+      searchInput?.focus();
+    }, 80);
     startAutoClose();
   }
 
@@ -175,7 +183,9 @@ function initHeader() {
   navLinks.forEach(function (link) {
     link.addEventListener("click", function (e) {
       if (this.getAttribute("href") === "#") e.preventDefault();
-      navLinks.forEach(function (l) { l.classList.remove("active"); });
+      navLinks.forEach(function (l) {
+        l.classList.remove("active");
+      });
       this.classList.add("active");
     });
   });
@@ -200,23 +210,22 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
 /* ═══════════════════════════════════════════════
    SECTION 3 — HERO CAROUSEL
 ═══════════════════════════════════════════════ */
 (function () {
-  const TOTAL       = 6;
+  const TOTAL = 6;
   const INTERVAL_MS = 5000;
 
   const slides = document.querySelectorAll(".hero-slide");
-  const dots   = document.querySelectorAll(".hero-dot");
-  const prev   = document.getElementById("heroPrev");
-  const next   = document.getElementById("heroNext");
+  const dots = document.querySelectorAll(".hero-dot");
+  const prev = document.getElementById("heroPrev");
+  const next = document.getElementById("heroNext");
 
   if (!slides.length) return;
 
   let current = 0;
-  let timer   = null;
+  let timer = null;
 
   function goTo(n) {
     slides[current].classList.remove("active");
@@ -228,11 +237,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function startTimer() {
     clearInterval(timer);
-    timer = setInterval(function () { goTo(current + 1); }, INTERVAL_MS);
+    timer = setInterval(function () {
+      goTo(current + 1);
+    }, INTERVAL_MS);
   }
 
-  prev?.addEventListener("click", function () { goTo(current - 1); startTimer(); });
-  next?.addEventListener("click", function () { goTo(current + 1); startTimer(); });
+  prev?.addEventListener("click", function () {
+    goTo(current - 1);
+    startTimer();
+  });
+  next?.addEventListener("click", function () {
+    goTo(current + 1);
+    startTimer();
+  });
 
   dots.forEach(function (dot) {
     dot.addEventListener("click", function () {
@@ -242,17 +259,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.addEventListener("keydown", function (e) {
-    if (e.key === "ArrowLeft")  { goTo(current - 1); startTimer(); }
-    if (e.key === "ArrowRight") { goTo(current + 1); startTimer(); }
+    if (e.key === "ArrowLeft") {
+      goTo(current - 1);
+      startTimer();
+    }
+    if (e.key === "ArrowRight") {
+      goTo(current + 1);
+      startTimer();
+    }
   });
 
   const carousel = document.getElementById("heroCarousel");
-  carousel?.addEventListener("mouseenter", function () { clearInterval(timer); });
+  carousel?.addEventListener("mouseenter", function () {
+    clearInterval(timer);
+  });
   carousel?.addEventListener("mouseleave", startTimer);
 
   startTimer();
 })();
-
 
 /* ═══════════════════════════════════════════════
    SECTION 4 — NOTIFICATION TICKER (seamless clone)
@@ -264,58 +288,65 @@ document.addEventListener("DOMContentLoaded", function () {
   track.innerHTML += track.innerHTML;
 })();
 
-
 /* ═══════════════════════════════════════════════
    SECTION 5 — VIDEO PLAYER
 ═══════════════════════════════════════════════ */
 (function () {
-  const featuredThumb   = document.getElementById("featuredThumb");
-  const featuredIframe  = document.getElementById("featuredIframe");
+  const featuredThumb = document.getElementById("featuredThumb");
+  const featuredIframe = document.getElementById("featuredIframe");
   const featuredPlayBtn = document.getElementById("featuredPlayBtn");
   const featuredThumbImg = document.getElementById("featuredThumbImg");
-  const featuredTitle   = document.getElementById("featuredTitle");
-  const thumbCards      = document.querySelectorAll(".vthumb-card");
-  let currentVid        = "r80IU7cVn-s";
+  const featuredTitle = document.getElementById("featuredTitle");
+  const thumbCards = document.querySelectorAll(".vthumb-card");
+  let currentVid = "r80IU7cVn-s";
 
   function playFeatured(vid) {
     featuredIframe.src =
-      "https://www.youtube.com/embed/" + vid + "?autoplay=1&rel=0&modestbranding=1";
+      "https://www.youtube.com/embed/" +
+      vid +
+      "?autoplay=1&rel=0&modestbranding=1";
     featuredIframe.classList.remove("d-none");
-    featuredThumb.style.opacity      = "0";
+    featuredThumb.style.opacity = "0";
     featuredThumb.style.pointerEvents = "none";
   }
 
   function resetFeatured() {
     featuredIframe.src = "";
     featuredIframe.classList.add("d-none");
-    featuredThumb.style.opacity      = "1";
+    featuredThumb.style.opacity = "1";
     featuredThumb.style.pointerEvents = "auto";
   }
 
-  featuredPlayBtn?.addEventListener("click", function () { playFeatured(currentVid); });
+  featuredPlayBtn?.addEventListener("click", function () {
+    playFeatured(currentVid);
+  });
 
   thumbCards.forEach(function (card) {
     card.addEventListener("click", function () {
-      const vid   = this.getAttribute("data-vid");
+      const vid = this.getAttribute("data-vid");
       const title = this.getAttribute("data-title");
 
-      thumbCards.forEach(function (c) { c.classList.remove("active"); });
+      thumbCards.forEach(function (c) {
+        c.classList.remove("active");
+      });
       this.classList.add("active");
 
       resetFeatured();
       currentVid = vid;
 
-      featuredThumbImg.src = "https://img.youtube.com/vi/" + vid + "/maxresdefault.jpg";
+      featuredThumbImg.src =
+        "https://img.youtube.com/vi/" + vid + "/maxresdefault.jpg";
       featuredThumbImg.onerror = function () {
         this.src = "https://img.youtube.com/vi/" + vid + "/hqdefault.jpg";
       };
       if (featuredTitle) featuredTitle.textContent = title;
 
-      setTimeout(function () { playFeatured(vid); }, 120);
+      setTimeout(function () {
+        playFeatured(vid);
+      }, 120);
     });
   });
 })();
-
 
 /* ═══════════════════════════════════════════════
    SECTION 5b — STAT COUNT-UP (repeats every 10s)
@@ -325,10 +356,10 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!stats.length) return;
 
   function countUp(el) {
-    const target   = +el.getAttribute("data-target");
+    const target = +el.getAttribute("data-target");
     const duration = 1800;
-    const step     = target / (duration / 16);
-    let current    = 0;
+    const step = target / (duration / 16);
+    let current = 0;
 
     const timer = setInterval(function () {
       current += step;
@@ -336,64 +367,70 @@ document.addEventListener("DOMContentLoaded", function () {
         current = target;
         clearInterval(timer);
       }
-      el.textContent = target >= 1000
-        ? Math.floor(current / 1000) + "K+"
-        : Math.floor(current) + "+";
+      el.textContent =
+        target >= 1000
+          ? Math.floor(current / 1000) + "K+"
+          : Math.floor(current) + "+";
     }, 16);
   }
 
-  function runAll() { stats.forEach(countUp); }
+  function runAll() {
+    stats.forEach(countUp);
+  }
 
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        runAll();
-        setInterval(runAll, 10000);
-        observer.disconnect();
-      }
-    });
-  }, { threshold: 0.4 });
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          runAll();
+          setInterval(runAll, 10000);
+          observer.disconnect();
+        }
+      });
+    },
+    { threshold: 0.4 },
+  );
 
   const section = document.getElementById("about-section");
   if (section) observer.observe(section);
 })();
-
 
 /* ═══════════════════════════════════════════════
    SECTION 5c — VIDEO THUMB SLIDER (arrow scroll)
 ═══════════════════════════════════════════════ */
 (function () {
   const slider = document.getElementById("videoThumbSlider");
-  const prev   = document.getElementById("vSliderPrev");
-  const next   = document.getElementById("vSliderNext");
+  const prev = document.getElementById("vSliderPrev");
+  const next = document.getElementById("vSliderNext");
   if (!slider) return;
 
   const SCROLL = 200;
 
   next?.addEventListener("click", function () {
-    const atEnd = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5;
+    const atEnd =
+      slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5;
     if (atEnd) slider.scrollTo({ left: 0, behavior: "smooth" });
-    else       slider.scrollBy({ left: SCROLL, behavior: "smooth" });
+    else slider.scrollBy({ left: SCROLL, behavior: "smooth" });
   });
 
   prev?.addEventListener("click", function () {
     const atStart = slider.scrollLeft <= 5;
-    if (atStart) slider.scrollTo({ left: slider.scrollWidth, behavior: "smooth" });
-    else         slider.scrollBy({ left: -SCROLL, behavior: "smooth" });
+    if (atStart)
+      slider.scrollTo({ left: slider.scrollWidth, behavior: "smooth" });
+    else slider.scrollBy({ left: -SCROLL, behavior: "smooth" });
   });
 })();
-
 
 /* ═══════════════════════════════════════════════
    SECTION 5d — HONEYCOMB CANVAS TRANSITION
    3D coin-flip with ember-wave effect
 ═══════════════════════════════════════════════ */
 (function () {
-  const card   = document.getElementById("honeycombCard");
+  const card = document.getElementById("honeycombCard");
   const canvas = document.getElementById("honeycombCanvas");
   if (!card || !canvas) return;
 
-  const ctx    = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d");
   const images = [
     "assets/images/hero-1.png",
     "assets/images/hero-2.png",
@@ -401,20 +438,20 @@ document.addEventListener("DOMContentLoaded", function () {
     "assets/images/hero-4.png",
   ];
 
-  const HEX_SIZE   = 52;
+  const HEX_SIZE = 52;
   const TRANSITION = 1400;
-  const HOLD       = 3200;
+  const HOLD = 3200;
 
-  let imgObjs  = [];
-  let current  = 0;
+  let imgObjs = [];
+  let current = 0;
   let hexCells = [];
   let W, H;
 
   // Load all images first
   let loaded = 0;
   images.forEach(function (src, i) {
-    const img  = new Image();
-    img.src    = src;
+    const img = new Image();
+    img.src = src;
     img.onload = function () {
       imgObjs[i] = img;
       if (++loaded === images.length) init();
@@ -432,7 +469,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function resize() {
-    W = canvas.width  = card.offsetWidth;
+    W = canvas.width = card.offsetWidth;
     H = canvas.height = card.offsetHeight || 280;
     buildHexGrid();
   }
@@ -447,7 +484,12 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         const offset = (col % 2) * HEX_SIZE * 0.75;
-        hexCells.push({ cx: col * colW * 0.865, cy: row * rowH + offset, col, row });
+        hexCells.push({
+          cx: col * colW * 0.865,
+          cy: row * rowH + offset,
+          col,
+          row,
+        });
       }
     }
   }
@@ -471,9 +513,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function nextSlide() {
-    const fromImg  = imgObjs[current];
-    const nextIdx  = (current + 1) % imgObjs.length;
-    const toImg    = imgObjs[nextIdx];
+    const fromImg = imgObjs[current];
+    const nextIdx = (current + 1) % imgObjs.length;
+    const toImg = imgObjs[nextIdx];
 
     if (!fromImg || !toImg) {
       current = nextIdx;
@@ -482,7 +524,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const startTime = performance.now();
-    const maxDiag   = Math.max(...hexCells.map(function (h) { return h.col + h.row; }));
+    const maxDiag = Math.max(
+      ...hexCells.map(function (h) {
+        return h.col + h.row;
+      }),
+    );
 
     function animate(now) {
       const elapsed = now - startTime;
@@ -490,13 +536,16 @@ document.addEventListener("DOMContentLoaded", function () {
       drawFrame(fromImg, 1);
 
       hexCells.forEach(function (hex) {
-        const diagNorm  = (hex.col + hex.row) / maxDiag;
+        const diagNorm = (hex.col + hex.row) / maxDiag;
         const waveStart = diagNorm * (TRANSITION * 0.5);
-        const localT    = Math.min(1, Math.max(0, (elapsed - waveStart) / (TRANSITION * 0.45)));
+        const localT = Math.min(
+          1,
+          Math.max(0, (elapsed - waveStart) / (TRANSITION * 0.45)),
+        );
 
         if (localT <= 0) return;
 
-        const flip   = Math.abs(Math.cos(localT * Math.PI)); // 1 → 0 → 1
+        const flip = Math.abs(Math.cos(localT * Math.PI)); // 1 → 0 → 1
         const isBack = localT > 0.5;
 
         ctx.save();
@@ -512,9 +561,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Ember flash at flip midpoint
         const emberAlpha = Math.max(0, 1 - flip * 6);
         if (emberAlpha > 0) {
-          ctx.fillStyle = "rgba(222, 89, 46, " + (emberAlpha * 0.92) + ")";
+          ctx.fillStyle = "rgba(222, 89, 46, " + emberAlpha * 0.92 + ")";
           ctx.fill();
-          ctx.fillStyle = "rgba(255, 200, 120, " + (emberAlpha * 0.6) + ")";
+          ctx.fillStyle = "rgba(255, 200, 120, " + emberAlpha * 0.6 + ")";
           hexPath(hex.cx, hex.cy, HEX_SIZE * 0.55);
           ctx.fill();
         }
@@ -536,12 +585,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 })();
 
-
 /* ═══════════════════════════════════════════════
    SECTION 6 — PARTNERS CAROUSEL
 ═══════════════════════════════════════════════ */
 (function () {
-  const carouselTrack   = document.getElementById("partnersCarouselTrack");
+  const carouselTrack = document.getElementById("partnersCarouselTrack");
   const carouselWrapper = document.querySelector(".partners-carousel-wrapper");
   if (!carouselTrack || !carouselWrapper) return;
 
@@ -555,25 +603,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Touch support
   let touchStartX = 0;
-  carouselWrapper.addEventListener("touchstart", function (e) {
-    touchStartX = e.changedTouches[0].screenX;
-    carouselTrack.style.animationPlayState = "paused";
-  }, false);
-  carouselWrapper.addEventListener("touchend", function () {
-    carouselTrack.style.animationPlayState = "running";
-  }, false);
+  carouselWrapper.addEventListener(
+    "touchstart",
+    function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+      carouselTrack.style.animationPlayState = "paused";
+    },
+    false,
+  );
+  carouselWrapper.addEventListener(
+    "touchend",
+    function () {
+      carouselTrack.style.animationPlayState = "running";
+    },
+    false,
+  );
 
   // Start animation when section enters viewport
   const section = document.getElementById("partners-carousel-section");
   if (section) {
-    new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) carouselTrack.style.animationPlayState = "running";
-      });
-    }, { threshold: 0.1 }).observe(section);
+    new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting)
+            carouselTrack.style.animationPlayState = "running";
+        });
+      },
+      { threshold: 0.1 },
+    ).observe(section);
   }
 })();
-
 
 /* ═══════════════════════════════════════════════
    SECTION 7 — FOOTER ANIMATIONS & NEWSLETTER
@@ -582,14 +641,18 @@ document.addEventListener("DOMContentLoaded", function () {
 // Scroll-in animation
 const footerElement = document.getElementById("main-footer");
 if (footerElement) {
-  new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.style.animation = "footer-fade-up 0.8s ease-out 0.2s both";
-        this.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 }).observe(footerElement);
+  new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.animation =
+            "footer-fade-up 0.8s ease-out 0.2s both";
+          this.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 },
+  ).observe(footerElement);
 }
 
 // Newsletter form
@@ -599,12 +662,14 @@ if (newsletterForm) {
     e.preventDefault();
 
     const input = this.querySelector(".footer-input");
-    const btn   = this.querySelector(".footer-btn");
+    const btn = this.querySelector(".footer-btn");
     const email = input.value.trim();
 
     if (!email || !email.includes("@")) {
       input.style.borderColor = "#ff6b6b";
-      setTimeout(function () { input.style.borderColor = ""; }, 1500);
+      setTimeout(function () {
+        input.style.borderColor = "";
+      }, 1500);
       return;
     }
 
@@ -629,7 +694,6 @@ if (newsletterForm) {
     });
   }
 }
-
 
 /* ═══════════════════════════════════════════════
    SECTION 6 — GLOBAL PRESENCE MAP
@@ -1042,3 +1106,88 @@ if (newsletterForm) {
   if (legend) observer.observe(legend);
 })();
 
+// ---------------
+
+/* SECTION 7 — SOCIAL TABS */
+(function () {
+  const tabs = document.querySelectorAll(".stab");
+  const feeds = document.querySelectorAll(".sfeed");
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      tabs.forEach((t) => t.classList.remove("active"));
+      feeds.forEach((f) => f.classList.remove("active"));
+      this.classList.add("active");
+      const id = "feed-" + this.getAttribute("data-tab");
+      document.getElementById(id)?.classList.add("active");
+    });
+  });
+})();
+
+/* SECTION 7 — NEWS VERTICAL AUTO-SCROLL LOOP */
+(function () {
+  const wrap = document.getElementById("newsScrollWrap");
+  const track = document.getElementById("newsTrack");
+  const pauseBtn = document.getElementById("newsPause");
+  const pauseIcon = document.getElementById("newsPauseIcon");
+  if (!wrap || !track) return;
+
+  /* Clone for seamless loop */
+  track.innerHTML += track.innerHTML;
+
+  let paused = false;
+  let pos = 0;
+  const SPEED = 0.6; /* px per frame */
+  let raf;
+
+  function tick() {
+    if (!paused) {
+      pos += SPEED;
+      const half = track.scrollHeight / 2;
+      if (pos >= half) pos = 0;
+      track.style.transform = `translateY(-${pos}px)`;
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  raf = requestAnimationFrame(tick);
+
+  /* Pause on hover */
+  wrap.addEventListener("mouseenter", function () {
+    paused = true;
+  });
+  wrap.addEventListener("mouseleave", function () {
+    if (!manualPause) paused = false;
+  });
+
+  /* Pause button */
+  let manualPause = false;
+  pauseBtn?.addEventListener("click", function () {
+    manualPause = !manualPause;
+    paused = manualPause;
+    pauseIcon.className = manualPause
+      ? "fa-solid fa-play"
+      : "fa-solid fa-pause";
+  });
+
+  /* Expand/collapse news items */
+  document.querySelectorAll(".news-expand-btn").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const item = this.closest(".news-item");
+      const wasExpanded = item.classList.contains("expanded");
+      document
+        .querySelectorAll(".news-item")
+        .forEach((i) => i.classList.remove("expanded"));
+      if (!wasExpanded) {
+        item.classList.add("expanded");
+        paused = true;
+        manualPause = true;
+        pauseIcon.className = "fa-solid fa-play";
+      } else {
+        paused = false;
+        manualPause = false;
+        pauseIcon.className = "fa-solid fa-pause";
+      }
+    });
+  });
+})();
