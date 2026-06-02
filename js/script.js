@@ -1191,3 +1191,61 @@ if (newsletterForm) {
     });
   });
 })();
+
+/* FLOATING QUICK SIDEBAR */
+(function () {
+  const sidebar = document.getElementById("quickSidebar");
+  const toggle = document.getElementById("qsToggle");
+  const toggleIcon = document.getElementById("qsToggleIcon");
+  const toTopBtn = document.getElementById("qsToTop");
+  if (!sidebar) return;
+
+  /* Open / close */
+  toggle.addEventListener("click", function () {
+    const isOpen = sidebar.classList.toggle("open");
+    toggleIcon.className = isOpen
+      ? "fa-solid fa-xmark"
+      : "fa-solid fa-grip-vertical";
+  });
+
+  /* Close on outside click */
+  document.addEventListener("click", function (e) {
+    if (!sidebar.contains(e.target)) {
+      sidebar.classList.remove("open");
+      toggleIcon.className = "fa-solid fa-grip-vertical";
+    }
+  });
+
+  /* Smooth scroll for anchor links */
+  sidebar.querySelectorAll('.qs-item[href^="#"]').forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        sidebar.classList.remove("open");
+        toggleIcon.className = "fa-solid fa-grip-vertical";
+      }
+    });
+  });
+
+  /* Back to top */
+  toTopBtn?.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    sidebar.classList.remove("open");
+    toggleIcon.className = "fa-solid fa-grip-vertical";
+  });
+
+  /* Hide near very top of page */
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (window.scrollY < 200) {
+        sidebar.classList.add("qs-hidden");
+      } else {
+        sidebar.classList.remove("qs-hidden");
+      }
+    },
+    { passive: true },
+  );
+})();
