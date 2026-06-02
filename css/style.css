@@ -1434,7 +1434,7 @@ body {
   display: flex;
   gap: 20px;
   padding: 20px 0;
-  animation: carouselScroll 40s linear infinite;
+  animation: carouselScroll 5s linear infinite;
   will-change: transform;
 }
 
@@ -1468,19 +1468,9 @@ body {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
-  animation: floatCard 3s ease-in-out infinite;
+  animation: 3s ease-in-out infinite;
 }
 
-/* Floating Animation */
-@keyframes floatCard {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
 
 /* Staggered Animation for each card */
 .partner-card:nth-child(1) {
