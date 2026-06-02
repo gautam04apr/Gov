@@ -62,7 +62,6 @@
 
           <!-- Tab 1: Pravasi Odia -->
           <div id="tab-1" class="tab-content active">
-            <!-- Toggle Section -->
             <div class="toggle-section">
               <label class="toggle-label">Select Registration Type:</label>
               <div class="toggle-switch-wrapper">
@@ -85,28 +84,352 @@
               </div>
 
               <form class="registration-form" data-form-id="form-1-overseas">
-                <!-- Page 1 -->
+                <!-- Page 1: Information -->
                 <div class="form-page active page-1">
+                  
+                  <h4 class="form-section-title">Registration Classification</h4>
                   <div class="form-row">
                     <div class="form-group">
-                      <label class="form-label">First Name <span style="color: var(--btn-color);">*</span></label>
-                      <input type="text" class="form-input form-field" placeholder="Enter your first name" required>
+                      <label class="form-label">Registration Category <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" id="overseas-category" onchange="handleCategoryChange('overseas')" required>
+                        <option value="">Select Category</option>
+                        <option value="Individual">Individual</option>
+                        <option value="Family">Family</option>
+                        <option value="Student">Student</option>
+                      </select>
                     </div>
                     <div class="form-group">
-                      <label class="form-label">Last Name <span style="color: var(--btn-color);">*</span></label>
-                      <input type="text" class="form-input form-field" placeholder="Enter your last name" required>
+                      <label class="form-label">Pravasi Odia Type <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select Type</option>
+                        <option value="NRI">NRI</option>
+                        <option value="OCI">OCI</option>
+                        <option value="PIO">PIO</option>
+                        <option value="Foreign Citizen">Foreign Citizen of Odia Origin</option>
+                        <option value="Student Visa">Student Visa Holder</option>
+                        <option value="Work Permit">Work Permit Holder</option>
+                      </select>
                     </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Country of Residence <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" id="overseas-country" onchange="handleCountryChange()" required>
+                        <option value="">Select Country</option>
+                        <option value="USA">USA</option>
+                        <option value="Canada">Canada</option>
+                        <option value="GCC Countries">GCC Countries</option>
+                        <option value="UK">UK</option>
+                        <option value="Australia">Australia</option>
+                        <option value="EU Countries">EU Countries</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Japan">Japan</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Continent <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" id="overseas-continent" readonly required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="form-label">Embassy/Consulate Jurisdiction</label>
+                      <input type="text" class="form-input form-field" id="overseas-embassy" readonly>
+                  </div>
+
+                  <h4 class="form-section-title">Personal Information</h4>
+                  <!-- Dynamic Family Count (Moved to Personal Information) -->
+                  <div class="form-group d-none" id="overseas-family-count-group">
+                    <label class="form-label">No. of Family Members <span style="color: var(--btn-color);">*</span></label>
+                    <input type="number" class="form-input form-field" id="overseas-family-count" min="1" max="10" onchange="generateFamilyFields('overseas')">
                   </div>
 
                   <div class="form-row">
                     <div class="form-group">
-                      <label class="form-label">Email Address <span style="color: var(--btn-color);">*</span></label>
-                      <input type="email" class="form-input form-field" placeholder="Enter your email address" required>
+                      <label class="form-label">Full Name (As Passport) <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
                     </div>
                     <div class="form-group">
-                      <label class="form-label">Phone Number <span style="color: var(--btn-color);">*</span></label>
-                      <input type="tel" class="form-input form-field" placeholder="Enter your phone number" required>
+                      <label class="form-label">Gender <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                      </select>
                     </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Date of Birth <span style="color: var(--btn-color);">*</span></label>
+                      <input type="date" class="form-input form-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Nationality <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select Nationality</option>
+                        <option value="Indian">Indian</option>
+                        <option value="American">American</option>
+                        <option value="Canadian">Canadian</option>
+                        <option value="British">British</option>
+                        <option value="Australian">Australian</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Odisha District of Origin <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select District</option>
+                        <option value="Khurda">Khurda</option>
+                        <option value="Cuttack">Cuttack</option>
+                        <option value="Ganjam">Ganjam</option>
+                        <option value="Puri">Puri</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Native Village/Town</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Marital Status</label>
+                      <select class="form-select form-field">
+                        <option value="">Select</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Current Citizenship Status <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select</option>
+                        <option value="Citizen">Citizen</option>
+                        <option value="PR Holder">PR Holder</option>
+                        <option value="Work Permit">Work Permit</option>
+                        <option value="Student Visa">Student Visa</option>
+                        <option value="Dependent Visa">Dependent Visa</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Container for dynamically generated family members -->
+                  <div id="overseas-family-container"></div>
+
+                  <h4 class="form-section-title">Passport & Immigration</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Passport Number <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Passport Issuing Country <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select Country</option>
+                        <option value="India">India</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Passport Expiry Date <span style="color: var(--btn-color);">*</span></label>
+                      <input type="date" class="form-input form-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">OCI Card Number (If applicable)</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Visa Type</label>
+                      <select class="form-select form-field">
+                        <option value="">Select</option>
+                        <option value="Work">Work</option>
+                        <option value="Student">Student</option>
+                        <option value="Tourist">Tourist</option>
+                        <option value="Dependent">Dependent</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Visa Expiry Date</label>
+                      <input type="date" class="form-input form-field">
+                    </div>
+                  </div>
+                  
+                  <!-- Dynamic Immigration Fields Container -->
+                  <div id="overseas-dynamic-immigration" class="form-row"></div>
+
+                  <h4 class="form-section-title">Contact Information</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Mobile Number <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" placeholder="+1 234 567 8900" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Email ID <span style="color: var(--btn-color);">*</span></label>
+                      <input type="email" class="form-input form-field" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Emergency Contact Name <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Emergency Contact Number <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Emergency Contact Relationship <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select</option>
+                        <option value="Spouse">Spouse</option>
+                        <option value="Parent">Parent</option>
+                        <option value="Sibling">Sibling</option>
+                        <option value="Friend">Friend</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">WhatsApp Number</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Preferred Communication Language</label>
+                      <select class="form-select form-field">
+                        <option value="">Select</option>
+                        <option value="Odia">Odia</option>
+                        <option value="English">English</option>
+                        <option value="Hindi">Hindi</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Preferred Communication Mode</label>
+                      <!-- Using multiple select for multi-select field -->
+                      <select class="form-select form-field" multiple size="3" style="height: auto;">
+                        <option value="Email">Email</option>
+                        <option value="WhatsApp">WhatsApp</option>
+                        <option value="SMS">SMS</option>
+                        <option value="Phone Call">Phone Call</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <h4 class="form-section-title">Overseas Address</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Address Line 1 <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">City <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Postal/ZIP Code <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Country <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select Country</option>
+                        <option value="USA">USA</option>
+                        <option value="Canada">Canada</option>
+                        <option value="UK">UK</option>
+                        <option value="Australia">Australia</option>
+                        <!-- Add other relevant countries as needed -->
+                      </select>
+                    </div>
+                  </div>
+
+                  <h4 class="form-section-title">Odisha Connection</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Odisha Address</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">District in Odisha <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select District</option>
+                        <option value="Khurda">Khurda</option>
+                        <option value="Cuttack">Cuttack</option>
+                        <option value="Ganjam">Ganjam</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Block/ULB</label>
+                      <select class="form-select form-field">
+                        <option value="">Select Block/ULB</option>
+                        <option value="Bhubaneswar">Bhubaneswar (ULB)</option>
+                        <option value="Cuttack">Cuttack (ULB)</option>
+                        <option value="Bhanjanagar">Bhanjanagar (Block)</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Family Members in Odisha</label>
+                      <select class="form-select form-field">
+                        <option value="">Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Relative Contact in Odisha</label>
+                    <input type="text" class="form-input form-field">
+                  </div>
+
+                  <h4 class="form-section-title">Education & Professional</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Highest Qualification <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select</option>
+                        <option value="Bachelors">Bachelors</option>
+                        <option value="Masters">Masters</option>
+                        <option value="PhD">PhD</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Occupation Category <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select</option>
+                        <option value="Student">Student</option>
+                        <option value="IT">IT</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Academia">Academia</option>
+                        <option value="Business">Business</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Skills/Expertise</label>
+                    <!-- Using multiple select for multi-select field -->
+                    <select class="form-select form-field" multiple size="3" style="height: auto;">
+                      <option value="Software Development">Software Development</option>
+                      <option value="Medical/Healthcare">Medical/Healthcare</option>
+                      <option value="Finance">Finance</option>
+                      <option value="Engineering">Engineering</option>
+                      <option value="Education">Education</option>
+                    </select>
                   </div>
 
                   <div class="form-actions">
@@ -115,29 +438,54 @@
                   </div>
                 </div>
 
-                <!-- Page 2 -->
+                <!-- Page 2: Documents and Consent -->
                 <div class="form-page page-2">
+                  <h4 class="form-section-title">Documents</h4>
+                  <p class="text-muted" style="font-size: 13px;">Upload files in PDF or JPEG format.</p>
+                  
                   <div class="form-row">
                     <div class="form-group">
-                      <label class="form-label">Country of Residence <span style="color: var(--btn-color);">*</span></label>
-                      <select class="form-select form-field" required>
-                        <option value="">Select Country</option>
-                        <option value="USA">United States</option>
-                        <option value="UK">United Kingdom</option>
-                        <option value="Canada">Canada</option>
-                        <option value="Australia">Australia</option>
-                        <option value="Other">Other</option>
-                      </select>
+                      <label class="form-label">Passport Copy <span style="color: var(--btn-color);">*</span></label>
+                      <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg" required>
                     </div>
                     <div class="form-group">
-                      <label class="form-label">Occupation <span style="color: var(--btn-color);">*</span></label>
-                      <input type="text" class="form-input form-field" placeholder="Enter your occupation" required>
+                      <label class="form-label">Visa/Residence Proof (If applicable)</label>
+                      <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg">
                     </div>
                   </div>
-
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">OCI/PIO Card Copy (If applicable)</label>
+                      <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Address Proof (If applicable)</label>
+                      <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Student ID (Students Only)</label>
+                      <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Employment Proof (Optional)</label>
+                      <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg">
+                    </div>
+                  </div>
                   <div class="form-group">
-                    <label class="form-label">About Yourself</label>
-                    <textarea class="form-textarea form-field" placeholder="Tell us about yourself and your connection to Odisha"></textarea>
+                    <label class="form-label">Association Authorization Letter (Association representatives)</label>
+                    <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg">
+                  </div>
+
+                  <h4 class="form-section-title">Consent & Declaration</h4>
+                  <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                    <input type="checkbox" style="margin-top: 5px;" required>
+                    <label><strong>Consent for Data Usage:</strong> I hereby consent to the storage and processing of my personal data in compliance with GDPR and local data protection regulations. <span style="color: var(--btn-color);">*</span></label>
+                  </div>
+                  <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                    <input type="checkbox" style="margin-top: 5px;" required>
+                    <label><strong>Declaration of Correctness:</strong> I declare that all information provided is accurate and true to the best of my knowledge. <span style="color: var(--btn-color);">*</span></label>
                   </div>
 
                   <div class="form-actions">
@@ -159,28 +507,368 @@
               </div>
 
               <form class="registration-form" data-form-id="form-1-india">
-                <!-- Page 1 -->
+                <!-- Page 1: Information -->
                 <div class="form-page active page-1">
+                  
+                  <h4 class="form-section-title">Registration Classification</h4>
                   <div class="form-row">
                     <div class="form-group">
-                      <label class="form-label">First Name <span style="color: var(--btn-color);">*</span></label>
-                      <input type="text" class="form-input form-field" placeholder="Enter your first name" required>
+                      <label class="form-label">Registration Category <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" id="india-category" onchange="handleCategoryChange('india')" required>
+                        <option value="">Select Category</option>
+                        <option value="Individual">Individual</option>
+                        <option value="Family">Family</option>
+                        <option value="Student">Student</option>
+                      </select>
                     </div>
                     <div class="form-group">
-                      <label class="form-label">Last Name <span style="color: var(--btn-color);">*</span></label>
-                      <input type="text" class="form-input form-field" placeholder="Enter your last name" required>
+                      <label class="form-label">Pravasi Odia Type <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select Type</option>
+                        <option value="Student">Student</option>
+                        <option value="Private Employee">Private Employee</option>
+                        <option value="Government Employee">Government Employee</option>
+                        <option value="Self Employed">Self Employed</option>
+                        <option value="Entrepreneur">Entrepreneur</option>
+                        <option value="Business Owner">Business Owner</option>
+                        <option value="Migrant Worker">Migrant Worker</option>
+                        <option value="Homemaker">Homemaker</option>
+                      </select>
                     </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Current State of Residence <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select State</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Current City of Residence <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="form-label">Duration of Stay Outside Odisha <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select Duration</option>
+                        <option value="Less than 1 year">Less than 1 year</option>
+                        <option value="1 to 5 years">1 to 5 years</option>
+                        <option value="5 to 10 years">5 to 10 years</option>
+                        <option value="More than 10 years">More than 10 years</option>
+                      </select>
+                  </div>
+
+                  <h4 class="form-section-title">Personal Details</h4>
+                  
+                  <!-- Dynamic Family Count -->
+                  <div class="form-group d-none" id="india-family-count-group">
+                    <label class="form-label">No. of Family Members <span style="color: var(--btn-color);">*</span></label>
+                    <input type="number" class="form-input form-field" id="india-family-count" min="1" max="10" onchange="generateFamilyFields('india')">
                   </div>
 
                   <div class="form-row">
                     <div class="form-group">
-                      <label class="form-label">Email Address <span style="color: var(--btn-color);">*</span></label>
-                      <input type="email" class="form-input form-field" placeholder="Enter your email address" required>
+                      <label class="form-label">Full Name <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
                     </div>
                     <div class="form-group">
-                      <label class="form-label">Phone Number <span style="color: var(--btn-color);">*</span></label>
-                      <input type="tel" class="form-input form-field" placeholder="Enter your phone number" required>
+                      <label class="form-label">Name in Odia</label>
+                      <input type="text" class="form-input form-field" placeholder="ଓଡିଆ ନାମ">
                     </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Gender <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Date of Birth <span style="color: var(--btn-color);">*</span></label>
+                      <input type="date" class="form-input form-field" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Marital Status</label>
+                      <select class="form-select form-field">
+                        <option value="">Select</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Aadhaar Number (Optional)</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">PAN Number (Optional)</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Voter ID Number (Optional)</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+
+                  <!-- Container for dynamically generated family members -->
+                  <div id="india-family-container"></div>
+
+                  <h4 class="form-section-title">Odisha Origin Details</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">District of Origin <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select District</option>
+                        <option value="Khurda">Khurda</option>
+                        <option value="Cuttack">Cuttack</option>
+                        <option value="Ganjam">Ganjam</option>
+                        <option value="Puri">Puri</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Subdivision</label>
+                      <select class="form-select form-field">
+                        <option value="">Select Subdivision</option>
+                        <option value="Subdivision 1">Subdivision 1</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Block</label>
+                      <select class="form-select form-field">
+                        <option value="">Select Block</option>
+                        <option value="Block 1">Block 1</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Gram Panchayat</label>
+                      <select class="form-select form-field">
+                        <option value="">Select Gram Panchayat</option>
+                        <option value="GP 1">GP 1</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Village</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Municipality/ULB</label>
+                      <select class="form-select form-field">
+                        <option value="">Select Municipality/ULB</option>
+                        <option value="ULB 1">ULB 1</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Native Address <span style="color: var(--btn-color);">*</span></label>
+                      <textarea class="form-textarea form-field" style="min-height: 50px;" required></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Pin Code <span style="color: var(--btn-color);">*</span></label>
+                      <input type="number" class="form-input form-field" required>
+                    </div>
+                  </div>
+
+                  <h4 class="form-section-title">Present Address (Outside Odisha)</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">State <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select State</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Karnataka">Karnataka</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">District <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">City <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Address Line 1 <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Address Line 2</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Landmark</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">PIN Code <span style="color: var(--btn-color);">*</span></label>
+                    <input type="number" class="form-input form-field" required>
+                  </div>
+
+                  <h4 class="form-section-title">Contact Information</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Mobile Number <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Alternate Mobile Number</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">WhatsApp Number</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Email ID <span style="color: var(--btn-color);">*</span></label>
+                      <input type="email" class="form-input form-field" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Alternate Email</label>
+                      <input type="email" class="form-input form-field">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Preferred Communication Language <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select</option>
+                        <option value="Odia">Odia</option>
+                        <option value="English">English</option>
+                        <option value="Hindi">Hindi</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Preferred Communication Channel</label>
+                    <select class="form-select form-field" multiple size="3" style="height: auto;">
+                      <option value="Email">Email</option>
+                      <option value="WhatsApp">WhatsApp</option>
+                      <option value="SMS">SMS</option>
+                      <option value="Phone Call">Phone Call</option>
+                    </select>
+                  </div>
+
+                  <h4 class="form-section-title">Education Details</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Highest Qualification <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select</option>
+                        <option value="High School">High School</option>
+                        <option value="Bachelors">Bachelors</option>
+                        <option value="Masters">Masters</option>
+                        <option value="PhD">PhD</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Stream</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Institution Name</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">State of Study</label>
+                      <select class="form-select form-field">
+                        <option value="">Select State</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Karnataka">Karnataka</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Year of Passing</label>
+                    <select class="form-select form-field">
+                      <option value="">Select Year</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option>
+                    </select>
+                  </div>
+
+                  <h4 class="form-section-title">Employment & Professional</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Occupation Category <span style="color: var(--btn-color);">*</span></label>
+                      <select class="form-select form-field" required>
+                        <option value="">Select</option>
+                        <option value="IT">IT</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Business">Business</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Current Organization</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Designation</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Industry Sector</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+
+                  <h4 class="form-section-title">Student Information</h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Institution Name <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Course Name <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Academic Year <span style="color: var(--btn-color);">*</span></label>
+                      <input type="text" class="form-input form-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Hostel/PG Details</label>
+                      <input type="text" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Guardian Contact</label>
+                    <input type="text" class="form-input form-field">
                   </div>
 
                   <div class="form-actions">
@@ -189,29 +877,64 @@
                   </div>
                 </div>
 
-                <!-- Page 2 -->
+                <!-- Page 2: Document Uploads & Consent -->
                 <div class="form-page page-2">
+                  <h4 class="form-section-title">Document Uploads</h4>
                   <div class="form-row">
                     <div class="form-group">
-                      <label class="form-label">State <span style="color: var(--hover-color);">*</span></label>
-                      <select class="form-select form-field" required>
-                        <option value="">Select State</option>
-                        <option value="Odisha">Odisha</option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Mumbai">Mumbai</option>
-                        <option value="Bangalore">Bangalore</option>
-                        <option value="Other">Other</option>
-                      </select>
+                      <label class="form-label">Photograph <span style="color: var(--btn-color);">*</span></label>
+                      <input type="file" class="form-input form-field" required>
                     </div>
                     <div class="form-group">
-                      <label class="form-label">Occupation <span style="color: var(--hover-color);">*</span></label>
-                      <input type="text" class="form-input form-field" placeholder="Enter your occupation" required>
+                      <label class="form-label">Aadhaar Copy (Optional)</label>
+                      <input type="file" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Address Proof (Optional)</label>
+                      <input type="file" class="form-input form-field">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Student ID Card (Conditional)</label>
+                      <input type="file" class="form-input form-field">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Employment ID (Conditional)</label>
+                      <input type="file" class="form-input form-field">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Business Registration Certificate (Conditional)</label>
+                      <input type="file" class="form-input form-field">
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label class="form-label">About Yourself</label>
-                    <textarea class="form-textarea form-field" placeholder="Tell us about yourself and your connection to Odisha"></textarea>
+                  <h4 class="form-section-title">Consent & Declaration</h4>
+                  <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                    <input type="checkbox" style="margin-top: 5px;" required>
+                    <label><strong>Consent for Data Usage:</strong> I hereby consent to the storage and processing of my personal data. <span style="color: var(--btn-color);">*</span></label>
+                  </div>
+                  <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                    <input type="checkbox" style="margin-top: 5px;" required>
+                    <label><strong>Consent to Receive Notifications:</strong> I agree to receive communications regarding Pravasi Odia updates. <span style="color: var(--btn-color);">*</span></label>
+                  </div>
+                  <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                    <input type="checkbox" style="margin-top: 5px;">
+                    <label><strong>Consent for Directory Listing:</strong> I agree to have my details listed in the public directory (Optional).</label>
+                  </div>
+                  <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                    <input type="checkbox" style="margin-top: 5px;">
+                    <label><strong>Consent for Skill Network Participation:</strong> I agree to participate in the skill network directory (Optional).</label>
+                  </div>
+                  <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                    <input type="checkbox" style="margin-top: 5px;" required>
+                    <label><strong>Declaration of Accuracy:</strong> I declare that all information provided is accurate and true. <span style="color: var(--btn-color);">*</span></label>
+                  </div>
+                  <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                    <input type="checkbox" style="margin-top: 5px;" required>
+                    <label><strong>CAPTCHA:</strong> I verify that I am human. <span style="color: var(--btn-color);">*</span></label>
                   </div>
 
                   <div class="form-actions">
@@ -820,6 +1543,207 @@
       // Initialize
       initializeFormTracking();
       currentActiveToggle = 'toggle-1';
+
+      // ═══════════════════════════════════════════════
+//   PRAVASI ODIA REGISTRATION DYNAMIC LOGIC
+// ═══════════════════════════════════════════════
+
+// Show/Hide Family Count based on Category Selection
+function handleCategoryChange(type) {
+  const categorySelect = document.getElementById(`${type}-category`);
+  const familyCountGroup = document.getElementById(`${type}-family-count-group`);
+  const familyCountInput = document.getElementById(`${type}-family-count`);
+  const familyContainer = document.getElementById(`${type}-family-container`);
+
+  if (categorySelect.value === 'Family') {
+    familyCountGroup.classList.remove('d-none');
+    familyCountInput.setAttribute('required', 'true');
+  } else {
+    familyCountGroup.classList.add('d-none');
+    familyCountInput.removeAttribute('required');
+    familyCountInput.value = '';
+    familyContainer.innerHTML = ''; 
+  }
+}
+
+// Generate Dynamic Forms for Family Members
+function generateFamilyFields(type) {
+  const count = parseInt(document.getElementById(`${type}-family-count`).value) || 0;
+  const container = document.getElementById(`${type}-family-container`);
+  container.innerHTML = ''; // Reset
+
+  for (let i = 1; i <= count; i++) {
+    let fieldsHtml = '';
+
+    if (type === 'overseas') {
+      fieldsHtml = `
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name (As Passport) <span style="color: var(--btn-color);">*</span></label>
+            <input type="text" class="form-input form-field" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Gender <span style="color: var(--btn-color);">*</span></label>
+            <select class="form-select form-field" required>
+              <option value="">Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Date of Birth <span style="color: var(--btn-color);">*</span></label>
+            <input type="date" class="form-input form-field" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nationality <span style="color: var(--btn-color);">*</span></label>
+             <select class="form-select form-field" required>
+                <option value="">Select Nationality</option>
+                <option value="Indian">Indian</option>
+                <option value="American">American</option>
+                <option value="Canadian">Canadian</option>
+              </select>
+          </div>
+        </div>
+      `;
+    } else if (type === 'india') {
+      // Dynamic Fields for Pravasi Odia (India) based on Personal Details Table
+      fieldsHtml = `
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name <span style="color: var(--btn-color);">*</span></label>
+            <input type="text" class="form-input form-field" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Name in Odia</label>
+            <input type="text" class="form-input form-field">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Gender <span style="color: var(--btn-color);">*</span></label>
+            <select class="form-select form-field" required>
+              <option value="">Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Date of Birth <span style="color: var(--btn-color);">*</span></label>
+            <input type="date" class="form-input form-field" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Marital Status</label>
+            <select class="form-select form-field">
+              <option value="">Select</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Widowed">Widowed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Aadhaar Number (Optional)</label>
+            <input type="text" class="form-input form-field">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">PAN Number (Optional)</label>
+            <input type="text" class="form-input form-field">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Voter ID Number (Optional)</label>
+            <input type="text" class="form-input form-field">
+          </div>
+        </div>
+      `;
+    }
+
+    container.innerHTML += `
+      <div class="family-member-block">
+        <h5 class="family-member-title">Family Member ${i} (Personal Details)</h5>
+        ${fieldsHtml}
+      </div>
+    `;
+  }
+}
+
+// Map Countries to Continents & Populate Additional Immigration Fields
+function handleCountryChange() {
+  const countryInput = document.getElementById('overseas-country').value;
+  const continentInput = document.getElementById('overseas-continent');
+  const embassyInput = document.getElementById('overseas-embassy');
+  const dynamicImmigBox = document.getElementById('overseas-dynamic-immigration');
+
+  // Continent & Embassy Mapping
+  const countryData = {
+    'USA': { continent: 'North America', embassy: 'Washington DC' },
+    'Canada': { continent: 'North America', embassy: 'Ottawa' },
+    'GCC Countries': { continent: 'Asia', embassy: 'Dubai' },
+    'UK': { continent: 'Europe', embassy: 'London' },
+    'Australia': { continent: 'Oceania', embassy: 'Canberra' },
+    'EU Countries': { continent: 'Europe', embassy: 'Brussels' },
+    'Singapore': { continent: 'Asia', embassy: 'Singapore' },
+    'Malaysia': { continent: 'Asia', embassy: 'Kuala Lumpur' },
+    'Japan': { continent: 'Asia', embassy: 'Tokyo' }
+  };
+
+  if (countryData[countryInput]) {
+    continentInput.value = countryData[countryInput].continent;
+    embassyInput.value = countryData[countryInput].embassy;
+  } else {
+    continentInput.value = '';
+    embassyInput.value = '';
+  }
+
+  // Dynamic Immigration Additional Fields Logic based heavily on the Passport & Immigration sub-table
+  dynamicImmigBox.innerHTML = '';
+  let extraFields = '';
+
+  switch (countryInput) {
+    case 'USA':
+      extraFields = `
+        <div class="form-group"><label class="form-label">SSN (Last 4 digits - optional)</label><input type="text" class="form-input form-field"></div>
+        <div class="form-group"><label class="form-label">State <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+      break;
+    case 'Canada':
+      extraFields = `<div class="form-group"><label class="form-label">SIN (optional)</label><input type="text" class="form-input form-field"></div>`;
+      break;
+    case 'GCC Countries':
+      extraFields = `<div class="form-group"><label class="form-label">Labour Card / Iqama Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+      break;
+    case 'UK':
+      extraFields = `<div class="form-group"><label class="form-label">BRP Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+      break;
+    case 'Australia':
+      extraFields = `<div class="form-group"><label class="form-label">Medicare (optional)</label><input type="text" class="form-input form-field"></div>`;
+      break;
+    case 'EU Countries':
+      extraFields = `<div class="form-group"><label class="form-label">Residence Permit ID <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+      break;
+    case 'Singapore':
+      extraFields = `<div class="form-group"><label class="form-label">FIN Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+      break;
+    case 'Malaysia':
+      extraFields = `<div class="form-group"><label class="form-label">MyPR/MyKad <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+      break;
+    case 'Japan':
+      extraFields = `<div class="form-group"><label class="form-label">Residence Card Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+      break;
+  }
+
+  // Inject the specific additional fields if they exist
+  if (extraFields) {
+    dynamicImmigBox.innerHTML = extraFields;
+  }
+}
     </script>
 
     <script src="js/script.js"></script>

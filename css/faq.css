@@ -34,13 +34,13 @@
 .accordion-button {
   font-weight: 600;
   color: var(--text-color);
-  background-color: var(--card-color);
+  background-color: white;
   transition: all 0.3s ease;
 }
 
 .accordion-button:not(.collapsed) {
   color: var(--btn-color);
-  background-color: var(--card-color);
+  background-color: white;
   box-shadow: none;
 }
 
