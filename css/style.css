@@ -2173,3 +2173,977 @@ body {
     margin-bottom: 10px;
   }
 }
+
+
+
+
+/* ═══════════════════════════════════════════
+   SECTION 6 — GLOBAL PRESENCE MAP
+═══════════════════════════════════════════ */
+
+#global-section {
+  background: #4b3528 !important;
+  padding: 80px 0 90px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background orbs */
+.global-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+.global-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: rgba(222, 89, 46, 0.12);
+  top: -150px;
+  left: -100px;
+}
+.global-orb-2 {
+  width: 400px;
+  height: 400px;
+  background: rgba(150, 80, 56, 0.1);
+  bottom: -120px;
+  right: -80px;
+}
+
+/* Header */
+.global-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--btn);
+  background: rgba(222, 89, 46, 0.15);
+  padding: 5px 14px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(222, 89, 46, 0.3);
+}
+.global-heading {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.global-highlight {
+  color: var(--btn);
+}
+.global-subtext {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+}
+
+/* ─── Map Card ───────────────────────────── */
+.map-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+}
+
+.map-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(
+    circle,
+    rgba(222, 89, 46, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+/* SVG map */
+.map-wrap {
+  position: relative;
+  width: 100%;
+}
+.world-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.map-land {
+  fill: rgba(255, 255, 255, 0.12);
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 0.5;
+  transition: fill 0.3s ease;
+}
+.map-land:hover {
+  fill: rgba(222, 89, 46, 0.25);
+}
+
+/* Connection lines SVG */
+.connections-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.conn-line {
+  stroke: rgba(222, 89, 46, 0.35);
+  stroke-width: 0.3;
+  stroke-dasharray: 3 3;
+  animation: dashMove 3s linear infinite;
+}
+@keyframes dashMove {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+/* ─── Pins ───────────────────────────────── */
+.pin-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.map-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Pulse ring */
+.pin-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(222, 89, 46, 0.25);
+  animation: pinPulse 2s ease-out infinite;
+}
+
+/* Stagger pulses */
+.map-pin:nth-child(2) .pin-pulse {
+  animation-delay: 0.3s;
+}
+.map-pin:nth-child(3) .pin-pulse {
+  animation-delay: 0.6s;
+}
+.map-pin:nth-child(4) .pin-pulse {
+  animation-delay: 0.9s;
+}
+.map-pin:nth-child(5) .pin-pulse {
+  animation-delay: 1.2s;
+}
+.map-pin:nth-child(6) .pin-pulse {
+  animation-delay: 1.5s;
+}
+.map-pin:nth-child(7) .pin-pulse {
+  animation-delay: 0.2s;
+}
+.map-pin:nth-child(8) .pin-pulse {
+  animation-delay: 0.8s;
+}
+.map-pin:nth-child(9) .pin-pulse {
+  animation-delay: 1.1s;
+}
+
+@keyframes pinPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+/* Pin dot */
+.pin-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--btn);
+  border: 2px solid #fff;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 8px rgba(222, 89, 46, 0.6);
+}
+.pin-dot.pin-assoc {
+  background: #ffb347;
+  box-shadow: 0 0 8px rgba(255, 179, 71, 0.6);
+}
+.pin-dot.pin-temple {
+  background: #9b59b6;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.6);
+}
+
+.map-pin:hover .pin-dot {
+  transform: scale(1.5);
+}
+
+/* Tooltip */
+.pin-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 10, 5, 0.95);
+  border: 1px solid rgba(222, 89, 46, 0.4);
+  color: #fff;
+  font-size: 0.72rem;
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 10;
+}
+.pin-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(20, 10, 5, 0.95);
+}
+.map-pin:hover .pin-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Country label */
+.pin-label {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.65rem;
+  font-weight: 600;
+  white-space: nowrap;
+  font-family: "Inter", sans-serif;
+  pointer-events: none;
+}
+
+/* ─── Legend ─────────────────────────────── */
+.map-legend {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 20px;
+  justify-content: center;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: "Inter", sans-serif;
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+  flex-shrink: 0;
+}
+.legend-default {
+  background: var(--btn);
+}
+.legend-assoc {
+  background: #ffb347;
+}
+.legend-temple {
+  background: #9b59b6;
+}
+
+/* ─── Stat Cards ─────────────────────────── */
+.global-stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.25s ease;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.global-stat-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--btn);
+  border-radius: 3px 0 0 3px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.global-stat-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(222, 89, 46, 0.3);
+  transform: translateX(4px);
+}
+.global-stat-card:hover::before {
+  opacity: 1;
+}
+
+.gsc-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(222, 89, 46, 0.18);
+  border: 1px solid rgba(222, 89, 46, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--btn);
+  flex-shrink: 0;
+}
+.gsc-icon-nri {
+  background: rgba(255, 179, 71, 0.15);
+  border-color: rgba(255, 179, 71, 0.3);
+  color: #ffb347;
+}
+.gsc-icon-country {
+  background: rgba(52, 199, 89, 0.15);
+  border-color: rgba(52, 199, 89, 0.3);
+  color: #34c759;
+}
+.gsc-icon-assoc {
+  background: rgba(90, 200, 250, 0.12);
+  border-color: rgba(90, 200, 250, 0.3);
+  color: #5ac8fa;
+}
+.gsc-icon-temple {
+  background: rgba(155, 89, 182, 0.18);
+  border-color: rgba(155, 89, 182, 0.3);
+  color: #9b59b6;
+}
+
+.gsc-body {
+  flex: 1;
+  min-width: 0;
+}
+.gsc-num {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 3px;
+  font-family: "Inter", sans-serif;
+  letter-spacing: -0.02em;
+}
+.gsc-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Inter", sans-serif;
+  margin-bottom: 8px;
+}
+
+/* Progress bar */
+.gsc-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.gsc-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--btn);
+  width: 0;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.gsc-bar-nri {
+  background: #ffb347;
+}
+.gsc-bar-country {
+  background: #34c759;
+}
+.gsc-bar-assoc {
+  background: #5ac8fa;
+}
+.gsc-bar-temple {
+  background: #9b59b6;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION 6 — GLOBAL PRESENCE MAP
+═══════════════════════════════════════════ */
+
+#global-section {
+  background: #130a05;
+  padding: 80px 0 90px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Particle canvas */
+#particleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Header */
+.global-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #de592e;
+  background: rgba(222, 89, 46, 0.12);
+  padding: 4px 14px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+.global-heading {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.global-highlight {
+  color: #de592e;
+}
+.global-subtext {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Map card */
+.map-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 60px rgba(222, 89, 46, 0.08);
+}
+
+.map-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+}
+
+#worldMapSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Map land paths — styled via JS/D3 but base here */
+.map-land-path {
+  fill: #2a1a10;
+  stroke: #3d2415;
+  stroke-width: 0.5;
+  transition: fill 0.3s ease;
+  cursor: pointer;
+}
+.map-land-path:hover {
+  fill: #4a2a18;
+}
+.map-land-path.has-pin {
+  fill: #2e1810;
+}
+.map-land-path.has-pin:hover {
+  fill: #5a2e18;
+}
+
+/* Pin layer */
+.pin-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Individual pin */
+.map-pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  pointer-events: all;
+  cursor: pointer;
+  z-index: 5;
+  opacity: 0;
+  animation: pinDrop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes pinDrop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -200%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -100%);
+  }
+}
+
+/* Pin SVG marker */
+.pin-marker {
+  width: 28px;
+  height: 36px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pin-head {
+  width: 26px;
+  height: 26px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.pin-assoc .pin-head {
+  background: linear-gradient(135deg, #de592e, #ff7a45);
+}
+.pin-temple .pin-head {
+  background: linear-gradient(135deg, #d4a017, #f5c842);
+}
+.pin-both .pin-head {
+  background: linear-gradient(135deg, #c23b8a, #e85aad);
+}
+
+.pin-head i {
+  transform: rotate(45deg);
+  font-size: 0.7rem;
+  color: #fff;
+}
+
+.pin-tail {
+  width: 2px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  margin-top: -1px;
+}
+
+/* Pulse rings */
+.pin-pulse {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.pin-pulse::before,
+.pin-pulse::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: radarPulse 2.2s ease-out infinite;
+}
+
+.pin-assoc .pin-pulse::before,
+.pin-assoc .pin-pulse::after {
+  border: 1.5px solid rgba(222, 89, 46, 0.7);
+}
+.pin-temple .pin-pulse::before,
+.pin-temple .pin-pulse::after {
+  border: 1.5px solid rgba(212, 160, 23, 0.7);
+}
+.pin-both .pin-pulse::before,
+.pin-both .pin-pulse::after {
+  border: 1.5px solid rgba(200, 60, 140, 0.7);
+}
+
+.pin-pulse::after {
+  animation-delay: 1.1s;
+}
+
+@keyframes radarPulse {
+  0% {
+    width: 6px;
+    height: 6px;
+    opacity: 1;
+  }
+  100% {
+    width: 44px;
+    height: 44px;
+    opacity: 0;
+  }
+}
+
+/* Pin breathing */
+.map-pin:nth-child(odd) .pin-head {
+  animation: pinBreathe 3s ease-in-out infinite;
+}
+.map-pin:nth-child(even) .pin-head {
+  animation: pinBreathe 3s ease-in-out 1.5s infinite;
+}
+
+@keyframes pinBreathe {
+  0%,
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1.12);
+  }
+}
+
+/* Tooltip */
+.pin-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: rgba(20, 8, 2, 0.96);
+  border: 1px solid rgba(222, 89, 46, 0.35);
+  border-radius: 10px;
+  padding: 10px 14px;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  z-index: 20;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  min-width: 160px;
+  text-align: center;
+}
+
+.map-pin:hover .pin-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.pin-tooltip strong {
+  display: block;
+  font-size: 0.85rem;
+  color: #de592e;
+  margin-bottom: 4px;
+}
+
+.pin-tooltip .tt-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 2px;
+}
+
+.pin-tooltip .tt-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Connection SVG overlay */
+.connections-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.conn-line {
+  stroke: rgba(222, 89, 46, 0.25);
+  stroke-width: 0.4;
+  stroke-dasharray: 3 4;
+  stroke-dashoffset: 0;
+  animation: dashFlow 3s linear infinite;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+/* Legend */
+.map-legend {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: "Inter", sans-serif;
+}
+
+.legend-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  flex-shrink: 0;
+}
+
+.legend-assoc-icon {
+  background: rgba(222, 89, 46, 0.25);
+  color: #de592e;
+}
+.legend-temple-icon {
+  background: rgba(212, 160, 23, 0.25);
+  color: #d4a017;
+}
+.legend-both-icon {
+  background: rgba(200, 60, 140, 0.25);
+  color: #c83c8a;
+}
+
+/* ── Stat Cards ─────────────────────────── */
+.gsc-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  backdrop-filter: blur(6px);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.gsc-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(222, 89, 46, 0.06),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.gsc-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(222, 89, 46, 0.3);
+  transform: translateX(4px);
+}
+.gsc-card:hover::before {
+  transform: translateX(100%);
+}
+
+.gsc-card.visible {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.gsc-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.gsc-c1 {
+  background: rgba(222, 89, 46, 0.2);
+  color: #de592e;
+}
+.gsc-c2 {
+  background: rgba(52, 152, 219, 0.2);
+  color: #3498db;
+}
+.gsc-c3 {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+}
+.gsc-c4 {
+  background: rgba(155, 89, 182, 0.2);
+  color: #9b59b6;
+}
+.gsc-c5 {
+  background: rgba(212, 160, 23, 0.2);
+  color: #d4a017;
+}
+.gsc-c6 {
+  background: rgba(200, 60, 140, 0.2);
+  color: #c83c8a;
+}
+
+.gsc-body {
+  flex: 1;
+}
+
+.gsc-num {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-family: "Inter", sans-serif;
+}
+
+.gsc-label {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  margin-top: 3px;
+  letter-spacing: 0.02em;
+}
+
+.gsc-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.gsc-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #965038, #de592e);
+  transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Legend updated */
+.map-legend {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 14px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.25);
+  flex-wrap: nowrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: "Inter", sans-serif;
+  flex: 1;
+  justify-content: center;
+}
+.legend-count {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  margin-left: 2px;
+}
+.legend-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+.legend-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+.legend-assoc-icon {
+  background: rgba(222, 89, 46, 0.2);
+}
+.legend-temple-icon {
+  background: rgba(212, 160, 23, 0.2);
+  color: #d4a017;
+  font-size: 0.72rem;
+}
+.legend-nro-icon {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+  font-size: 0.72rem;
+}
+.legend-nri-icon {
+  background: rgba(155, 89, 182, 0.2);
+  color: #9b59b6;
+  font-size: 0.72rem;
+}

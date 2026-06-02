@@ -629,3 +629,416 @@ if (newsletterForm) {
     });
   }
 }
+
+
+/* ═══════════════════════════════════════════════
+   SECTION 6 — GLOBAL PRESENCE MAP
+═══════════════════════════════════════════════ */
+(function () {
+  /* ── Pin data ── */
+  const PINS = [
+    {
+      id: "usa",
+      country: "USA",
+      pct: [13, 42],
+      type: "both",
+      nro: 12000,
+      nri: 3200,
+      label: "USA",
+    },
+    {
+      id: "uk",
+      country: "UK",
+      pct: [44, 22],
+      type: "assoc",
+      nro: 7800,
+      nri: 2100,
+      label: "United Kingdom",
+    },
+    {
+      id: "uae",
+      country: "UAE",
+      pct: [57, 38],
+      type: "both",
+      nro: 9800,
+      nri: 2600,
+      label: "UAE",
+    },
+    {
+      id: "india",
+      country: "India",
+      pct: [63, 40],
+      type: "temple",
+      nro: 5500,
+      nri: 1200,
+      label: "India",
+    },
+    {
+      id: "sg",
+      country: "Singapore",
+      pct: [72, 52],
+      type: "assoc",
+      nro: 3200,
+      nri: 800,
+      label: "Singapore",
+    },
+    {
+      id: "aus",
+      country: "Australia",
+      pct: [76, 68],
+      type: "temple",
+      nro: 4400,
+      nri: 1100,
+      label: "Australia",
+    },
+    {
+      id: "ca",
+      country: "Canada",
+      pct: [18, 28],
+      type: "assoc",
+      nro: 6200,
+      nri: 1800,
+      label: "Canada",
+    },
+  ];
+
+  /* ── Connection pairs (index pairs from PINS array) ── */
+  const CONNECTIONS = [
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [3, 4],
+    [4, 5],
+    [0, 6],
+  ];
+
+  /* ── D3 World Map ── */
+  function buildMap() {
+    const wrap = document.getElementById("mapWrap");
+    if (!wrap) return;
+    const W = wrap.offsetWidth || 700;
+    const H = wrap.offsetHeight || 350;
+
+    const svg = d3
+      .select("#worldMapSvg")
+      .attr("viewBox", `0 0 ${W} ${H}`)
+      .attr("preserveAspectRatio", "xMidYMid meet");
+
+    const projection = d3
+      .geoNaturalEarth1()
+      .scale(W / 6.5)
+      .translate([W / 2, H / 2]);
+
+    const path = d3.geoPath().projection(projection);
+
+    d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+      .then(function (world) {
+        const countries = topojson_feature(world, world.objects.countries);
+
+        svg
+          .selectAll(".map-land-path")
+          .data(countries.features)
+          .enter()
+          .append("path")
+          .attr("class", "map-land-path")
+          .attr("d", path)
+          .on("mouseover", function () {
+            d3.select(this).style("fill", "#4a2a18");
+          })
+          .on("mouseout", function () {
+            d3.select(this).style("fill", null);
+          });
+
+        buildConnections(W, H);
+        buildPins(W, H);
+      })
+      .catch(function () {
+        buildFallbackMap(svg, W, H);
+        buildConnections(W, H);
+        buildPins(W, H);
+      });
+  }
+
+  /* Fallback simplified map if CDN fails */
+  function buildFallbackMap(svg, W, H) {
+    const lands = [
+      "M120,80 L200,70 L240,90 L260,130 L250,170 L230,190 L200,210 L180,240 L160,260 L140,250 L110,230 L90,200 L80,170 L85,140 L100,110 Z",
+      "M175,265 L215,255 L235,280 L240,320 L230,370 L210,410 L190,430 L170,410 L155,370 L150,320 L155,280 Z",
+      "M430,60 L490,55 L510,70 L520,90 L505,110 L490,120 L470,115 L450,120 L435,110 L425,90 Z",
+      "M440,130 L490,125 L520,140 L530,175 L525,220 L510,265 L490,300 L465,320 L440,300 L420,260 L415,220 L420,175 L425,145 Z",
+      "M520,40 L780,30 L820,65 L800,90 L700,95 L600,85 L540,65 Z",
+      "M530,130 L610,140 L615,165 L595,180 L565,175 L540,160 L525,145 Z",
+      "M610,145 L670,160 L665,195 L645,220 L620,215 L605,190 L600,165 Z",
+      "M650,90 L800,100 L800,130 L740,155 L665,140 L640,100 Z",
+      "M710,290 L830,295 L830,370 L740,375 L700,310 Z",
+    ];
+    lands.forEach(function (d) {
+      svg
+        .append("path")
+        .attr("class", "map-land-path")
+        .attr(
+          "d",
+          d.replace(/(\d+)/g, function (n) {
+            return Math.round((+n * W) / 1000);
+          }),
+        );
+    });
+  }
+
+  /* ── Connection lines ── */
+  function buildConnections(W, H) {
+    const wrap = document.getElementById("mapWrap");
+    let connSvg = wrap.querySelector(".connections-svg");
+    if (!connSvg) {
+      connSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      connSvg.setAttribute("class", "connections-svg");
+      connSvg.setAttribute("viewBox", `0 0 100 100`);
+      connSvg.setAttribute("preserveAspectRatio", "none");
+      wrap.appendChild(connSvg);
+    }
+    CONNECTIONS.forEach(function (pair) {
+      const a = PINS[pair[0]],
+        b = PINS[pair[1]];
+      const line = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "line",
+      );
+      line.setAttribute("class", "conn-line");
+      line.setAttribute("x1", a.pct[0]);
+      line.setAttribute("y1", a.pct[1]);
+      line.setAttribute("x2", b.pct[0]);
+      line.setAttribute("y2", b.pct[1]);
+      line.style.animationDelay = Math.random() * 2 + "s";
+      connSvg.appendChild(line);
+    });
+  }
+
+  /* ── Pins ── */
+  function buildPins(W, H) {
+    const layer = document.getElementById("pinLayer");
+    if (!layer) return;
+
+    PINS.forEach(function (pin, i) {
+      const el = document.createElement("div");
+      el.className = "map-pin pin-" + pin.type;
+      el.style.left = pin.pct[0] + "%";
+      el.style.top = pin.pct[1] + "%";
+      el.style.animationDelay = i * 0.18 + 0.5 + "s";
+
+      const iconMap = {
+        assoc: "fa-people-group",
+        temple: "fa-place-of-worship",
+        both: "fa-star",
+      };
+      const dotColor = { assoc: "#DE592E", temple: "#d4a017", both: "#c83c8a" };
+
+      el.innerHTML = `
+        <div class="pin-pulse"></div>
+        <div class="pin-marker">
+          <div class="pin-head">
+            <i class="fa-solid ${iconMap[pin.type] || "fa-location-dot"}"></i>
+          </div>
+          <div class="pin-tail"></div>
+        </div>
+        <div class="pin-tooltip">
+          <strong>${pin.label}</strong>
+          <div class="tt-row"><span class="tt-dot" style="background:#DE592E"></span>NRO: ${pin.nro.toLocaleString()}</div>
+          <div class="tt-row"><span class="tt-dot" style="background:#9b59b6"></span>NRI: ${pin.nri.toLocaleString()}</div>
+        </div>`;
+      layer.appendChild(el);
+    });
+  }
+
+  /* ── Floating particles ── */
+  function buildParticles() {
+    const canvas = document.getElementById("particleCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let W,
+      H,
+      particles = [];
+
+    function resize() {
+      const section = document.getElementById("global-section");
+      W = canvas.width = section.offsetWidth;
+      H = canvas.height = section.offsetHeight;
+    }
+
+    function createParticles() {
+      particles = [];
+      for (let i = 0; i < 55; i++) {
+        particles.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: Math.random() * 1.8 + 0.4,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: -(Math.random() * 0.5 + 0.2),
+          alpha: Math.random() * 0.5 + 0.1,
+          hue: Math.random() > 0.7 ? 30 : 15, // warm amber or orange
+        });
+      }
+    }
+
+    function tick() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(function (p) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.y < -4) {
+          p.y = H + 4;
+          p.x = Math.random() * W;
+        }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(tick);
+    }
+
+    resize();
+    createParticles();
+    tick();
+    window.addEventListener("resize", function () {
+      resize();
+      createParticles();
+    });
+  }
+
+  /* ── Stat card count-up + slide-in ── */
+  function buildStats() {
+    const cards = document.querySelectorAll(".gsc-card");
+    const fills = document.querySelectorAll(".gsc-fill");
+    let triggered = false;
+
+    function runCount() {
+      document
+        .querySelectorAll(".legend-num[data-target]")
+        .forEach(function (el) {
+          const target = +el.getAttribute("data-target");
+          const suffix = el.getAttribute("data-suffix") || "";
+          const dur = 1800,
+            step = target / (dur / 16);
+          let cur = 0;
+          const t = setInterval(function () {
+            cur += step;
+            if (cur >= target) {
+              cur = target;
+              clearInterval(t);
+            }
+            el.textContent =
+              (target >= 1000
+                ? Math.floor(cur / 1000) + "K"
+                : Math.floor(cur)) + suffix;
+          }, 16);
+        });
+    }
+
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !triggered) {
+            triggered = true;
+
+            cards.forEach(function (card, i) {
+              setTimeout(function () {
+                card.classList.add("visible");
+              }, i * 120);
+            });
+
+            setTimeout(function () {
+              fills.forEach(function (fill) {
+                fill.style.width = fill.style.getPropertyValue("--w") || "50%";
+              });
+            }, 300);
+
+            runCount();
+            setInterval(runCount, 10000);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 },
+    );
+
+    const section = document.getElementById("global-section");
+    if (section) observer.observe(section);
+  }
+
+  /* ── topojson shim ── */
+  function topojson_feature(topology, object) {
+    if (typeof topojson !== "undefined")
+      return topojson.feature(topology, object);
+    // minimal inline mesh converter
+    return { features: [] };
+  }
+
+  /* ── Init ── */
+  window.addEventListener("load", function () {
+    buildParticles();
+    buildStats();
+
+    /* Wait for D3 + topojson */
+    function tryMap(attempts) {
+      if (typeof d3 !== "undefined") {
+        /* Load topojson too */
+        if (typeof topojson === "undefined") {
+          const s = document.createElement("script");
+          s.src =
+            "https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js";
+          s.onload = buildMap;
+          document.head.appendChild(s);
+        } else {
+          buildMap();
+        }
+      } else if (attempts > 0) {
+        setTimeout(function () {
+          tryMap(attempts - 1);
+        }, 300);
+      }
+    }
+    tryMap(10);
+  });
+})();
+
+/* Legend count-up, repeats every 10s */
+(function () {
+  function countLegend() {
+    document
+      .querySelectorAll(".legend-num[data-target]")
+      .forEach(function (el) {
+        const target = +el.getAttribute("data-target");
+        const suffix = el.getAttribute("data-suffix") || "";
+        const dur = 1600,
+          step = target / (dur / 16);
+        let cur = 0;
+        const t = setInterval(function () {
+          cur += step;
+          if (cur >= target) {
+            cur = target;
+            clearInterval(t);
+          }
+          el.textContent =
+            (target >= 1000 ? Math.floor(cur / 1000) + "K" : Math.floor(cur)) +
+            suffix;
+        }, 16);
+      });
+  }
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          countLegend();
+          setInterval(countLegend, 10000);
+          observer.disconnect();
+        }
+      });
+    },
+    { threshold: 0.3 },
+  );
+
+  const legend = document.querySelector(".map-legend");
+  if (legend) observer.observe(legend);
+})();
+
