@@ -1249,3 +1249,268 @@ if (newsletterForm) {
     { passive: true },
   );
 })();
+
+/* ═══════════════════════════════════════════════
+   SECTION 8 — CURVED GALLERY
+═══════════════════════════════════════════════ */
+(function () {
+  const ITEMS = [
+    {
+      img:'assets/images/1.png',
+      title: "Jagannath Temple, Puri",
+      cat: "Heritage",
+    },
+    {
+      img:'assets/images/2.png',
+      title: "Konark Sun Temple",
+      cat: "Heritage",
+    },
+    {
+      img:'assets/images/3.png',
+      title: "Chilika Lake",
+      cat: "Nature",
+    },
+    {
+      img:'assets/images/4.png',
+      title: "Odisha Dance",
+      cat: "Culture",
+    },
+    {
+      img:'assets/images/5.png',
+      title: "Pattachitra Art",
+      cat: "Art",
+    },
+    {
+      img:'assets/images/6.png',
+      title: "Lingaraj Temple",
+      cat: "Heritage",
+    },
+    {
+      img:'assets/images/7.png',
+      title: "Rath Yatra Festival",
+      cat: "Festival",
+    },
+    {
+      img:'assets/images/8.png',
+      title: "Hirakud Dam",
+      cat: "Nature",
+    },
+  ];
+
+  const TOTAL = ITEMS.length;
+  let current = 0;
+  let typeTimer = null;
+
+  const bg = document.getElementById("galBg");
+  const bgNext = document.getElementById("galBgNext");
+  const galTitle = document.getElementById("galTitle");
+  const galCat = document.getElementById("galCat");
+
+  /* ── Build strip items dynamically for infinite loop ── */
+  const stripEl = document.getElementById("galStrip");
+  if (!stripEl) return;
+
+  /* We render VISIBLE_COUNT items centered around current */
+  const VISIBLE = 7; /* odd number so center is clear */
+
+  function renderStrip() {
+    stripEl.innerHTML = "";
+    for (let v = 0; v < VISIBLE; v++) {
+      const dataIdx =
+        (((current - Math.floor(VISIBLE / 2) + v) % TOTAL) + TOTAL) % TOTAL;
+      const d = ITEMS[dataIdx];
+      const el = document.createElement("div");
+      el.className =
+        "gal-item" + (v === Math.floor(VISIBLE / 2) ? " active" : "");
+      el.setAttribute("data-vindex", v);
+      el.setAttribute("data-dataindex", dataIdx);
+      el.innerHTML = `<img src="${d.img}" alt="${d.title}" loading="lazy"/><div class="gal-item-shine"></div>`;
+      el.addEventListener("click", function () {
+        const clicked = +this.getAttribute("data-dataindex");
+        goTo(clicked);
+      });
+      stripEl.appendChild(el);
+    }
+    applyArc();
+  }
+
+  /* ── Arc curve geometry ── */
+  function applyArc() {
+    const items = stripEl.querySelectorAll(".gal-item");
+    const RADIUS = 600;
+    const ITEM_H = 92;
+    const GAP = 5;
+    const center = Math.floor(VISIBLE / 2);
+
+    items.forEach(function (item, v) {
+      const rel = v - center;
+      const abs = Math.abs(rel);
+      const angle = Math.asin(Math.min(0.98, (rel * (ITEM_H + GAP)) / RADIUS));
+      const cosA = Math.cos(angle);
+      const xOff = RADIUS * (1 - cosA) * -1;
+      const yOff = rel * (ITEM_H + GAP);
+      const rotY = ((angle * 180) / Math.PI) * 0.9;
+      const widthScale = Math.max(0.48, cosA);
+      const scale = abs === 0 ? 1.0 : Math.max(0.56, 1 - abs * 0.09);
+      const opacity = abs > 3 ? 0 : Math.max(0.1, 1 - abs * 0.22);
+
+      item.style.transform = [
+        `translateX(${xOff}px)`,
+        `translateY(${yOff}px)`,
+        `rotateY(${rotY}deg)`,
+        `scaleX(${widthScale})`,
+        `scale(${scale})`,
+      ].join(" ");
+      item.style.opacity = String(opacity);
+      item.style.zIndex = String(10 - abs);
+    });
+  }
+
+  /* ── Crossfade background ── */
+  function crossfadeBg(img) {
+    bgNext.style.backgroundImage = `url('${img}')`;
+    bgNext.style.opacity = "1";
+    bgNext.style.animation = "none";
+    setTimeout(function () {
+      bg.style.backgroundImage = `url('${img}')`;
+      bg.style.animation = "none";
+      bgNext.style.opacity = "0";
+      /* restart Ken Burns on bg */
+      void bg.offsetWidth;
+      bg.style.animation = "galKen 12s ease-in-out infinite alternate";
+    }, 800);
+  }
+
+  /* ── Typewriter ── */
+  function typewrite(el, text) {
+    if (typeTimer) {
+      clearInterval(typeTimer);
+      typeTimer = null;
+    }
+    if (!el || !text) return;
+    el.textContent = "";
+    let i = 0;
+    typeTimer = setInterval(function () {
+      if (i < text.length) {
+        el.textContent += text[i++];
+      } else {
+        clearInterval(typeTimer);
+        typeTimer = null;
+      }
+    }, 40);
+  }
+
+  /* ── Go to data index ── */
+  function goTo(idx) {
+    current = ((idx % TOTAL) + TOTAL) % TOTAL;
+    const d = ITEMS[current];
+    renderStrip();
+    console.log("goTo fired", d.title, document.getElementById("galTitle"));
+    crossfadeBg(d.img);
+
+    const titleEl = document.getElementById("galTitle");
+    const catEl = document.getElementById("galCat");
+
+    if (catEl) catEl.textContent = d.cat;
+    typewrite(titleEl, d.title);
+  }
+
+  // /* ── Wheel scroll with debounce ── */
+  // let wheelLock = false;
+  // document.getElementById('gallery-section')?.addEventListener('wheel', function (e) {
+  //   e.preventDefault();
+  //   if (wheelLock) return;
+  //   wheelLock = true;
+  //   setTimeout(function () { wheelLock = false; }, 450);
+  //   goTo(e.deltaY > 0 ? current + 1 : current - 1);
+  // }, { passive: false });
+
+  /* ── Auto-play every 5s ── */
+  let autoTimer = setInterval(function () {
+    goTo(current + 1);
+  }, 3000);
+
+  /* Pause on hover, resume on leave */
+  const galSection = document.getElementById("gallery-section");
+  galSection?.addEventListener("mouseenter", function () {
+    clearInterval(autoTimer);
+  });
+  galSection?.addEventListener("mouseleave", function () {
+    autoTimer = setInterval(function () {
+      goTo(current + 1);
+    }, 5000);
+  });
+
+  /* ── Drag ── */
+  let dragY = null;
+  stripEl.addEventListener("mousedown", function (e) {
+    dragY = e.clientY;
+    e.preventDefault();
+  });
+  window.addEventListener("mouseup", function () {
+    dragY = null;
+  });
+  window.addEventListener("mousemove", function (e) {
+    if (dragY === null) return;
+    const diff = dragY - e.clientY;
+    if (Math.abs(diff) > 38) {
+      goTo(diff > 0 ? current + 1 : current - 1);
+      dragY = e.clientY;
+    }
+  });
+
+  /* ── Keyboard ── */
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowUp") goTo(current - 1);
+    if (e.key === "ArrowDown") goTo(current + 1);
+  });
+
+  /* ── Mouse trail ── */
+  (function () {
+    const canvas = document.getElementById("galTrailCanvas");
+    const section = document.getElementById("gallery-section");
+    if (!canvas || !section) return;
+    const ctx = canvas.getContext("2d");
+    let W, H;
+    const dots = [];
+
+    function resize() {
+      W = canvas.width = section.offsetWidth;
+      H = canvas.height = section.offsetHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    section.addEventListener("mousemove", function (e) {
+      const rect = section.getBoundingClientRect();
+      dots.push({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+        r: Math.random() * 3 + 1,
+        alpha: 0.65,
+      });
+      if (dots.length > 55) dots.shift();
+    });
+
+    (function tick() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = dots.length - 1; i >= 0; i--) {
+        const d = dots[i];
+        d.alpha -= 0.02;
+        d.r *= 0.96;
+        if (d.alpha <= 0) {
+          dots.splice(i, 1);
+          continue;
+        }
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(222,89,46,${d.alpha})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    })();
+  })();
+
+  /* ── Init ── */
+  goTo(0);
+})();

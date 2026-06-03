@@ -1361,6 +1361,114 @@
       <!-- /container -->
     </section>
 
+<!-- SECTION 8 — CURVED GALLERY -->
+<section id="gallery-section">
+
+  <!-- Full-screen background -->
+  <div class="gal-bg" id="galBg"></div>
+  <div class="gal-bg gal-bg-next" id="galBgNext"></div>
+  <div class="gal-vignette"></div>
+
+  <!-- Mouse light trail canvas -->
+  <canvas id="galTrailCanvas"></canvas>
+
+  <div class="gal-wrap">
+
+    <!-- LEFT: Curved Film Strip -->
+    <div class="gal-strip-area">
+      <!-- Arc guide SVG -->
+      <svg class="gal-arc-svg" viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <path d="M 380 0 Q -200 400 380 800" fill="none"
+        stroke="rgba(255,255,255,0.035)" stroke-width="120"/>
+  <path d="M 380 0 Q -200 400 380 800" fill="none"
+        stroke="rgba(222,89,46,0.12)" stroke-width="1.5"/>
+</svg>
+
+      <!-- Strip items -->
+      <div class="gal-strip" id="galStrip"><div class="gal-item" data-index="0" data-title="Jagannath Temple, Puri" data-cat="Heritage" data-date="Mar 2025">
+  <img src="https://picsum.photos/seed/jagannath/320/200" alt=""/>
+  <div class="gal-item-shine"></div>
+</div>
+<div class="gal-item" data-index="1" data-title="Konark Sun Temple" data-cat="Heritage" data-date="Jan 2025">
+  <img src="https://picsum.photos/seed/konark/320/200" alt=""/>
+  <div class="gal-item-shine"></div>
+</div>
+<div class="gal-item" data-index="2" data-title="Chilika Lake" data-cat="Nature" data-date="Apr 2025">
+  <img src="https://picsum.photos/seed/chilika/320/200" alt=""/>
+  <div class="gal-item-shine"></div>
+</div>
+<div class="gal-item" data-index="3" data-title="Odissi Dance" data-cat="Culture" data-date="May 2025">
+  <img src="https://picsum.photos/seed/odissi/320/200" alt=""/>
+  <div class="gal-item-shine"></div>
+</div>
+<div class="gal-item" data-index="4" data-title="Pattachitra Art" data-cat="Art" data-date="Aug 2025">
+  <img src="https://picsum.photos/seed/pattachitra/320/200" alt=""/>
+  <div class="gal-item-shine"></div>
+</div>
+<div class="gal-item" data-index="5" data-title="Lingaraj Temple" data-cat="Heritage" data-date="Feb 2025">
+  <img src="https://picsum.photos/seed/lingaraj/320/200" alt=""/>
+  <div class="gal-item-shine"></div>
+</div>
+<div class="gal-item" data-index="6" data-title="Rath Yatra Festival" data-cat="Festival" data-date="Jul 2025">
+  <img src="https://picsum.photos/seed/rathyatra/320/200" alt=""/>
+  <div class="gal-item-shine"></div>
+</div>
+<div class="gal-item" data-index="7" data-title="Hirakud Dam" data-cat="Nature" data-date="Jun 2025">
+  <img src="https://picsum.photos/seed/hirakud/320/200" alt=""/>
+  <div class="gal-item-shine"></div>
+</div>
+</div>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="gal-scroll-hint">
+        <i class="fa-solid fa-computer-mouse"></i>
+        <span>Scroll to explore</span>
+      </div>
+    </div>
+
+    <!-- CENTER: Active info -->
+    <div class="gal-center">
+  <div class="gal-info-card" id="galInfoCard">
+    <span class="gal-cat" id="galCat">Heritage</span>
+<h2 class="gal-title" id="galTitle">Jagannath Temple</h2>
+  </div>
+</div>
+
+    <!-- RIGHT: Thumbnails + counter -->
+    <div class="gal-right">
+      <div class="gal-counter">
+        <span class="gal-cur" id="galCur">01</span>
+        <span class="gal-sep">/</span>
+        <span class="gal-total">08</span>
+      </div>
+
+      <div class="gal-thumbs" id="galThumbs">
+        <!-- Injected by JS -->
+      </div>
+
+      <div class="gal-right-btns">
+        <button class="gal-view-btn" id="galGridView" title="Grid view">
+          <i class="fa-solid fa-grip"></i>
+        </button>
+        <button class="gal-view-btn active" id="galStripView" title="Strip view">
+          <i class="fa-solid fa-film"></i>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /gal-wrap -->
+
+  <!-- Slideshow overlay -->
+  <div class="gal-slideshow-overlay" id="galSlideshowOverlay">
+    <button class="gal-ss-close" id="galSsClose"><i class="fa-solid fa-xmark"></i></button>
+    <img src="" alt="" class="gal-ss-img" id="galSsImg"/>
+    <div class="gal-ss-caption" id="galSsCaption"></div>
+  </div>
+
+</section>
+
+
     <!-- ═══════════════════════════════════════════
        SECTION 6 — GOVERNMENT PARTNERS LOGO CAROUSEL
     ════════════════════════════════════════════ -->
