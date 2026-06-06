@@ -69,9 +69,50 @@
               </div>
 
               <form class="registration-form" data-form-id="form-1-overseas">
-                <div class="form-page active page-1">
+<div class="stepper-wrapper">
+  <div class="stepper-sidebar">
+    <ul class="stepper-list" id="stepper-form_1_overseas">
+      <li class="stepper-item active" data-step="1" onclick="goToStep(this, 1, 'form_1_overseas')">
+        <div class="stepper-circle"><span class="step-number">1</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Basic Details</div>
+          <div class="step-subtitle">Personal info &amp; classification</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="2" onclick="goToStep(this, 2, 'form_1_overseas')">
+        <div class="stepper-circle"><span class="step-number">2</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Documentation &amp; Consent</div>
+          <div class="step-subtitle">Upload docs &amp; agree</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="3" onclick="goToStep(this, 3, 'form_1_overseas')">
+        <div class="stepper-circle"><span class="step-number">3</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Review &amp; Submit</div>
+          <div class="step-subtitle">Confirm &amp; submit</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="stepper-body">
+
+    <!-- STEP 1 -->
+    <div class="step-pane active" id="step-form_1_overseas-1">
+      <div class="step-error-msg" id="err-form_1_overseas-1"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
+
                   
-                  <h4 class="form-section-title">Registration Classification</h4>
+                  
+<div class="accordion-section open" data-accordion-id="acc-registration-classification">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Registration Classification</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Registration Category <span style="color: var(--btn-color);">*</span></label>
@@ -121,7 +162,18 @@
                       <input type="text" class="form-input form-field" id="overseas-embassy" readonly>
                   </div>
 
-                  <h4 class="form-section-title">Personal Information</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-personal-information">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Personal Information</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
 
                   <div class="form-row">
                     <div class="form-group">
@@ -204,7 +256,18 @@
                     <button type="button" class="draft-btn" onclick="addFamilyMember('overseas')"><i class="fas fa-plus"></i> Add Family Member</button>
                   </div>
 
-                  <h4 class="form-section-title">Passport & Immigration</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-passport---immigration">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Passport & Immigration</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Passport Number <span style="color: var(--btn-color);">*</span></label>
@@ -248,7 +311,18 @@
                   
                   <div id="overseas-dynamic-immigration" class="form-row"></div>
 
-                  <h4 class="form-section-title">Contact Information</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-contact-information">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Contact Information</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Mobile Number <span style="color: var(--btn-color);">*</span></label>
@@ -306,7 +380,18 @@
                     </div>
                   </div>
 
-                  <h4 class="form-section-title">Overseas Address</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-overseas-address">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Overseas Address</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Address Line 1 <span style="color: var(--btn-color);">*</span></label>
@@ -334,7 +419,18 @@
                     </div>
                   </div>
 
-                  <h4 class="form-section-title">Odisha Connection</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-odisha-connection">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Odisha Connection</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Odisha Address</label>
@@ -374,7 +470,18 @@
                     <input type="text" class="form-input form-field">
                   </div>
 
-                  <h4 class="form-section-title">Education & Professional</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-education---professional">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Education & Professional</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Highest Qualification <span style="color: var(--btn-color);">*</span></label>
@@ -413,17 +520,30 @@
                       <option value="Education">Education</option>
                     </select>
                   </div>
-                  </div>
+                  </div>  </div>
+</div>
+                
+      <div class="step-actions">
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 1, 'form_1_overseas')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-pane" id="step-form_1_overseas-2">
+      <div class="step-error-msg" id="err-form_1_overseas-2"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
+
                   
+<div class="accordion-section open" data-accordion-id="acc-documents">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Documents</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
 
-                  <div class="form-actions">
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="button" class="next-btn next-page-btn">Next</button>
-                  </div>
-                </div>
-
-                <div class="form-page page-2">
-                  <h4 class="form-section-title">Documents</h4>
                   <p class="text-muted" style="font-size: 13px;">Upload files in PDF or JPEG format.</p>
                   
                   <div class="form-row">
@@ -461,7 +581,18 @@
                     <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg">
                   </div>
 
-                  <h4 class="form-section-title">Consent & Declaration</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-consent---declaration">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Consent & Declaration</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
                     <input type="checkbox" style="margin-top: 5px;" required>
                     <label><strong>Consent for Data Usage:</strong> I hereby consent to the storage and processing of my personal data in compliance with GDPR and local data protection regulations. <span style="color: var(--btn-color);">*</span></label>
@@ -469,15 +600,31 @@
                   <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
                     <input type="checkbox" style="margin-top: 5px;" required>
                     <label><strong>Declaration of Correctness:</strong> I declare that all information provided is accurate and true to the best of my knowledge. <span style="color: var(--btn-color);">*</span></label>
-                  </div>
+                  </div>  </div>
+</div>
+                
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 2, 'form_1_overseas')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 2, 'form_1_overseas')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="back-btn back-page-btn">Back</button>
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="submit" class="submit-btn">Submit</button>
-                  </div>
-                </div>
-              </form>
+    <!-- STEP 3: Review & Submit -->
+    <div class="step-pane" id="step-form_1_overseas-3">
+      <h3 class="form-title" style="margin-bottom:6px;">Review &amp; Submission</h3>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;">Please review all entered information before submitting.</p>
+      <div id="review-content-form_1_overseas" class="review-content"></div>
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 3, 'form_1_overseas')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane" style="margin-right:6px;"></i> Submit Registration</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</form>
             </div>
 
             <div class="form-content" id="toggle-1-india">
@@ -489,9 +636,50 @@
               </div>
 
               <form class="registration-form" data-form-id="form-1-india">
-                <div class="form-page active page-1">
+<div class="stepper-wrapper">
+  <div class="stepper-sidebar">
+    <ul class="stepper-list" id="stepper-form_1_india">
+      <li class="stepper-item active" data-step="1" onclick="goToStep(this, 1, 'form_1_india')">
+        <div class="stepper-circle"><span class="step-number">1</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Basic Details</div>
+          <div class="step-subtitle">Personal info &amp; classification</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="2" onclick="goToStep(this, 2, 'form_1_india')">
+        <div class="stepper-circle"><span class="step-number">2</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Documentation &amp; Consent</div>
+          <div class="step-subtitle">Upload docs &amp; agree</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="3" onclick="goToStep(this, 3, 'form_1_india')">
+        <div class="stepper-circle"><span class="step-number">3</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Review &amp; Submit</div>
+          <div class="step-subtitle">Confirm &amp; submit</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="stepper-body">
+
+    <!-- STEP 1 -->
+    <div class="step-pane active" id="step-form_1_india-1">
+      <div class="step-error-msg" id="err-form_1_india-1"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
+
                   
-                  <h4 class="form-section-title">Registration Classification</h4>
+                  
+<div class="accordion-section open" data-accordion-id="acc-registration-classification">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Registration Classification</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Registration Category <span style="color: var(--btn-color);">*</span></label>
@@ -548,7 +736,18 @@
                       </select>
                   </div>
 
-                  <h4 class="form-section-title">Personal Details</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-personal-details">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Personal Details</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
 
                   <div class="form-row">
                     <div class="form-group">
@@ -608,7 +807,18 @@
                     <button type="button" class="draft-btn" onclick="addFamilyMember('india')"><i class="fas fa-plus"></i> Add Family Member</button>
                   </div>
 
-                  <h4 class="form-section-title">Odisha Origin Details</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-odisha-origin-details">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Odisha Origin Details</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">District of Origin <span style="color: var(--btn-color);">*</span></label>
@@ -668,7 +878,18 @@
                     </div>
                   </div>
 
-                  <h4 class="form-section-title">Present Address (Outside Odisha)</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-present-address--outside-odish">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Present Address (Outside Odisha)</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">State <span style="color: var(--btn-color);">*</span></label>
@@ -709,7 +930,18 @@
                     <input type="number" class="form-input form-field" required>
                   </div>
 
-                  <h4 class="form-section-title">Contact Information</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-contact-information">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Contact Information</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Mobile Number <span style="color: var(--btn-color);">*</span></label>
@@ -755,7 +987,18 @@
                     </select>
                   </div>
 
-                  <h4 class="form-section-title">Education Details</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-education-details">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Education Details</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Highest Qualification <span style="color: var(--btn-color);">*</span></label>
@@ -796,7 +1039,18 @@
                     </select>
                   </div>
 
-                  <h4 class="form-section-title">Employment & Professional</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-employment---professional">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Employment & Professional</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Occupation Category <span style="color: var(--btn-color);">*</span></label>
@@ -823,7 +1077,18 @@
                     </div>
                   </div>
 
-                  <h4 class="form-section-title">Student Information</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-student-information">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Student Information</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Institution Name <span style="color: var(--btn-color);">*</span></label>
@@ -847,16 +1112,30 @@
                   <div class="form-group">
                     <label class="form-label">Guardian Contact</label>
                     <input type="text" class="form-input form-field">
-                  </div>
+                  </div>  </div>
+</div>
+                
+      <div class="step-actions">
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 1, 'form_1_india')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="button" class="next-btn next-page-btn">Next</button>
-                  </div>
-                </div>
+    <!-- STEP 2 -->
+    <div class="step-pane" id="step-form_1_india-2">
+      <div class="step-error-msg" id="err-form_1_india-2"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
 
-                <div class="form-page page-2">
-                  <h4 class="form-section-title">Document Uploads</h4>
+                  
+<div class="accordion-section open" data-accordion-id="acc-document-uploads">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Document Uploads</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Photograph <span style="color: var(--btn-color);">*</span></label>
@@ -888,7 +1167,18 @@
                     </div>
                   </div>
 
-                  <h4 class="form-section-title">Consent & Declaration</h4>
+                    </div>
+</div>
+<div class="accordion-section open" data-accordion-id="acc-consent---declaration">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="accordion-header-left">
+      <i class="accordion-section-icon fas fa-circle-check"></i>
+      <h4 class="accordion-section-title">Consent & Declaration</h4>
+    </div>
+    <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+  </div>
+  <div class="accordion-body">
+
                   <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
                     <input type="checkbox" style="margin-top: 5px;" required>
                     <label><strong>Consent for Data Usage:</strong> I hereby consent to the storage and processing of my personal data. <span style="color: var(--btn-color);">*</span></label>
@@ -912,15 +1202,31 @@
                   <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
                     <input type="checkbox" style="margin-top: 5px;" required>
                     <label><strong>CAPTCHA:</strong> I verify that I am human. <span style="color: var(--btn-color);">*</span></label>
-                  </div>
+                  </div>  </div>
+</div>
+                
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 2, 'form_1_india')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 2, 'form_1_india')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="back-btn back-page-btn">Back</button>
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="submit" class="submit-btn">Submit</button>
-                  </div>
-                </div>
-              </form>
+    <!-- STEP 3: Review & Submit -->
+    <div class="step-pane" id="step-form_1_india-3">
+      <h3 class="form-title" style="margin-bottom:6px;">Review &amp; Submission</h3>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;">Please review all entered information before submitting.</p>
+      <div id="review-content-form_1_india" class="review-content"></div>
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 3, 'form_1_india')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane" style="margin-right:6px;"></i> Submit Registration</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</form>
             </div>
           </div>
 
@@ -946,7 +1252,38 @@
               </div>
 
               <form class="registration-form" data-form-id="form-2-overseas">
-                <div class="form-page active page-1">
+<div class="stepper-wrapper">
+  <div class="stepper-sidebar">
+    <ul class="stepper-list" id="stepper-form_2_overseas">
+      <li class="stepper-item active" data-step="1" onclick="goToStep(this, 1, 'form_2_overseas')">
+        <div class="stepper-circle"><span class="step-number">1</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Basic Details</div>
+          <div class="step-subtitle">Personal info &amp; classification</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="2" onclick="goToStep(this, 2, 'form_2_overseas')">
+        <div class="stepper-circle"><span class="step-number">2</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Documentation &amp; Consent</div>
+          <div class="step-subtitle">Upload docs &amp; agree</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="3" onclick="goToStep(this, 3, 'form_2_overseas')">
+        <div class="stepper-circle"><span class="step-number">3</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Review &amp; Submit</div>
+          <div class="step-subtitle">Confirm &amp; submit</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="stepper-body">
+
+    <!-- STEP 1 -->
+    <div class="step-pane active" id="step-form_2_overseas-1">
+      <div class="step-error-msg" id="err-form_2_overseas-1"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Association Name <span style="color: var(--hover-color);">*</span></label>
@@ -975,14 +1312,17 @@
                       <input type="text" class="form-input form-field" placeholder="Enter city name" required>
                     </div>
                   </div>
+                
+      <div class="step-actions">
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 1, 'form_2_overseas')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="button" class="next-btn next-page-btn">Next</button>
-                  </div>
-                </div>
+    <!-- STEP 2 -->
+    <div class="step-pane" id="step-form_2_overseas-2">
+      <div class="step-error-msg" id="err-form_2_overseas-2"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
 
-                <div class="form-page page-2">
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">President Name <span style="color: var(--hover-color);">*</span></label>
@@ -998,14 +1338,29 @@
                     <label class="form-label">Association Description</label>
                     <textarea class="form-textarea form-field" placeholder="Describe your association's activities and objectives"></textarea>
                   </div>
+                
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 2, 'form_2_overseas')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 2, 'form_2_overseas')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="back-btn back-page-btn">Back</button>
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="submit" class="submit-btn">Submit</button>
-                  </div>
-                </div>
-              </form>
+    <!-- STEP 3: Review & Submit -->
+    <div class="step-pane" id="step-form_2_overseas-3">
+      <h3 class="form-title" style="margin-bottom:6px;">Review &amp; Submission</h3>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;">Please review all entered information before submitting.</p>
+      <div id="review-content-form_2_overseas" class="review-content"></div>
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 3, 'form_2_overseas')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane" style="margin-right:6px;"></i> Submit Registration</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</form>
             </div>
 
             <div class="form-content" id="toggle-2-india">
@@ -1017,7 +1372,38 @@
               </div>
 
               <form class="registration-form" data-form-id="form-2-india">
-                <div class="form-page active page-1">
+<div class="stepper-wrapper">
+  <div class="stepper-sidebar">
+    <ul class="stepper-list" id="stepper-form_2_india">
+      <li class="stepper-item active" data-step="1" onclick="goToStep(this, 1, 'form_2_india')">
+        <div class="stepper-circle"><span class="step-number">1</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Basic Details</div>
+          <div class="step-subtitle">Personal info &amp; classification</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="2" onclick="goToStep(this, 2, 'form_2_india')">
+        <div class="stepper-circle"><span class="step-number">2</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Documentation &amp; Consent</div>
+          <div class="step-subtitle">Upload docs &amp; agree</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="3" onclick="goToStep(this, 3, 'form_2_india')">
+        <div class="stepper-circle"><span class="step-number">3</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Review &amp; Submit</div>
+          <div class="step-subtitle">Confirm &amp; submit</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="stepper-body">
+
+    <!-- STEP 1 -->
+    <div class="step-pane active" id="step-form_2_india-1">
+      <div class="step-error-msg" id="err-form_2_india-1"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Association Name <span style="color: var(--hover-color);">*</span></label>
@@ -1046,14 +1432,17 @@
                       <input type="text" class="form-input form-field" placeholder="Enter city name" required>
                     </div>
                   </div>
+                
+      <div class="step-actions">
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 1, 'form_2_india')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="button" class="next-btn next-page-btn">Next</button>
-                  </div>
-                </div>
+    <!-- STEP 2 -->
+    <div class="step-pane" id="step-form_2_india-2">
+      <div class="step-error-msg" id="err-form_2_india-2"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
 
-                <div class="form-page page-2">
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">President Name <span style="color: var(--hover-color);">*</span></label>
@@ -1069,14 +1458,29 @@
                     <label class="form-label">Association Description</label>
                     <textarea class="form-textarea form-field" placeholder="Describe your association's activities and objectives"></textarea>
                   </div>
+                
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 2, 'form_2_india')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 2, 'form_2_india')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="back-btn back-page-btn">Back</button>
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="submit" class="submit-btn">Submit</button>
-                  </div>
-                </div>
-              </form>
+    <!-- STEP 3: Review & Submit -->
+    <div class="step-pane" id="step-form_2_india-3">
+      <h3 class="form-title" style="margin-bottom:6px;">Review &amp; Submission</h3>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;">Please review all entered information before submitting.</p>
+      <div id="review-content-form_2_india" class="review-content"></div>
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 3, 'form_2_india')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane" style="margin-right:6px;"></i> Submit Registration</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</form>
             </div>
           </div>
 
@@ -1102,7 +1506,38 @@
               </div>
 
               <form class="registration-form" data-form-id="form-3-overseas">
-                <div class="form-page active page-1">
+<div class="stepper-wrapper">
+  <div class="stepper-sidebar">
+    <ul class="stepper-list" id="stepper-form_3_overseas">
+      <li class="stepper-item active" data-step="1" onclick="goToStep(this, 1, 'form_3_overseas')">
+        <div class="stepper-circle"><span class="step-number">1</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Basic Details</div>
+          <div class="step-subtitle">Personal info &amp; classification</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="2" onclick="goToStep(this, 2, 'form_3_overseas')">
+        <div class="stepper-circle"><span class="step-number">2</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Documentation &amp; Consent</div>
+          <div class="step-subtitle">Upload docs &amp; agree</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="3" onclick="goToStep(this, 3, 'form_3_overseas')">
+        <div class="stepper-circle"><span class="step-number">3</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Review &amp; Submit</div>
+          <div class="step-subtitle">Confirm &amp; submit</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="stepper-body">
+
+    <!-- STEP 1 -->
+    <div class="step-pane active" id="step-form_3_overseas-1">
+      <div class="step-error-msg" id="err-form_3_overseas-1"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Temple/Center Name <span style="color: var(--hover-color);">*</span></label>
@@ -1131,14 +1566,17 @@
                       <input type="text" class="form-input form-field" placeholder="Enter city name" required>
                     </div>
                   </div>
+                
+      <div class="step-actions">
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 1, 'form_3_overseas')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="button" class="next-btn next-page-btn">Next</button>
-                  </div>
-                </div>
+    <!-- STEP 2 -->
+    <div class="step-pane" id="step-form_3_overseas-2">
+      <div class="step-error-msg" id="err-form_3_overseas-2"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
 
-                <div class="form-page page-2">
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Head Priest Name <span style="color: var(--hover-color);">*</span></label>
@@ -1154,14 +1592,29 @@
                     <label class="form-label">Temple Details</label>
                     <textarea class="form-textarea form-field" placeholder="Provide details about your temple or worship center"></textarea>
                   </div>
+                
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 2, 'form_3_overseas')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 2, 'form_3_overseas')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="back-btn back-page-btn">Back</button>
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="submit" class="submit-btn">Submit</button>
-                  </div>
-                </div>
-              </form>
+    <!-- STEP 3: Review & Submit -->
+    <div class="step-pane" id="step-form_3_overseas-3">
+      <h3 class="form-title" style="margin-bottom:6px;">Review &amp; Submission</h3>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;">Please review all entered information before submitting.</p>
+      <div id="review-content-form_3_overseas" class="review-content"></div>
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 3, 'form_3_overseas')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane" style="margin-right:6px;"></i> Submit Registration</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</form>
             </div>
 
             <div class="form-content" id="toggle-3-india">
@@ -1173,7 +1626,38 @@
               </div>
 
               <form class="registration-form" data-form-id="form-3-india">
-                <div class="form-page active page-1">
+<div class="stepper-wrapper">
+  <div class="stepper-sidebar">
+    <ul class="stepper-list" id="stepper-form_3_india">
+      <li class="stepper-item active" data-step="1" onclick="goToStep(this, 1, 'form_3_india')">
+        <div class="stepper-circle"><span class="step-number">1</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Basic Details</div>
+          <div class="step-subtitle">Personal info &amp; classification</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="2" onclick="goToStep(this, 2, 'form_3_india')">
+        <div class="stepper-circle"><span class="step-number">2</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Documentation &amp; Consent</div>
+          <div class="step-subtitle">Upload docs &amp; agree</div>
+        </div>
+      </li>
+      <li class="stepper-item" data-step="3" onclick="goToStep(this, 3, 'form_3_india')">
+        <div class="stepper-circle"><span class="step-number">3</span></div>
+        <div class="stepper-label">
+          <div class="step-title">Review &amp; Submit</div>
+          <div class="step-subtitle">Confirm &amp; submit</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="stepper-body">
+
+    <!-- STEP 1 -->
+    <div class="step-pane active" id="step-form_3_india-1">
+      <div class="step-error-msg" id="err-form_3_india-1"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
+
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Temple/Center Name <span style="color: var(--hover-color);">*</span></label>
@@ -1202,14 +1686,17 @@
                       <input type="text" class="form-input form-field" placeholder="Enter city name" required>
                     </div>
                   </div>
+                
+      <div class="step-actions">
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 1, 'form_3_india')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="button" class="next-btn next-page-btn">Next</button>
-                  </div>
-                </div>
+    <!-- STEP 2 -->
+    <div class="step-pane" id="step-form_3_india-2">
+      <div class="step-error-msg" id="err-form_3_india-2"><i class="fas fa-exclamation-circle"></i> Please fill all required fields before proceeding.</div>
 
-                <div class="form-page page-2">
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Head Priest Name <span style="color: var(--hover-color);">*</span></label>
@@ -1225,14 +1712,29 @@
                     <label class="form-label">Temple Details</label>
                     <textarea class="form-textarea form-field" placeholder="Provide details about your temple or worship center"></textarea>
                   </div>
+                
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 2, 'form_3_india')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="button" class="next-btn" onclick="stepNext(this, 2, 'form_3_india')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+      </div>
+    </div>
 
-                  <div class="form-actions">
-                    <button type="button" class="back-btn back-page-btn">Back</button>
-                    <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                    <button type="submit" class="submit-btn">Submit</button>
-                  </div>
-                </div>
-              </form>
+    <!-- STEP 3: Review & Submit -->
+    <div class="step-pane" id="step-form_3_india-3">
+      <h3 class="form-title" style="margin-bottom:6px;">Review &amp; Submission</h3>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;">Please review all entered information before submitting.</p>
+      <div id="review-content-form_3_india" class="review-content"></div>
+      <div class="step-actions">
+        <button type="button" class="back-btn" onclick="stepBack(this, 3, 'form_3_india')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+        <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
+        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane" style="margin-right:6px;"></i> Submit Registration</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</form>
             </div>
           </div>
         </div>
@@ -1756,5 +2258,297 @@ function handleCountryChange() {
     </script>
 
     <script src="js/script.js"></script>
+
+    <script>
+    /* ═══════════════════════════════════════════════
+       ACCORDION LOGIC
+    ═══════════════════════════════════════════════ */
+    function toggleAccordion(headerEl) {
+      const section = headerEl.closest('.accordion-section');
+      const isOpen = section.classList.contains('open');
+      if (isOpen) {
+        section.classList.remove('open');
+      } else {
+        section.classList.add('open');
+      }
+    }
+
+    function validateAccordionSection(section) {
+      const requiredFields = section.querySelectorAll('.accordion-body [required]');
+      let allValid = true;
+      requiredFields.forEach(field => {
+        const val = field.value ? field.value.trim() : '';
+        if (!val) allValid = false;
+        if (field.type === 'checkbox' && !field.checked) allValid = false;
+      });
+      return allValid;
+    }
+
+    function checkAndCollapseAccordion(changedField) {
+      const section = changedField.closest('.accordion-section');
+      if (!section) return;
+      if (validateAccordionSection(section)) {
+        section.classList.add('completed');
+        section.classList.remove('open');
+      } else {
+        section.classList.remove('completed');
+      }
+    }
+
+    // Attach accordion auto-collapse on field change
+    function initAccordionValidation() {
+      document.querySelectorAll('.accordion-section .form-field, .accordion-section input[type="checkbox"]').forEach(field => {
+        field.addEventListener('change', function() {
+          checkAndCollapseAccordion(this);
+        });
+        field.addEventListener('blur', function() {
+          checkAndCollapseAccordion(this);
+        });
+      });
+    }
+
+    /* ═══════════════════════════════════════════════
+       STEPPER LOGIC
+    ═══════════════════════════════════════════════ */
+    function getStepperItems(formId) {
+      return document.querySelectorAll(`#stepper-${formId} .stepper-item`);
+    }
+
+    function getStepPane(formId, step) {
+      return document.getElementById(`step-${formId}-${step}`);
+    }
+
+    function validateStepFields(formId, step) {
+      const pane = getStepPane(formId, step);
+      if (!pane) return true;
+      const requiredFields = pane.querySelectorAll('[required]');
+      let allValid = true;
+      requiredFields.forEach(field => {
+        field.classList.remove('field-error');
+        const val = field.value ? field.value.trim() : '';
+        let fieldValid = true;
+        if (field.type === 'checkbox') {
+          fieldValid = field.checked;
+        } else {
+          fieldValid = val !== '';
+        }
+        if (!fieldValid) {
+          allValid = false;
+          field.classList.add('field-error');
+          // Open accordion containing invalid field
+          const acc = field.closest('.accordion-section');
+          if (acc && !acc.classList.contains('open')) acc.classList.add('open');
+        }
+      });
+      return allValid;
+    }
+
+    function markStepComplete(formId, step) {
+      const items = getStepperItems(formId);
+      items.forEach(item => {
+        if (parseInt(item.dataset.step) === step) {
+          item.classList.remove('active');
+          item.classList.add('completed');
+        }
+      });
+    }
+
+    function markStepActive(formId, step) {
+      const items = getStepperItems(formId);
+      items.forEach(item => {
+        const s = parseInt(item.dataset.step);
+        if (s === step) {
+          item.classList.add('active');
+          item.classList.remove('completed');
+        } else if (s < step) {
+          item.classList.add('completed');
+          item.classList.remove('active');
+        } else {
+          item.classList.remove('active', 'completed');
+        }
+      });
+    }
+
+    function showPane(formId, step, direction) {
+      for (let i = 1; i <= 3; i++) {
+        const pane = getStepPane(formId, i);
+        if (pane) {
+          pane.classList.remove('active', 'slide-back');
+        }
+      }
+      const target = getStepPane(formId, step);
+      if (target) {
+        if (direction === 'back') target.classList.add('slide-back');
+        target.classList.add('active');
+      }
+    }
+
+    function stepNext(btn, currentStep, formId) {
+      const isValid = validateStepFields(formId, currentStep);
+      const errEl = document.getElementById(`err-${formId}-${currentStep}`);
+      
+      if (!isValid) {
+        if (errEl) errEl.classList.add('show');
+        return;
+      }
+      if (errEl) errEl.classList.remove('show');
+      
+      markStepComplete(formId, currentStep);
+      const nextStep = currentStep + 1;
+      markStepActive(formId, nextStep);
+      showPane(formId, nextStep, 'forward');
+
+      if (nextStep === 3) {
+        buildReviewContent(formId);
+      }
+
+      // Scroll to top of stepper
+      const wrapper = btn.closest('.stepper-wrapper');
+      if (wrapper) wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function stepBack(btn, currentStep, formId) {
+      const prevStep = currentStep - 1;
+      markStepActive(formId, prevStep);
+      showPane(formId, prevStep, 'back');
+
+      const wrapper = btn.closest('.stepper-wrapper');
+      if (wrapper) wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function goToStep(itemEl, step, formId) {
+      // Only allow clicking completed or active steps
+      const items = getStepperItems(formId);
+      let canNav = false;
+      items.forEach(item => {
+        if (parseInt(item.dataset.step) === step) {
+          canNav = item.classList.contains('completed') || item.classList.contains('active');
+        }
+      });
+      if (!canNav) return;
+
+      markStepActive(formId, step);
+      showPane(formId, step, 'forward');
+      if (step === 3) buildReviewContent(formId);
+    }
+
+    /* ═══════════════════════════════════════════════
+       REVIEW CONTENT BUILDER
+    ═══════════════════════════════════════════════ */
+    function buildReviewContent(formId) {
+      const container = document.getElementById(`review-content-${formId}`);
+      if (!container) return;
+
+      // Find the form
+      const form = document.querySelector(`[data-form-id="${formId.replace(/_/g, '-')}"]`);
+      if (!form) return;
+
+      let html = '';
+
+      // Collect fields from step 1 and step 2
+      [1, 2].forEach(step => {
+        const pane = document.getElementById(`step-${formId}-${step}`);
+        if (!pane) return;
+
+        // Group by accordion sections
+        const accSections = pane.querySelectorAll('.accordion-section');
+        accSections.forEach(section => {
+          const titleEl = section.querySelector('.accordion-section-title');
+          const sectionTitle = titleEl ? titleEl.textContent.trim() : 'Section';
+          
+          const fieldRows = [];
+          const formGroups = section.querySelectorAll('.accordion-body .form-group');
+          
+          formGroups.forEach(group => {
+            const label = group.querySelector('.form-label');
+            if (!label) return;
+            const labelText = label.textContent.replace('*', '').trim();
+            
+            const field = group.querySelector('input, select, textarea');
+            if (!field) return;
+
+            let value = '';
+            if (field.type === 'checkbox') {
+              value = field.checked ? 'Yes' : 'No';
+            } else if (field.type === 'file') {
+              value = field.files && field.files.length > 0 ? field.files[0].name : '—';
+            } else if (field.tagName === 'SELECT' && field.multiple) {
+              const selected = Array.from(field.selectedOptions).map(o => o.text);
+              value = selected.length > 0 ? selected.join(', ') : '—';
+            } else {
+              value = field.value ? field.value.trim() : '';
+            }
+
+            fieldRows.push({ label: labelText, value: value });
+          });
+
+          // Also handle checkbox form-groups (consent) not inside .form-group
+          const checkboxGroups = section.querySelectorAll('.accordion-body > div[style*="display: flex"]');
+          checkboxGroups.forEach(group => {
+            const cb = group.querySelector('input[type="checkbox"]');
+            const lbl = group.querySelector('label');
+            if (cb && lbl) {
+              // Extract just the bold part or first sentence
+              const strongEl = lbl.querySelector('strong');
+              const labelText = strongEl ? strongEl.textContent.trim() : lbl.textContent.trim().substring(0, 50);
+              fieldRows.push({ label: labelText, value: cb.checked ? '✓ Agreed' : '✗ Not agreed' });
+            }
+          });
+
+          if (fieldRows.length === 0) return;
+
+          html += `<div class="review-section">
+            <div class="review-section-header"><i class="fas fa-list-check" style="margin-right:8px;"></i>${sectionTitle}</div>
+            <div class="review-section-body">`;
+          
+          fieldRows.forEach(row => {
+            const displayVal = row.value || '—';
+            const cls = row.value ? 'review-value' : 'review-value review-empty';
+            html += `<div class="review-row">
+              <span class="review-label">${row.label}</span>
+              <span class="${cls}">${displayVal}</span>
+            </div>`;
+          });
+
+          html += `</div></div>`;
+        });
+      });
+
+      if (!html) {
+        html = '<p style="color:var(--text-muted);text-align:center;padding:20px;">No data entered yet. Please fill the form steps.</p>';
+      }
+
+      container.innerHTML = html;
+    }
+
+    /* ═══════════════════════════════════════════════
+       INIT
+    ═══════════════════════════════════════════════ */
+    document.addEventListener('DOMContentLoaded', function() {
+      initAccordionValidation();
+
+      // Clear field-error on input
+      document.querySelectorAll('.form-field').forEach(field => {
+        field.addEventListener('input', function() {
+          this.classList.remove('field-error');
+        });
+        field.addEventListener('change', function() {
+          this.classList.remove('field-error');
+        });
+      });
+    });
+
+    // Re-init after dynamic family member added (called from existing addFamilyMember)
+    const _origInitFormTracking = initializeFormTracking;
+    function initializeFormTracking() {
+      _origInitFormTracking();
+      initAccordionValidation();
+      // Re-attach field-error clearing
+      document.querySelectorAll('.form-field').forEach(field => {
+        field.addEventListener('input', function() { this.classList.remove('field-error'); });
+        field.addEventListener('change', function() { this.classList.remove('field-error'); });
+      });
+    }
+    </script>
   </body>
 </html>
