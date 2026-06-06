@@ -351,7 +351,7 @@
                         <option value="UK">UK</option>
                         <option value="Australia">Australia</option>
                         <!-- Add other relevant countries as needed -->
-                      </select>
+                        </select>
                     </div>
                   </div>
 
@@ -399,7 +399,7 @@
                   <div class="form-row">
                     <div class="form-group">
                       <label class="form-label">Highest Qualification <span style="color: var(--btn-color);">*</span></label>
-                      <select class="form-select form-field" required>
+                      <select class="form-select form-field" onchange="handleOverseasQualificationChange(this)" required>
                         <option value="">Select</option>
                         <option value="Bachelors">Bachelors</option>
                         <option value="Masters">Masters</option>
@@ -419,6 +419,10 @@
                         <option value="Other">Other</option>
                       </select>
                     </div>
+                  </div>
+                  <div class="form-group d-none" id="overseas-other-occupation-group">
+                    <label class="form-label">Occupation Category (Text) <span style="color: var(--btn-color);">*</span></label>
+                    <input type="text" class="form-input form-field" id="overseas-other-occupation-input" placeholder="Enter occupation category">
                   </div>
                   <div class="form-group">
                     <label class="form-label">Skills/Expertise</label>
@@ -1547,6 +1551,20 @@
       // ═══════════════════════════════════════════════
 //   PRAVASI ODIA REGISTRATION DYNAMIC LOGIC
 // ═══════════════════════════════════════════════
+
+// Show/Hide Occupation Category text field based on Highest Qualification
+function handleOverseasQualificationChange(selectElement) {
+  const otherOccupationGroup = document.getElementById('overseas-other-occupation-group');
+  const otherOccupationInput = document.getElementById('overseas-other-occupation-input');
+  if (selectElement.value === 'Other') {
+    otherOccupationGroup.classList.remove('d-none');
+    otherOccupationInput.setAttribute('required', 'true');
+  } else {
+    otherOccupationGroup.classList.add('d-none');
+    otherOccupationInput.removeAttribute('required');
+    otherOccupationInput.value = '';
+  }
+}
 
 // Show/Hide Family Count based on Category Selection
 function handleCategoryChange(type) {
