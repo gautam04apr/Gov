@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* ═══════════════════════════════════════════════
-   SECTION 3 — HERO CAROUSEL
+   SECTION 2 — HERO CAROUSEL
 ═══════════════════════════════════════════════ */
 (function () {
   const TOTAL = 6;
@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 
 /* ═══════════════════════════════════════════════
-   SECTION 4 — NOTIFICATION TICKER (seamless clone)
+   SECTION 3 — NOTIFICATION TICKER (seamless clone)
 ═══════════════════════════════════════════════ */
 (function () {
   const track = document.getElementById("notifTrack");
@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 
 /* ═══════════════════════════════════════════════
-   SECTION 5 — VIDEO PLAYER
+   SECTION 4 — ABOUT US + VIDEO — VIDEO PLAYER
 ═══════════════════════════════════════════════ */
 (function () {
   const featuredThumb = document.getElementById("featuredThumb");
@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 
 /* ═══════════════════════════════════════════════
-   SECTION 5b — STAT COUNT-UP (repeats every 10s)
+   SECTION 4 — ABOUT US + VIDEO — STAT COUNT-UP (repeats every 10s)
 ═══════════════════════════════════════════════ */
 (function () {
   const stats = document.querySelectorAll(".stat-num[data-target]");
@@ -396,7 +396,7 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 
 /* ═══════════════════════════════════════════════
-   SECTION 5c — VIDEO THUMB SLIDER (arrow scroll)
+   SECTION 4 — ABOUT US + VIDEO — VIDEO THUMB SLIDER (arrow scroll)
 ═══════════════════════════════════════════════ */
 (function () {
   const slider = document.getElementById("videoThumbSlider");
@@ -422,7 +422,7 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 
 /* ═══════════════════════════════════════════════
-   SECTION 5d — HONEYCOMB CANVAS TRANSITION
+   SECTION 4 — ABOUT US + VIDEO — HONEYCOMB CANVAS TRANSITION
    3D coin-flip with ember-wave effect
 ═══════════════════════════════════════════════ */
 (function () {
@@ -586,117 +586,7 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 
 /* ═══════════════════════════════════════════════
-   SECTION 6 — PARTNERS CAROUSEL
-═══════════════════════════════════════════════ */
-(function () {
-  const carouselTrack = document.getElementById("partnersCarouselTrack");
-  const carouselWrapper = document.querySelector(".partners-carousel-wrapper");
-  if (!carouselTrack || !carouselWrapper) return;
-
-  // Hover pause (CSS handles it too, but JS ensures cross-browser)
-  carouselWrapper.addEventListener("mouseenter", function () {
-    carouselTrack.style.animationPlayState = "paused";
-  });
-  carouselWrapper.addEventListener("mouseleave", function () {
-    carouselTrack.style.animationPlayState = "running";
-  });
-
-  // Touch support
-  let touchStartX = 0;
-  carouselWrapper.addEventListener(
-    "touchstart",
-    function (e) {
-      touchStartX = e.changedTouches[0].screenX;
-      carouselTrack.style.animationPlayState = "paused";
-    },
-    false,
-  );
-  carouselWrapper.addEventListener(
-    "touchend",
-    function () {
-      carouselTrack.style.animationPlayState = "running";
-    },
-    false,
-  );
-
-  // Start animation when section enters viewport
-  const section = document.getElementById("partners-carousel-section");
-  if (section) {
-    new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting)
-            carouselTrack.style.animationPlayState = "running";
-        });
-      },
-      { threshold: 0.1 },
-    ).observe(section);
-  }
-})();
-
-/* ═══════════════════════════════════════════════
-   SECTION 7 — FOOTER ANIMATIONS & NEWSLETTER
-═══════════════════════════════════════════════ */
-
-// Scroll-in animation
-const footerElement = document.getElementById("main-footer");
-if (footerElement) {
-  new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.style.animation =
-            "footer-fade-up 0.8s ease-out 0.2s both";
-          this.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1 },
-  ).observe(footerElement);
-}
-
-// Newsletter form
-const newsletterForm = document.getElementById("footer-newsletter-form");
-if (newsletterForm) {
-  newsletterForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const input = this.querySelector(".footer-input");
-    const btn = this.querySelector(".footer-btn");
-    const email = input.value.trim();
-
-    if (!email || !email.includes("@")) {
-      input.style.borderColor = "#ff6b6b";
-      setTimeout(function () {
-        input.style.borderColor = "";
-      }, 1500);
-      return;
-    }
-
-    btn.style.background = "linear-gradient(135deg, #90ee90, #76d776)";
-    btn.innerHTML = '<i class="fa-solid fa-check"></i>';
-
-    setTimeout(function () {
-      btn.style.background = "linear-gradient(135deg, var(--btn), #c74a24)";
-      btn.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
-      input.value = "";
-    }, 2000);
-  });
-
-  const footerInput = newsletterForm.querySelector(".footer-input");
-  if (footerInput) {
-    footerInput.addEventListener("focus", function () {
-      this.parentElement.style.boxShadow =
-        "0 0 20px rgba(222, 89, 46, 0.3), inset 0 0 15px rgba(222, 89, 46, 0.1)";
-    });
-    footerInput.addEventListener("blur", function () {
-      this.parentElement.style.boxShadow = "";
-    });
-  }
-}
-
-/* ═══════════════════════════════════════════════
-   SECTION 6 — GLOBAL PRESENCE MAP
+   SECTION 5 — GLOBAL PRESENCE MAP
 ═══════════════════════════════════════════════ */
 (function () {
   /* ── Pin data ── */
@@ -1065,7 +955,9 @@ if (newsletterForm) {
   });
 })();
 
-/* Legend count-up, repeats every 10s */
+/* ═══════════════════════════════════════════════
+   SECTION 5 — GLOBAL PRESENCE MAP + Legend count-up, repeats every 10s
+═══════════════════════════════════════════════ */
 (function () {
   function countLegend() {
     document
@@ -1106,9 +998,9 @@ if (newsletterForm) {
   if (legend) observer.observe(legend);
 })();
 
-// ---------------
-
-/* SECTION 7 — SOCIAL TABS */
+/* ═══════════════════════════════════════════════
+   SECTION 6 — SOCIAL + NEWS 
+═══════════════════════════════════════════════ */
 (function () {
   const tabs = document.querySelectorAll(".stab");
   const feeds = document.querySelectorAll(".sfeed");
@@ -1123,7 +1015,9 @@ if (newsletterForm) {
   });
 })();
 
-/* SECTION 7 — NEWS VERTICAL AUTO-SCROLL LOOP */
+/* ═══════════════════════════════════════════════
+   SECTION 6 — SOCIAL + NEWS + part2
+═══════════════════════════════════════════════ */
 (function () {
   const wrap = document.getElementById("newsScrollWrap");
   const track = document.getElementById("newsTrack");
@@ -1192,106 +1086,97 @@ if (newsletterForm) {
   });
 })();
 
-/* FLOATING QUICK SIDEBAR */
+/* ═══════════════════════════════════════════════
+   SECTION 8 — GOVERNMENT PARTNERS LOGO CAROUSEL
+═══════════════════════════════════════════════ */
 (function () {
-  const sidebar = document.getElementById("quickSidebar");
-  const toggle = document.getElementById("qsToggle");
-  const toggleIcon = document.getElementById("qsToggleIcon");
-  const toTopBtn = document.getElementById("qsToTop");
-  if (!sidebar) return;
+  const carouselTrack = document.getElementById("partnersCarouselTrack");
+  const carouselWrapper = document.querySelector(".partners-carousel-wrapper");
+  if (!carouselTrack || !carouselWrapper) return;
 
-  /* Open / close */
-  toggle.addEventListener("click", function () {
-    const isOpen = sidebar.classList.toggle("open");
-    toggleIcon.className = isOpen
-      ? "fa-solid fa-xmark"
-      : "fa-solid fa-grip-vertical";
+  // Hover pause (CSS handles it too, but JS ensures cross-browser)
+  carouselWrapper.addEventListener("mouseenter", function () {
+    carouselTrack.style.animationPlayState = "paused";
+  });
+  carouselWrapper.addEventListener("mouseleave", function () {
+    carouselTrack.style.animationPlayState = "running";
   });
 
-  /* Close on outside click */
-  document.addEventListener("click", function (e) {
-    if (!sidebar.contains(e.target)) {
-      sidebar.classList.remove("open");
-      toggleIcon.className = "fa-solid fa-grip-vertical";
-    }
-  });
-
-  /* Smooth scroll for anchor links */
-  sidebar.querySelectorAll('.qs-item[href^="#"]').forEach(function (link) {
-    link.addEventListener("click", function (e) {
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-        sidebar.classList.remove("open");
-        toggleIcon.className = "fa-solid fa-grip-vertical";
-      }
-    });
-  });
-
-  /* Back to top */
-  toTopBtn?.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    sidebar.classList.remove("open");
-    toggleIcon.className = "fa-solid fa-grip-vertical";
-  });
-
-  /* Hide near very top of page */
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (window.scrollY < 200) {
-        sidebar.classList.add("qs-hidden");
-      } else {
-        sidebar.classList.remove("qs-hidden");
-      }
+  // Touch support
+  let touchStartX = 0;
+  carouselWrapper.addEventListener(
+    "touchstart",
+    function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+      carouselTrack.style.animationPlayState = "paused";
     },
-    { passive: true },
+    false,
   );
+  carouselWrapper.addEventListener(
+    "touchend",
+    function () {
+      carouselTrack.style.animationPlayState = "running";
+    },
+    false,
+  );
+
+  // Start animation when section enters viewport
+  const section = document.getElementById("partners-carousel-section");
+  if (section) {
+    new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting)
+            carouselTrack.style.animationPlayState = "running";
+        });
+      },
+      { threshold: 0.1 },
+    ).observe(section);
+  }
 })();
 
 /* ═══════════════════════════════════════════════
-   SECTION 8 — CURVED GALLERY
+   SECTION 9 — CURVED GALLERY
 ═══════════════════════════════════════════════ */
 (function () {
   const ITEMS = [
     {
-      img:'assets/images/1.png',
+      img: "assets/images/1.png",
       title: "Jagannath Temple, Puri",
       cat: "Heritage",
     },
     {
-      img:'assets/images/2.png',
+      img: "assets/images/2.png",
       title: "Konark Sun Temple",
       cat: "Heritage",
     },
     {
-      img:'assets/images/3.png',
+      img: "assets/images/3.png",
       title: "Chilika Lake",
       cat: "Nature",
     },
     {
-      img:'assets/images/4.png',
+      img: "assets/images/4.png",
       title: "Odisha Dance",
       cat: "Culture",
     },
     {
-      img:'assets/images/5.png',
+      img: "assets/images/5.png",
       title: "Pattachitra Art",
       cat: "Art",
     },
     {
-      img:'assets/images/6.png',
+      img: "assets/images/6.png",
       title: "Lingaraj Temple",
       cat: "Heritage",
     },
     {
-      img:'assets/images/7.png',
+      img: "assets/images/7.png",
       title: "Rath Yatra Festival",
       cat: "Festival",
     },
     {
-      img:'assets/images/8.png',
+      img: "assets/images/8.png",
       title: "Hirakud Dam",
       cat: "Nature",
     },
@@ -1513,4 +1398,219 @@ if (newsletterForm) {
 
   /* ── Init ── */
   goTo(0);
+})();
+
+/* ═══════════════════════════════════════════════
+   SECTION 10 - FLOATING SIDE NAV
+═══════════════════════════════════════════════ */
+(function () {
+  const nav = document.getElementById("floatNav");
+  const items = document.querySelectorAll(".fn-item");
+  if (!nav || !items.length) return;
+
+  /* ── Auto-close timers per item ── */
+  const timers = new Map();
+
+  items.forEach(function (item) {
+    /* Hover open */
+    item.addEventListener("mouseenter", function () {
+      if (timers.has(item)) {
+        clearTimeout(timers.get(item));
+        timers.delete(item);
+      }
+      item.classList.add("fn-open");
+    });
+
+    /* Auto-close after 1.4s on leave */
+    item.addEventListener("mouseleave", function () {
+      const t = setTimeout(function () {
+        item.classList.remove("fn-open");
+        timers.delete(item);
+      }, 1400);
+      timers.set(item, t);
+    });
+
+    /* Click → smooth scroll */
+    item.addEventListener("click", function () {
+      const target = this.getAttribute("data-target");
+      const el = document.getElementById(target);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else if (target === "hero-section") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      /* Close after click */
+      setTimeout(function () {
+        item.classList.remove("fn-open");
+      }, 600);
+    });
+  });
+
+/* ── Active section detection + auto-expand ── */
+const sectionMap = new Map();
+items.forEach(function (item) {
+  const id = item.getAttribute('data-target');
+  const section = document.getElementById(id);
+  if (section) sectionMap.set(section, item);
+});
+
+const autoCloseTimers = new Map();
+
+function autoExpand(item) {
+  /* Clear any existing auto-close for this item */
+  if (autoCloseTimers.has(item)) {
+    clearTimeout(autoCloseTimers.get(item));
+    autoCloseTimers.delete(item);
+  }
+
+  /* Don't expand if user is already hovering it */
+  if (item.matches(':hover')) return;
+
+  /* Open it */
+  item.classList.add('fn-open');
+
+  /* Auto-close after 2s */
+  const t = setTimeout(function () {
+    if (!item.matches(':hover')) {
+      item.classList.remove('fn-open');
+    }
+    autoCloseTimers.delete(item);
+  }, 2000);
+
+  autoCloseTimers.set(item, t);
+}
+
+const observer = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    const item = sectionMap.get(entry.target);
+    if (!item) return;
+    if (entry.isIntersecting) {
+      /* Update active state */
+      items.forEach(i => i.classList.remove('fn-active'));
+      item.classList.add('fn-active');
+
+      /* Auto-expand */
+      autoExpand(item);
+    }
+  });
+}, {
+  threshold: 0.3,
+  rootMargin: '-10% 0px -10% 0px'
+});
+
+sectionMap.forEach(function (item, section) {
+  observer.observe(section);
+});
+
+  /* ── Hide near top ── */
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (window.scrollY < 300) {
+        nav.classList.add("fn-hidden");
+      } else {
+        nav.classList.remove("fn-hidden");
+      }
+    },
+    { passive: true },
+  );
+
+  /* ── Init visibility ── */
+  if (window.scrollY < 300) nav.classList.add("fn-hidden");
+})();
+
+/* ═══════════════════════════════════════════════
+   SECTION 11 — FOOTER ANIMATIONS & NEWSLETTER
+═══════════════════════════════════════════════ */
+
+// Scroll-in animation
+const footerElement = document.getElementById("main-footer");
+if (footerElement) {
+  new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.animation =
+            "footer-fade-up 0.8s ease-out 0.2s both";
+          this.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 },
+  ).observe(footerElement);
+}
+
+// Newsletter form
+const newsletterForm = document.getElementById("footer-newsletter-form");
+if (newsletterForm) {
+  newsletterForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const input = this.querySelector(".footer-input");
+    const btn = this.querySelector(".footer-btn");
+    const email = input.value.trim();
+
+    if (!email || !email.includes("@")) {
+      input.style.borderColor = "#ff6b6b";
+      setTimeout(function () {
+        input.style.borderColor = "";
+      }, 1500);
+      return;
+    }
+
+    btn.style.background = "linear-gradient(135deg, #90ee90, #76d776)";
+    btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+    setTimeout(function () {
+      btn.style.background = "linear-gradient(135deg, var(--btn), #c74a24)";
+      btn.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
+      input.value = "";
+    }, 2000);
+  });
+
+  const footerInput = newsletterForm.querySelector(".footer-input");
+  if (footerInput) {
+    footerInput.addEventListener("focus", function () {
+      this.parentElement.style.boxShadow =
+        "0 0 20px rgba(222, 89, 46, 0.3), inset 0 0 15px rgba(222, 89, 46, 0.1)";
+    });
+    footerInput.addEventListener("blur", function () {
+      this.parentElement.style.boxShadow = "";
+    });
+  }
+}
+
+// <!-- ═══════════════════════════════════════════
+//      SECTION 12 - BACK TO TOP
+// ════════════════════════════════════════════ -->
+(function () {
+  const btn = document.getElementById("backToTop");
+  if (!btn) return;
+
+  /* Show/hide + scroll progress ring */
+  window.addEventListener(
+    "scroll",
+    function () {
+      const scrolled = window.scrollY;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const progress = Math.min(100, (scrolled / maxScroll) * 100);
+
+      /* Update progress ring */
+      btn.style.setProperty("--scroll-progress", progress + "%");
+
+      /* Show after 400px */
+      if (scrolled > 400) {
+        btn.classList.add("btt-visible");
+      } else {
+        btn.classList.remove("btt-visible");
+      }
+    },
+    { passive: true },
+  );
+
+  /* Smooth scroll to top */
+  btn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 })();
