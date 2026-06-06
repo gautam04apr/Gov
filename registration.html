@@ -1241,6 +1241,21 @@
 
     <div id="site-footer"></div>
 
+    <div class="error-popup-overlay" id="error-popup">
+      <div class="error-popup-content">
+        <div class="error-popup-header">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h4>Action Not Allowed</h4>
+        </div>
+        <div class="error-popup-body">
+          <p id="error-popup-message"></p>
+        </div>
+        <div class="error-popup-footer">
+          <button class="error-popup-btn" onclick="closeErrorPopup()">Close</button>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
     <script>
@@ -1277,13 +1292,13 @@
         // Disable all inactive tabs
         tabButtons.forEach(btn => {
           if (!btn.classList.contains('active')) {
-            btn.disabled = true;
+            btn.classList.add('is-disabled'); // Replaced btn.disabled = true
           }
         });
 
         // Disable ALL toggles (including the current tab's toggle)
         toggleInputs.forEach(toggle => {
-          toggle.disabled = true;
+          toggle.classList.add('is-disabled'); // Replaced toggle.disabled = true
         });
       }
 
@@ -1291,8 +1306,8 @@
         const tabButtons = document.querySelectorAll('.tab-btn');
         const toggleInputs = document.querySelectorAll('.tab-toggle');
         
-        tabButtons.forEach(btn => btn.disabled = false);
-        toggleInputs.forEach(toggle => toggle.disabled = false);
+        tabButtons.forEach(btn => btn.classList.remove('is-disabled'));
+        toggleInputs.forEach(toggle => toggle.classList.remove('is-disabled'));
       }
 
       let currentActiveToggle = null;
@@ -1320,8 +1335,9 @@
 
       tabButtons.forEach(button => {
         button.addEventListener('click', () => {
-          if (button.disabled && isFormModified) {
-            alert('Please submit or clear the current form before switching to another registration type.');
+          // Replaced button.disabled with class check
+          if (button.classList.contains('is-disabled') && isFormModified) {
+            showErrorPopup();
             return;
           }
 
@@ -1355,9 +1371,10 @@
 
       toggles.forEach(toggle => {
         toggle.addEventListener('change', function() {
-          if (this.disabled && isFormModified) {
+          // Replaced this.disabled with class check
+          if (this.classList.contains('is-disabled') && isFormModified) {
             this.checked = !this.checked;
-            alert('Please submit or clear the current form before switching registration types.');
+            showErrorPopup();
             return;
           }
           updateToggleState(this);
@@ -1653,6 +1670,20 @@ function addFamilyMember(type) {
   initializeFormTracking();
 }
 
+  // ADDED: Error Popup Functions
+      function showErrorPopup() {
+        const activeFormTitleEl = document.querySelector('.tab-content.active .form-content.active .form-title');
+        const formName = activeFormTitleEl ? activeFormTitleEl.innerText : 'current';
+        const message = `You have started filling the ${formName} form so you can't switch to another form.`;
+        
+        document.getElementById('error-popup-message').innerText = message;
+        document.getElementById('error-popup').classList.add('show');
+      }
+
+      function closeErrorPopup() {
+        document.getElementById('error-popup').classList.remove('show');
+      }
+
 // Map Countries to Continents & Populate Additional Immigration Fields
 function handleCountryChange() {
   const countryInput = document.getElementById('overseas-country').value;
@@ -1721,7 +1752,7 @@ function handleCountryChange() {
   if (extraFields) {
     dynamicImmigBox.innerHTML = extraFields;
   }
-}
+      }
     </script>
 
     <script src="js/script.js"></script>
