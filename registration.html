@@ -1316,133 +1316,486 @@
             </div>
           </div>
 
-          <div class="form-content active" id="toggle-2-overseas">
+         <div class="form-content active" id="toggle-2-overseas">
             <h3 class="form-title">Odia Association Registration (Overseas)</h3>
             <div class="form-page-indicator">Page <span class="current-page">1</span> of 2</div>
 
             <div class="info-box">
-              <p><strong>Note:</strong> Please provide accurate information about your association. Documentation may be
-                required for verification.</p>
+              <p><strong>Note:</strong> Please fill in all required fields accurately. Your association details and uploaded bylaws will be reviewed by our registration committee within 5-7 business days.</p>
             </div>
 
             <form class="registration-form" data-form-id="form-2-overseas">
               <div class="stepper-wrapper">
+                <!-- Vertical Stepper Sidebar -->
                 <div class="stepper-sidebar">
                   <ul class="stepper-list" id="stepper-form_2_overseas">
                     <li class="stepper-item active" data-step="1" onclick="goToStep(this, 1, 'form_2_overseas')">
                       <div class="stepper-circle"><span class="step-number">1</span></div>
                       <div class="stepper-label">
-                        <div class="step-title">Basic Details</div>
-                        <div class="step-subtitle">Personal info &amp; classification</div>
+                        <div class="step-title">Organization Profile</div>
+                        <div class="step-subtitle">Profile &amp; Governance Structure</div>
                       </div>
                     </li>
                     <li class="stepper-item" data-step="2" onclick="goToStep(this, 2, 'form_2_overseas')">
                       <div class="stepper-circle"><span class="step-number">2</span></div>
                       <div class="stepper-label">
-                        <div class="step-title">Documentation &amp; Consent</div>
-                        <div class="step-subtitle">Upload docs &amp; agree</div>
+                        <div class="step-title">Governance &amp; Uploads</div>
+                        <div class="step-subtitle">Bylaws &amp; Documents</div>
                       </div>
                     </li>
                     <li class="stepper-item" data-step="3" onclick="goToStep(this, 3, 'form_2_overseas')">
                       <div class="stepper-circle"><span class="step-number">3</span></div>
                       <div class="stepper-label">
                         <div class="step-title">Review &amp; Submit</div>
-                        <div class="step-subtitle">Confirm &amp; submit</div>
+                        <div class="step-subtitle">Confirm details</div>
                       </div>
                     </li>
                   </ul>
                 </div>
+
+                <!-- Stepper Content Body -->
                 <div class="stepper-body">
 
-                  <!-- STEP 1 -->
+                  <!-- STEP 1: ORGANIZATION PROFILE & ALL PROFILE / MEMBERSHIP ACCORDIONS -->
                   <div class="step-pane active" id="step-form_2_overseas-1">
-                    <div class="step-error-msg" id="err-form_2_overseas-1"><i class="fas fa-exclamation-circle"></i>
-                      Please fill all required fields before proceeding.</div>
+                    <div class="step-error-msg" id="err-form_2_overseas-1">
+                      <i class="fas fa-exclamation-circle"></i> Please fill all required fields highlighted in red before proceeding.
+                    </div>
 
-                    <div class="form-row">
-                      <div class="form-group">
-                        <label class="form-label">Association Name <span
-                            style="color: var(--hover-color);">*</span></label>
-                        <input type="text" class="form-input form-field" placeholder="Enter association name" required>
+                    <!-- Accordion 1: Registration Classification -->
+                    <div class="accordion-section open" data-accordion-id="acc-assoc-classification">
+                      <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                          <i class="accordion-section-icon fas fa-circle-check"></i>
+                          <h4 class="accordion-section-title">Registration Classification</h4>
+                        </div>
+                        <i class="accordion-toggle-icon fas fa-chevron-down"></i>
                       </div>
-                      <div class="form-group">
-                        <label class="form-label">Registration Number <span
-                            style="color: var(--hover-color);">*</span></label>
-                        <input type="text" class="form-input form-field" placeholder="Enter registration number"
-                          required>
+                      <div class="accordion-body">
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Association Category <span style="color: var(--btn-color);">*</span></label>
+                            <select class="form-select form-field" required>
+                              <option value="">Select Category</option>
+                              <option value="Odia Cultural Association">Odia Cultural Association</option>
+                              <option value="Odia Welfare Association">Odia Welfare Association</option>
+                              <option value="Odia Student Association">Odia Student Association</option>
+                              <option value="Multi-Purpose Odia Association">Multi-Purpose Odia Association</option>
+                              <option value="Youth Organization">Youth Organization</option>
+                              <option value="Women Association">Women Association</option>
+                              <option value="Sports Association">Sports Association</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Country of Registration <span style="color: var(--btn-color);">*</span></label>
+                            <select class="form-select form-field" id="assoc-overseas-country" onchange="handleAssocCountryChange()" required>
+                              <option value="">Select Country</option>
+                              <option value="USA">USA</option>
+                              <option value="UK">UK</option>
+                              <option value="Canada">Canada</option>
+                              <option value="Australia">Australia</option>
+                              <option value="Singapore">Singapore</option>
+                              <option value="UAE">UAE</option>
+                              <option value="Germany">Germany</option>
+                              <option value="France">France</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">State / Province <span style="color: var(--btn-color);">*</span></label>
+                            <input type="text" class="form-input form-field" placeholder="Enter state or province" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">City <span style="color: var(--btn-color);">*</span></label>
+                            <input type="text" class="form-input form-field" placeholder="Enter city" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Year of Establishment <span style="color: var(--btn-color);">*</span></label>
+                          <input type="number" min="1800" max="2026" class="form-input form-field" placeholder="YYYY" required>
+                        </div>
                       </div>
                     </div>
 
-                    <div class="form-row">
-                      <div class="form-group">
-                        <label class="form-label">Country <span style="color: var(--hover-color);">*</span></label>
-                        <select class="form-select form-field" required>
-                          <option value="">Select Country</option>
-                          <option value="USA">United States</option>
-                          <option value="UK">United Kingdom</option>
-                          <option value="Canada">Canada</option>
-                          <option value="Australia">Australia</option>
-                          <option value="Other">Other</option>
-                        </select>
+                    <!-- Accordion 2: Organization Profile -->
+                    <div class="accordion-section open" data-accordion-id="acc-assoc-profile">
+                      <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                          <i class="accordion-section-icon fas fa-circle-check"></i>
+                          <h4 class="accordion-section-title">Organization Profile</h4>
+                        </div>
+                        <i class="accordion-toggle-icon fas fa-chevron-down"></i>
                       </div>
-                      <div class="form-group">
-                        <label class="form-label">City <span style="color: var(--hover-color);">*</span></label>
-                        <input type="text" class="form-input form-field" placeholder="Enter city name" required>
+                      <div class="accordion-body">
+                        <div class="form-group">
+                          <label class="form-label">Official Association Name <span style="color: var(--btn-color);">*</span></label>
+                          <input type="text" class="form-input form-field" placeholder="Enter registered name" required>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Official Email ID <span style="color: var(--btn-color);">*</span></label>
+                            <input type="email" class="form-input form-field" placeholder="name@association.org" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Official Contact Number <span style="color: var(--btn-color);">*</span></label>
+                            <input type="tel" class="form-input form-field" placeholder="+1..." required>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Website URL</label>
+                            <input type="url" class="form-input form-field" placeholder="https://...">
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Logo Upload</label>
+                            <input type="file" class="form-input form-field" accept=".jpeg,.jpg,.png">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Association Vision <span style="color: var(--btn-color);">*</span></label>
+                          <textarea class="form-textarea form-field" placeholder="Describe the long-term vision..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Mission Statement <span style="color: var(--btn-color);">*</span></label>
+                          <textarea class="form-textarea form-field" placeholder="Describe the targeted mission goals..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Organization Description <span style="color: var(--btn-color);">*</span></label>
+                          <textarea class="form-textarea form-field" placeholder="Provide a brief summary of the organization..." required></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Accordion 3: Legal Registration Details -->
+                    <div class="accordion-section open" data-accordion-id="acc-assoc-legal">
+                      <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                          <i class="accordion-section-icon fas fa-circle-check"></i>
+                          <h4 class="accordion-section-title">Legal Registration Details</h4>
+                        </div>
+                        <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+                      </div>
+                      <div class="accordion-body">
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Registration Number <span style="color: var(--btn-color);">*</span></label>
+                            <input type="text" class="form-input form-field" placeholder="Enter certificate ID" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Registration Date <span style="color: var(--btn-color);">*</span></label>
+                            <input type="date" class="form-input form-field" required>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Registration Authority <span style="color: var(--btn-color);">*</span></label>
+                            <input type="text" class="form-input form-field" placeholder="e.g. Corporate Affairs / State Registry" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Registered Non-Profit?</label>
+                            <select class="form-select form-field">
+                              <option value="No">No</option>
+                              <option value="Yes">Yes</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div id="assoc-overseas-dynamic-legal" class="form-row"></div>
+                      </div>
+                    </div>
+
+                    <!-- Accordion 4: Association Address -->
+                    <div class="accordion-section open" data-accordion-id="acc-assoc-address">
+                      <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                          <i class="accordion-section-icon fas fa-circle-check"></i>
+                          <h4 class="accordion-section-title">Registered Office Address</h4>
+                        </div>
+                        <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+                      </div>
+                      <div class="accordion-body">
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Address Line 1 <span style="color: var(--btn-color);">*</span></label>
+                            <input type="text" class="form-input form-field" placeholder="Street address, P.O. box" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Address Line 2</label>
+                            <input type="text" class="form-input form-field" placeholder="Apartment, suite, unit (optional)">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">City <span style="color: var(--btn-color);">*</span></label>
+                            <input type="text" class="form-input form-field" placeholder="City" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">State / Province <span style="color: var(--btn-color);">*</span></label>
+                            <input type="text" class="form-input form-field" placeholder="State/Province" required>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Postal / ZIP Code <span style="color: var(--btn-color);">*</span></label>
+                            <input type="text" class="form-input form-field" placeholder="ZIP or Postal Code" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Country <span style="color: var(--btn-color);">*</span></label>
+                            <input type="text" class="form-input form-field" id="assoc-address-country-mirror" readonly placeholder="Auto-populated" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Google Maps Location Link</label>
+                          <input type="url" class="form-input form-field" placeholder="https://maps.google.com/?q=...">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Accordion 5: Primary Office Bearer Details -->
+                    <div class="accordion-section open" data-accordion-id="acc-assoc-bearers">
+                      <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                          <i class="accordion-section-icon fas fa-circle-check"></i>
+                          <h4 class="accordion-section-title">Primary Office Bearer Details</h4>
+                        </div>
+                        <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+                      </div>
+                      <div class="accordion-body">
+                        <div class="form-group">
+                          <label class="form-label">Number of Primary Office Bearers <span style="color: var(--btn-color);">*</span></label>
+                          <select class="form-select form-field" id="assoc-bearer-count" onchange="handleDynamicCommitteeMembers('bearer')" required>
+                            <option value="">Select Count</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </div>
+                        <div id="assoc-bearers-dynamic-container"></div>
+                      </div>
+                    </div>
+
+                    <!-- Accordion 6: Executive Committee Details -->
+                    <div class="accordion-section open" data-accordion-id="acc-assoc-executive">
+                      <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                          <i class="accordion-section-icon fas fa-circle-check"></i>
+                          <h4 class="accordion-section-title">Executive Committee</h4>
+                        </div>
+                        <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+                      </div>
+                      <div class="accordion-body">
+                        <div class="form-group">
+                          <label class="form-label">Total Executive Members <span style="color: var(--btn-color);">*</span></label>
+                          <select class="form-select form-field" id="assoc-executive-count" onchange="handleDynamicCommitteeMembers('executive')" required>
+                            <option value="">Select Count</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                          </select>
+                        </div>
+                        <div id="assoc-executive-dynamic-container"></div>
+                      </div>
+                    </div>
+
+                    <!-- Accordion 7: Government Collaboration Interests -->
+                    <div class="accordion-section open" data-accordion-id="acc-assoc-collaboration">
+                      <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                          <i class="accordion-section-icon fas fa-circle-check"></i>
+                          <h4 class="accordion-section-title">Government Collaboration</h4>
+                        </div>
+                        <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+                      </div>
+                      <div class="accordion-body">
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Interested in Govt Programs?</label>
+                            <select class="form-select form-field">
+                              <option value="No">No</option>
+                              <option value="Yes">Yes</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Willing to Partner with Odisha Paribar?</label>
+                            <select class="form-select form-field">
+                              <option value="No">No</option>
+                              <option value="Yes">Yes</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Interested in World Odia Conference?</label>
+                            <select class="form-select form-field">
+                              <option value="No">No</option>
+                              <option value="Yes">Yes</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Interested in Hosting Odisha Events?</label>
+                            <select class="form-select form-field">
+                              <option value="No">No</option>
+                              <option value="Yes">Yes</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Interested in Official Recognition?</label>
+                          <select class="form-select form-field">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Accordion 8: Social Presence -->
+                    <div class="accordion-section open" data-accordion-id="acc-assoc-social">
+                      <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                          <i class="accordion-section-icon fas fa-circle-check"></i>
+                          <h4 class="accordion-section-title">Social Presence</h4>
+                        </div>
+                        <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+                      </div>
+                      <div class="accordion-body">
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Facebook Page URL</label>
+                            <input type="url" class="form-input form-field" placeholder="https://facebook.com/...">
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">LinkedIn Page URL</label>
+                            <input type="url" class="form-input form-field" placeholder="https://linkedin.com/company/...">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Instagram Handle URL</label>
+                            <input type="url" class="form-input form-field" placeholder="https://instagram.com/...">
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">YouTube Channel URL</label>
+                            <input type="url" class="form-input form-field" placeholder="https://youtube.com/...">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Does the Association have a dedicated Mobile App Available?</label>
+                          <select class="form-select form-field">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
 
                     <div class="step-actions">
                       <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                      <button type="button" class="next-btn" onclick="stepNext(this, 1, 'form_2_overseas')">Next <i
-                          class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+                      <button type="button" class="next-btn" onclick="stepNext(this, 1, 'form_2_overseas')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
                     </div>
                   </div>
 
-                  <!-- STEP 2 -->
+                  <!-- STEP 2: GOVERNANCE & UPLOADS SECTION -->
                   <div class="step-pane" id="step-form_2_overseas-2">
-                    <div class="step-error-msg" id="err-form_2_overseas-2"><i class="fas fa-exclamation-circle"></i>
-                      Please fill all required fields before proceeding.</div>
+                    <div class="step-error-msg" id="err-form_2_overseas-2">
+                      <i class="fas fa-exclamation-circle"></i> Please resolve any missing requirements inside the verification panels.
+                    </div>
 
-                    <div class="form-row">
-                      <div class="form-group">
-                        <label class="form-label">President Name <span
-                            style="color: var(--hover-color);">*</span></label>
-                        <input type="text" class="form-input form-field" placeholder="Enter president name" required>
+                    <!-- Accordion 9: Document Uploads -->
+                    <div class="accordion-section open" data-accordion-id="acc-assoc-uploads">
+                      <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                          <i class="accordion-section-icon fas fa-circle-check"></i>
+                          <h4 class="accordion-section-title">Document Uploads</h4>
+                        </div>
+                        <i class="accordion-toggle-icon fas fa-chevron-down"></i>
                       </div>
-                      <div class="form-group">
-                        <label class="form-label">Contact Email <span
-                            style="color: var(--hover-color);">*</span></label>
-                        <input type="email" class="form-input form-field" placeholder="Enter contact email" required>
+                      <div class="accordion-body">
+                        <p class="text-muted" style="font-size: 13px;">Upload active documentation in PDF, JPG, or PNG formats.</p>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Registration Certificate <span style="color: var(--btn-color);">*</span></label>
+                            <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg,.png" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Constitution / Bylaws Document <span style="color: var(--btn-color);">*</span></label>
+                            <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg,.png" required>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Latest Annual Activity Report <span style="color: var(--btn-color);">*</span></label>
+                            <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg,.png" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Official Address Proof <span style="color: var(--btn-color);">*</span></label>
+                            <input type="file" class="form-input form-field" accept=".pdf,.jpeg,.jpg,.png" required>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
-                    <div class="form-group">
-                      <label class="form-label">Association Description</label>
-                      <textarea class="form-textarea form-field"
-                        placeholder="Describe your association's activities and objectives"></textarea>
+                    <!-- Accordion 10: Consent & Declaration -->
+                    <div class="accordion-section open" data-accordion-id="acc-assoc-consent">
+                      <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                          <i class="accordion-section-icon fas fa-circle-check"></i>
+                          <h4 class="accordion-section-title">Consent &amp; Declaration</h4>
+                        </div>
+                        <i class="accordion-toggle-icon fas fa-chevron-down"></i>
+                      </div>
+                      <div class="accordion-body">
+                        <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                          <input type="checkbox" style="margin-top: 5px;" class="form-field" required>
+                          <label>I grant my <strong>Consent for Public Directory Listing</strong> of our primary coordination contact information. <span style="color: var(--btn-color);">*</span></label>
+                        </div>
+                        <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                          <input type="checkbox" style="margin-top: 5px;" class="form-field" required>
+                          <label>I grant my <strong>Consent for Government Communications</strong> updates and strategic feedback modules. <span style="color: var(--btn-color);">*</span></label>
+                        </div>
+                        <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                          <input type="checkbox" style="margin-top: 5px;" class="form-field" required>
+                          <label>I grant our organization's <strong>Consent for Event Notifications</strong> listings and regional program pairings. <span style="color: var(--btn-color);">*</span></label>
+                        </div>
+                        <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                          <input type="checkbox" style="margin-top: 5px;" class="form-field" required>
+                          <label>I grant <strong>Consent for Data Usage</strong> processing rules in accordance with local cloud parameters. <span style="color: var(--btn-color);">*</span></label>
+                        </div>
+                        <div class="form-group" style="display: flex; gap: 10px; align-items: flex-start;">
+                          <input type="checkbox" style="margin-top: 5px;" class="form-field" required>
+                          <label><strong>Declaration of Authenticity:</strong> I declare that I possess explicit administrative proxy rights to submit this information. <span style="color: var(--btn-color);">*</span></label>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label class="form-label">Security Verification (CAPTCHA): Type "ODISHA" <span style="color: var(--btn-color);">*</span></label>
+                            <input type="text" class="form-input form-field" pattern="ODISHA" placeholder="Enter text exactly" required>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     <div class="step-actions">
-                      <button type="button" class="back-btn" onclick="stepBack(this, 2, 'form_2_overseas')"><i
-                          class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+                      <button type="button" class="back-btn" onclick="stepBack(this, 2, 'form_2_overseas')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
                       <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                      <button type="button" class="next-btn" onclick="stepNext(this, 2, 'form_2_overseas')">Next <i
-                          class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+                      <button type="button" class="next-btn" onclick="stepNext(this, 2, 'form_2_overseas')">Next <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
                     </div>
                   </div>
 
-                  <!-- STEP 3: Review & Submit -->
+                  <!-- STEP 3: REVIEW & SUBMIT -->
                   <div class="step-pane" id="step-form_2_overseas-3">
                     <h3 class="form-title" style="margin-bottom:6px;">Review &amp; Submission</h3>
-                    <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;">Please review all entered
-                      information before submitting.</p>
+                    <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;">Please review all association profile items before submitting files to the government portal.</p>
+                    
                     <div id="review-content-form_2_overseas" class="review-content"></div>
+                    
                     <div class="step-actions">
-                      <button type="button" class="back-btn" onclick="stepBack(this, 3, 'form_2_overseas')"><i
-                          class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
+                      <button type="button" class="back-btn" onclick="stepBack(this, 3, 'form_2_overseas')"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back</button>
                       <button type="button" class="draft-btn save-draft-btn">Save as Draft</button>
-                      <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"
-                          style="margin-right:6px;"></i> Submit Registration</button>
+                      <button type="submit" class="submit-btn"><i class="fas fa-paper-plane" style="margin-right:6px;"></i> Submit Registration</button>
                     </div>
                   </div>
 
@@ -2681,6 +3034,148 @@
         field.addEventListener('input', function () { this.classList.remove('field-error'); });
         field.addEventListener('change', function () { this.classList.remove('field-error'); });
       });
+    }
+
+    // Map Countries to Localized Identifiers & Sync Address Country Node (image_15d7a0.png)
+    function handleAssocCountryChange() {
+      const selectedCountry = document.getElementById('assoc-overseas-country').value;
+      const addressMirror = document.getElementById('assoc-address-country-mirror');
+      const extraLegalBox = document.getElementById('assoc-overseas-dynamic-legal');
+
+      // Mirror state value directly to Address module block
+      addressMirror.value = selectedCountry;
+      extraLegalBox.innerHTML = '';
+      
+      let specializedFieldHtml = '';
+      switch (selectedCountry) {
+        case 'USA':
+          specializedFieldHtml = `<div class="form-group"><label class="form-label">EIN Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" placeholder="XX-XXXXXXX" required></div>`;
+          break;
+        case 'UK':
+          specializedFieldHtml = `<div class="form-group"><label class="form-label">Charity Registration Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+          break;
+        case 'Canada':
+          specializedFieldHtml = `<div class="form-group"><label class="form-label">CRA Charity Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+          break;
+        case 'Australia':
+          specializedFieldHtml = `<div class="form-group"><label class="form-label">ABN Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+          break;
+        case 'Singapore':
+          specializedFieldHtml = `<div class="form-group"><label class="form-label">UEN Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+          break;
+        case 'UAE':
+          specializedFieldHtml = `<div class="form-group"><label class="form-label">Community License Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+          break;
+        case 'Germany':
+          specializedFieldHtml = `<div class="form-group"><label class="form-label">Vereinsregister Number <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+          break;
+        case 'France':
+          specializedFieldHtml = `<div class="form-group"><label class="form-label">Association Registration Number (RNA/W) <span style="color: var(--btn-color);">*</span></label><input type="text" class="form-input form-field" required></div>`;
+          break;
+      }
+
+      if (specializedFieldHtml) {
+        extraLegalBox.innerHTML = specializedFieldHtml;
+      }
+      initializeFormTracking();
+    }
+
+    // Generate Dynamic Rows for Board and Executive Members loop counts (image_15d4dc.png)
+    function handleDynamicCommitteeMembers(type) {
+      const selectElement = document.getElementById(`assoc-${type}-count`);
+      const container = document.getElementById(`assoc-${type}-dynamic-container`);
+      const count = parseInt(selectElement.value) || 0;
+      
+      container.innerHTML = '';
+      
+      for (let i = 1; i <= count; i++) {
+        const itemBlock = document.createElement('div');
+        itemBlock.className = 'family-member-block'; // Reuses stylized structural wrappers perfectly
+        
+        if (type === 'bearer') {
+          itemBlock.innerHTML = `
+            <h5 class="family-member-title">Office Bearer Member #${i} Details</h5>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Full Name <span style="color: var(--btn-color);">*</span></label>
+                <input type="text" class="form-input form-field" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Designation <span style="color: var(--btn-color);">*</span></label>
+                <select class="form-select form-field" required>
+                  <option value="">Select Designation</option>
+                  <option value="President">President</option>
+                  <option value="Chairman">Chairman</option>
+                  <option value="Secretary">Secretary</option>
+                  <option value="General Secretary">General Secretary</option>
+                  <option value="Treasurer">Treasurer</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Gender</label>
+                <select class="form-select form-field">
+                  <option value="">Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email ID <span style="color: var(--btn-color);">*</span></label>
+                <input type="email" class="form-input form-field" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Mobile Number <span style="color: var(--btn-color);">*</span></label>
+                <input type="tel" class="form-input form-field" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">WhatsApp Number</label>
+                <input type="tel" class="form-input form-field">
+              </div>
+            </div>
+          `;
+        } else if (type === 'executive') {
+          itemBlock.innerHTML = `
+            <h5 class="family-member-title">Executive Committee Member #${i} Details</h5>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Full Name <span style="color: var(--btn-color);">*</span></label>
+                <input type="text" class="form-input form-field" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Designation <span style="color: var(--btn-color);">*</span></label>
+                <input type="text" class="form-input form-field" placeholder="e.g. Board Member / Coordinator" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Country <span style="color: var(--btn-color);">*</span></label>
+                <input type="text" class="form-input form-field" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">City <span style="color: var(--btn-color);">*</span></label>
+                <input type="text" class="form-input form-field" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Email ID <span style="color: var(--btn-color);">*</span></label>
+                <input type="email" class="form-input form-field" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mobile Number <span style="color: var(--btn-color);">*</span></label>
+                <input type="tel" class="form-input form-field" required>
+              </div>
+            </div>
+          `;
+        }
+        container.appendChild(itemBlock);
+      }
+      initializeFormTracking();
     }
   </script>
 </body>
